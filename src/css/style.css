@@ -1,11 +1,11 @@
 html,body {margin:0;padding:0;overflow-x:hidden;}
-body {margin:0;padding:0;font-family:'Amatic SC',cursive;color:#444;font-size:20px;overflow-x:hidden;}
+body {margin:0;padding:0;font-family:'Amatic SC',cursive; font-family: 'Abel', sans-serif;color:#444;font-size:20px;overflow-x:hidden;}
 
 #canvas {position:fixed;top:0;left:0;}
 .content {position:relative;padding:10% 50% 10% 10%;z-index:1;}
-.content h1 {font-weight:bold;font-size:70px;margin-bottom:20px;}
+.content h1 {position:relative;left:-5px;font-weight:bold;font-size:70px;margin-bottom:20px;}
 .content h2 {font-size:30px;margin:40px 0 20px 0;}
-.content p {line-height:1.4em;margin-bottom:1em;}
+.content p {line-height:1.4em;margin-bottom:1em;font-size:16px;}
 .content a {text-decoration:none;color:#FF7000;}
 .content a:hover {text-decoration:underline;}
 
