@@ -1,0 +1,5 @@
+html,body {margin:0;padding:0;overflow:hidden;}
+.dg.main * {-moz-box-sizing:initial;-webkit-box-sizing:initial;box-sizing:initial;}
+.dg.main select {-webkit-appearance:menulist;}
+.dg.main input[type=checkbox] {-webkit-appearance:checkbox;}
+

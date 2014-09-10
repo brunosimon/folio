@@ -87,6 +87,9 @@ HERE IS A COOL DINOSAUR TO WAIT
         <h2>My lab</h2>
         <ul>
             <li>
+                <a target="_blank" href="lab/morphing-cloud/"><img class="retina" width="250" height="100" src="src/img/lab/morphing-cloud.jpg" alt=""></a>
+            </li>
+            <li>
                 <a target="_blank" href="lab/shaders-terrain/"><img class="retina" width="250" height="100" src="src/img/lab/shaders-terrain.jpg" alt=""></a>
             </li>
             <li>
