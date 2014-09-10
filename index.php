@@ -74,7 +74,7 @@ HERE IS A COOL DINOSAUR TO WAIT
     <div class="content">
         <h1>Bruno SIMON</h1>
         <p>
-            Coder most of the time, human otherwise. Currently working at <a target="_blank" href="http://www.uzik.com">Uzik</a> as web developer, also teaching classes at <a target="_blank" href="hetic.net">HETIC</a> and doing freelance work.<br />Feel free to contact me at <a target="_blank" href="mailto:contact@bruno-simon.com">contact@bruno-simon.com</a> or on twitter <a target="_blank" href="https://twitter.com/bruno_simon">@bruno_simon</a>
+            Coder most of the time, human otherwise. Currently working at <a target="_blank" href="http://www.uzik.com">Uzik</a> as web developer, also teaching classes at <a target="_blank" href="http://hetic.net">HETIC</a> and doing freelance work.<br />Feel free to contact me at <a target="_blank" href="mailto:contact@bruno-simon.com">contact@bruno-simon.com</a> or on twitter <a target="_blank" href="https://twitter.com/bruno_simon">@bruno_simon</a>
         </p>
 
         <h2>Some projects I worked on</h2>
