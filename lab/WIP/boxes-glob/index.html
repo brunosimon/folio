@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boxes glob</title>
+    <style>
+        html,body {margin:0;padding:0;background:#1C1C1C url('bg-points.png') top left repeat;}
+        canvas {display:block;}
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    <script src="http://ajax.googleapis.com/ajax/libs/threejs/r67/three.min.js"></script>
+    <script>
+
+        /* INIT THREE */
+        var scene    = new THREE.Scene(),
+            camera   = new THREE.PerspectiveCamera(85,window.innerWidth/window.innerHeight,0.1,1000),
+            renderer = new THREE.WebGLRenderer({canvas:document.getElementById('three-canvas'),alpha:true});
+
+        renderer.setClearColor(0x000000,0);
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        camera.position.y = 0.2;
+        camera.position.z = 3;
+
+        /* SPHERE BOXES */
+        var sphere_boxes = new THREE.Object3D();
+        function create_sphere_boxes()
+        {
+            var center        = new THREE.Vector3(),
+                sphere_radius = 1,
+                sphere        = new THREE.SphereGeometry(sphere_radius,50,25);
+
+            // Remove duplicates
+            for(var i = 0; i < sphere.vertices.length; i++)
+            {
+                if(Math.abs(sphere.vertices[i].y) === sphere_radius)
+                {
+                    sphere.vertices.splice(i,1);
+                    i--;
+                }
+            }
+            sphere.vertices.push(new THREE.Vector3(0,sphere_radius,0));
+            sphere.vertices.push(new THREE.Vector3(0,-sphere_radius,0));
+
+            // Boxes cached variables
+            var box_geometry = new THREE.BoxGeometry(0.2,0.2,0.2),
+                box_material = new THREE.MeshBasicMaterial({color:0xaaaaaa}),
+                box_mesh     = null;
+
+            // Create each box
+            for(i = 0, len = sphere.vertices.length; i < len; i++)
+            {
+                box_mesh   = new THREE.Mesh(box_geometry,box_material);
+                box_mesh.position = sphere.vertices[i];
+                box_mesh.scale.set(0.04,0.04,0.1);
+                box_mesh.lookAt(center);
+
+                sphere_boxes.add(box_mesh);
+            }
+
+            scene.add(sphere_boxes);
+        }
+
+        /* TORUS BOXES */
+        var torus_boxes = new THREE.Object3D();
+        function create_torus_boxes()
+        {
+            var center  = new THREE.Vector3(),
+                torus   = new THREE.TorusGeometry(2,1,16,100);
+
+            // Boxes cached variables
+            var box_geometry = new THREE.BoxGeometry(0.2,0.2,0.2),
+                box_material = new THREE.MeshBasicMaterial({color:0x19897e}),
+                box_mesh     = null,
+                box_helper   = null;
+
+            // Remove some
+            for(var i = 0; i < torus.vertices.length; i++)
+            {
+                if(Math.sqrt(Math.pow(torus.vertices[i].y,2) + Math.pow(torus.vertices[i].x,2)) < 1.2)
+                {
+                    torus.vertices.splice(i,1);
+                    i--;
+                }
+            }
+
+            // Create each box
+            for(i = 0, len = torus.vertices.length; i < len; i++)
+            {
+                box_mesh   = new THREE.Mesh(box_geometry,box_material);
+                box_mesh.position = torus.vertices[i];
+                box_mesh.scale.set(0.04,0.04,0.2);
+                box_mesh.lookAt(center);
+
+                torus_boxes.add(box_mesh);
+            }
+
+            torus_boxes.rotation.x = Math.PI / 2;
+            scene.add(torus_boxes);
+        }
+
+        /* FRAMES */
+        function loop()
+        {
+            window.requestAnimationFrame(loop);
+
+            sphere_boxes.rotation.y += 0.001;
+            torus_boxes.rotation.z  += 0.0005;
+
+            renderer.render(scene,camera);
+        }
+
+        create_sphere_boxes();
+        create_torus_boxes();
+        loop();
+    </script>
+</body>
+</html>
