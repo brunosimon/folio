@@ -12,19 +12,41 @@
     <canvas id="three-canvas"></canvas>
     <script src="http://ajax.googleapis.com/ajax/libs/threejs/r67/three.min.js"></script>
     <script src="src/js/libs/three-js/OBJLoader.js"></script>
+    <script src="src/js/libs/Wagner/Wagner.js"></script>
+    <script>
+        WAGNER.log = function(){};</script>
+    <script src="src/js/libs/Wagner/Wagner.base.js"></script>
+    <!-- <script src="src/js/libs/Wagner/Wagner.experimental.js"></script> -->
+    <script src="src/js/libs/Wagner/ShaderLoader.js"></script>
     <script>
 
-        /* INIT THREE */
-        var scene    = new THREE.Scene(),
-            camera   = new THREE.PerspectiveCamera(85,window.innerWidth/window.innerHeight,0.0001,1000),
-            center   = new THREE.Vector3(),
-            canvas   = document.getElementById('three-canvas'),
-            renderer = new THREE.WebGLRenderer({canvas:canvas,alpha:true});
+        /* SCENE */
+        var scene  = new THREE.Scene(),
+            camera = new THREE.PerspectiveCamera(85,window.innerWidth/window.innerHeight,0.0001,1000),
+            center = new THREE.Vector3(0,0.2,0);
+
+        camera.position.y = 0.2;
+        camera.position.z = 0.5;
+
+        /* WAGNER */
+        WAGNER.vertexShadersPath   = 'src/js/libs/Wagner/vertex-shaders';
+        WAGNER.fragmentShadersPath = 'src/js/libs/Wagner/fragment-shaders';
+        WAGNER.assetsPath          = 'src/js/libs/Wagner/assets/';
+
+        /* RENDER */
+        var canvas    = document.getElementById('three-canvas'),
+            renderer  = new THREE.WebGLRenderer({canvas:canvas,alpha:true}),
+            composer  = new WAGNER.Composer( renderer, { useRGBA: false } ),
+            bloomPass = new WAGNER.MultiPassBloomPass(),
+            dirtPass  = new WAGNER.DirtPass();
+
+        bloomPass.blendPass.params.opacity = 1;
+        bloomPass.params.blurAmount        = 30;
+
+        composer.setSize(window.innerWidth,window.innerHeight);
 
         renderer.setClearColor(0x000000,0);
         renderer.setSize(window.innerWidth,window.innerHeight);
-        camera.position.y = 0.2;
-        camera.position.z = 0.5;
 
         /* DUMMY */
         function init_dummy()
@@ -62,8 +84,6 @@
                         });
 
                     material.emissive = new THREE.Color(0xffffff);
-
-                    console.log(material);
 
                     // Rotate container
                     container.rotation.y = - Math.PI / 4;
@@ -115,16 +135,44 @@
             mouse.ratio.y = mouse.y / win.height;
         };
 
+        /* MOUSE WHEEL */
+        var distance = 2;
+        var mouse_wheel_handler = function(e)
+        {
+            e.preventDefault();
+
+            var delta = e.wheelDeltaY || e.wheelDelta || - e.detail;
+
+            distance += - delta / 200;
+
+            if(distance < 0.4)
+                distance = 0.4;
+            else if(distance > 4)
+                distance = 4;
+
+            return false;
+        };
+        document.addEventListener('mousewheel',mouse_wheel_handler,false);
+        document.addEventListener('DOMMouseScroll',mouse_wheel_handler,false);
+
         /* FRAMES */
         function loop()
         {
             window.requestAnimationFrame(loop);
 
-            camera.position.x = (mouse.ratio.x - 0.5) * 1;
-            camera.position.y = - (mouse.ratio.y - 1) * 1;
+            camera.position.x += (Math.sin(mouse.ratio.x * 2 - 1) * distance - camera.position.x) / 10;
+            camera.position.z += (Math.cos(mouse.ratio.x * 2 - 1) * distance - camera.position.z) / 10;
+            camera.position.y += (- (mouse.ratio.y - 1) * distance - camera.position.y) / 10;
             camera.lookAt(center);
 
-            renderer.render(scene,camera);
+            // renderer.render(scene,camera);
+
+            composer.reset();
+            composer.render(scene,camera);
+
+            composer.pass(bloomPass);
+            // composer.pass( dirtPass );
+            composer.toScreen();
         }
 
         loop();
