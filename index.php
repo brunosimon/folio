@@ -79,13 +79,17 @@ HERE IS A COOL DINOSAUR TO WAIT
 
         <h2>Some projects I worked on</h2>
         <p>
-            <a target="_blank" href="http://jr-associee.com">JR &amp; Associée</a>
+            <a target="_blank" href="http://valeriemartinez.com">Valérie Martinez</a>
+            <br /><a target="_blank" href="http://jr-associee.com">JR &amp; Associée</a>
             <br /><a target="_blank" href="http://www.myprovence.fr/snapshots2013/">Myprovence - Snapshots 2013</a>
             <br /><a target="_blank" href="http://randheli.chevalblanc.com">Cheval Blanc - Randheli</a>
         </p>
 
         <h2>My lab</h2>
         <ul>
+            <li>
+                <a target="_blank" href="lab/impacts/"><img class="retina" width="250" height="100" src="src/img/lab/impacts.jpg" alt=""></a>
+            </li>
             <li>
                 <a target="_blank" href="lab/morphing-cloud/"><img class="retina" width="250" height="100" src="src/img/lab/morphing-cloud.jpg" alt=""></a>
             </li>
