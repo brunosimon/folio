@@ -1,7 +1,0 @@
-html,body {width:100%;height:100%;}
-.block {position:absolute;}
-.targeted {background:red;}
-.full {background:green;}
-.block {
-	-webkit-transition:width 1s,height 1s,top 1s,left 1s,background 0.05s;
-}

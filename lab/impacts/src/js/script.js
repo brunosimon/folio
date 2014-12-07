@@ -4,7 +4,6 @@ var options = {
     model         : 'bricks',
     camera_fov    : 85,
     dirt_pass     : false,
-    dirt_opacity  : 1,
     bloom_pass    : true,
     bloom_amount  : 10,
     bloom_opacity : 1
@@ -42,7 +41,6 @@ controllers.camera_fov = misc.add(options,'camera_fov',20,180).step(1).name('cam
 
 shaders.open();
 controllers.dirt_pass     = shaders.add(options,'dirt_pass').name('dirt pass');
-controllers.dirt_opacity  = shaders.add(options,'dirt_opacity',0,1).step(0.01).name('dirt opacity');
 controllers.bloom_pass    = shaders.add(options,'bloom_pass').name('bloom pass');
 controllers.bloom_amount  = shaders.add(options,'bloom_amount',0,100).step(1).name('bloom amount');
 controllers.bloom_opacity = shaders.add(options,'bloom_opacity',0,1).step(0.01).name('bloom opacity');

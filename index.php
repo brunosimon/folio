@@ -88,6 +88,12 @@ HERE IS A COOL DINOSAUR TO WAIT
         <h2>My lab</h2>
         <ul>
             <li>
+                <a target="_blank" href="lab/snow-shader/"><img class="retina" width="250" height="100" src="src/img/lab/snow-shader.jpg" alt=""></a>
+            </li>
+            <li>
+                <a target="_blank" href="http://christmasexperiments.com/experiments/5"><img class="retina" width="250" height="100" src="src/img/lab/christmas-experiment.jpg" alt=""></a>
+            </li>
+            <li>
                 <a target="_blank" href="lab/impacts/"><img class="retina" width="250" height="100" src="src/img/lab/impacts.jpg" alt=""></a>
             </li>
             <li>
