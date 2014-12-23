@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template - Three.js - GUI - Stats - Shaders - Multi-composer - World - Classes</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+
+    <!-- LIBS : MISC -->
+    <script src="src/js/libs/dat.gui.min.js"></script>
+    <script src="src/js/libs/rStats.js"></script>
+    <script src="src/js/libs/jquery-2.1.1.min.js"></script>
+    <script src="src/js/libs/class.js"></script>
+    <script src="src/js/libs/matter-0.8.0.min.js"></script>
+    <script src="src/js/libs/howler.min.js"></script>
+
+    <!-- LIBS : THREE -->
+    <script src="src/js/libs/three-js/three.min.js"></script>
+    <script src="src/js/libs/three-js/shaders/AdditiveBlendingShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/ConvolutionShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/CopyShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/VerticalBlurShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/HorizontalBlurShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/VerticalTiltShiftShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/HorizontalTiltShiftShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/BrightnessContrastShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/FXAAShader.js"></script>
+    <script src="src/js/libs/three-js/shaders/ColorCorrectionShader.js"></script>
+    <script src="src/js/libs/three-js/postprocessing/EffectComposer.js"></script>
+    <script src="src/js/libs/three-js/postprocessing/BloomPass.js"></script>
+    <script src="src/js/libs/three-js/postprocessing/RenderPass.js"></script>
+    <script src="src/js/libs/three-js/postprocessing/ShaderPass.js"></script>
+    <script src="src/js/libs/three-js/postprocessing/MaskPass.js"></script>
+
+    <!-- APP -->
+    <script src="src/js/app/app.js"></script>
+
+    <!-- CORE -->
+    <script src="src/js/app/core/abstract.class.js"></script>
+    <script src="src/js/app/core/event_emitter.class.js"></script>
+    <script src="src/js/app/core/app.class.js"></script>
+
+    <!-- COMPONENTS -->
+    <script src="src/js/app/components/debug.class.js"></script>
+    <script src="src/js/app/components/ui.class.js"></script>
+    <script src="src/js/app/components/sounds.class.js"></script>
+    <script src="src/js/app/components/world/world.class.js"></script>
+    <script src="src/js/app/components/world/planet.class.js"></script>
+    <script src="src/js/app/components/world/renderer.class.js"></script>
+
+    <!-- TOOLS -->
+    <script src="src/js/app/tools/browser.class.js"></script>
+    <script src="src/js/app/tools/css.class.js"></script>
+    <script src="src/js/app/tools/images.class.js"></script>
+    <script src="src/js/app/tools/three_helper.class.js"></script>
+    <script src="src/js/app/tools/keyboard.class.js"></script>
+    <script src="src/js/app/tools/mouse.class.js"></script>
+    <script src="src/js/app/tools/ticker.class.js"></script>
+
+    <script>
+        var app = new APP.CORE.App();
+        app.start();
+    </script>
+</body>
+</html>
