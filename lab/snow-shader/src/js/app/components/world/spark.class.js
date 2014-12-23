@@ -9,9 +9,9 @@
             preview_size : 120,
             texture_size : 20,
             disk_scale   : 0.4,
-            disk_color   : '#ffffff',
+            disk_color   : '#ffcc28',
             glow_scale   : 0.4,
-            glow_color   : '#ffffff'
+            glow_color   : '#ff0077'
         },
 
         /**
