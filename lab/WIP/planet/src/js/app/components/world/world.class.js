@@ -57,20 +57,31 @@
             // Camera
             this.camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 100000 );
             this.center = new THREE.Vector3( 0, 0, 0 );
-            this.camera.position.set( 4, 2, 4 );
+            this.camera.position.set( 0, 0, 10 );
+            this.distance = 10;
 
-            // Planet
-            this.planet = new APP.COMPONENTS.WORLD.Planet({
-                scene : this.scene
+            this.mouse.on('wheel',function()
+            {
+                that.distance -= that.mouse.wheel.delta / 20;
+                if( that.distance < 2.4 )
+                    that.distance = 2.4;
             });
 
-            // Light
-            var ambient_light = new THREE.AmbientLight(0xffffff);
-            this.scene.add(ambient_light);
+            // Sun
+            this.sun_light = new THREE.PointLight( new THREE.Color( 0xffffff ), 1.0 );
+            this.sun_light.position.set( 5, 5, 10 );
+            this.scene.add( this.sun_light );
 
             // Renderer
             this.renderer = new APP.COMPONENTS.WORLD.Renderer( { canvas : this.canvas } );
             this.renderer.start( this.scene, this.camera );
+
+            // Planet
+            this.planet = new APP.COMPONENTS.WORLD.Planet({
+                scene     : this.scene,
+                sun_light : this.sun_light,
+                renderer  : this.renderer.instance
+            });
 
             // Ticker
             this.ticker.on( 'tick' , function()
@@ -84,8 +95,10 @@
          */
         frame: function()
         {
-            this.camera.position.x =   ( this.mouse.ratio.x - 0.5 ) * 5;
-            this.camera.position.y = - ( this.mouse.ratio.y - 0.5 ) * 5;
+            this.camera.position.x = Math.sin( this.mouse.ratio.x * Math.PI * 2 ) * this.distance;
+            this.camera.position.z = Math.cos( this.mouse.ratio.x * Math.PI * 2 ) * this.distance;
+            this.camera.position.y = - ( this.mouse.ratio.y - 0.5 ) * 4 * this.distance;
+
             this.camera.lookAt( this.center );
         }
     });

@@ -92,6 +92,8 @@
             this.instance   = new THREE.WebGLRenderer( { canvas : this.options.canvas, alpha : true } );
             this.start_time = + ( new Date() );
 
+            this.instance.gammaInput  = true;
+            this.instance.gammaOutput = true;
             this.instance.setClearColor( 0x000000, 0 );
             this.instance.setSize( this.browser.width, this.browser.height );
 
