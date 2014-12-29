@@ -14,11 +14,15 @@
          */
         init : function( options )
         {
+            var that = this;
+
             this._super( options );
 
             this.scene     = this.options.scene;
             this.sun_light = this.options.sun_light;
             this.renderer  = this.options.renderer;
+            this.camera    = this.options.camera;
+            this.ticker    = new APP.TOOLS.Ticker();
 
             // Geometry
             this.geometry = this.generate_geometry();
@@ -32,6 +36,11 @@
 
             // Sky
             this.generate_sky();
+
+            this.ticker.on( 'tick', function()
+            {
+                that.frame();
+            } );
         },
 
         /**
@@ -39,136 +48,143 @@
          */
         generate_sky: function()
         {
+            this.sky = {};
+
             var atmosphere =
             {
                 Kr   : 0.0025,
                 Km   : 0.0010,
                 ESun : 20.0,
                 g    : - 0.950,
-                innerRadius   : 2.1,
-                outerRadius   : 2.5,
-                wavelength    : [ 0.650, 0.570, 0.475 ],
-                scaleDepth    : 0.25,
+                innerRadius   : 2.07,
+                outerRadius   : 3.09,
+                wavelength    : [ 0.550, 0.600, 0.500 ],
+                // wavelength    : [ 0.350, 0.500, 0.500 ],
+                scaleDepth    : 0.15,
                 // mieScaleDepth : 0.1
             };
 
-            var uniforms =
+            console.log(1 / Math.pow( atmosphere.wavelength[ 0 ], 4 ));
+            console.log(1 / Math.pow( atmosphere.wavelength[ 1 ], 4 ));
+            console.log(1 / Math.pow( atmosphere.wavelength[ 2 ], 4 ));
+
+            var camera_length = this.camera.position.length() * 2;
+
+            this.sky.uniforms =
             {
               v3LightPosition: {
-                type: "v3",
+                type: 'v3',
                 // value: new THREE.Vector3(1e8, 0, 1e8).normalize()
-                value: this.sun_light.position.normalize()
+                value: new THREE.Vector3().copy( this.sun_light.position ).normalize()
               },
               v3InvWavelength: {
-                type: "v3",
-                value: new THREE.Vector3(1 / Math.pow(atmosphere.wavelength[0], 4), 1 / Math.pow(atmosphere.wavelength[1], 4), 1 / Math.pow(atmosphere.wavelength[2], 4))
+                type: 'v3',
+                value: new THREE.Vector3( 1 / Math.pow( atmosphere.wavelength[ 0 ], 4 ), 1 / Math.pow( atmosphere.wavelength[ 1 ], 4 ), 1 / Math.pow( atmosphere.wavelength[ 2 ], 4 ) )
               },
               fCameraHeight: {
-                type: "f",
-                value: 600
+                type: 'f',
+                value: camera_length
               },
               fCameraHeight2: {
-                type: "f",
-                value: 600 * 600
+                type: 'f',
+                value: camera_length * camera_length
               },
               fInnerRadius: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.innerRadius
               },
               fInnerRadius2: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.innerRadius * atmosphere.innerRadius
               },
               fOuterRadius: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.outerRadius
               },
               fOuterRadius2: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.outerRadius * atmosphere.outerRadius
               },
               fKrESun: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.Kr * atmosphere.ESun
               },
               fKmESun: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.Km * atmosphere.ESun
               },
               fKr4PI: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.Kr * 4.0 * Math.PI
               },
               fKm4PI: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.Km * 4.0 * Math.PI
               },
               fScale: {
-                type: "f",
+                type: 'f',
                 value: 1 / (atmosphere.outerRadius - atmosphere.innerRadius)
               },
               fScaleDepth: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.scaleDepth
               },
               fScaleOverScaleDepth: {
-                type: "f",
-                value: 1 / (atmosphere.outerRadius - atmosphere.innerRadius) / atmosphere.scaleDepth
+                type: 'f',
+                value: 1 / ( atmosphere.outerRadius - atmosphere.innerRadius ) / atmosphere.scaleDepth
               },
               g: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.g
               },
               g2: {
-                type: "f",
+                type: 'f',
                 value: atmosphere.g * atmosphere.g
               },
               nSamples: {
-                type: "i",
+                type: 'i',
                 value: 3
               },
               fSamples: {
-                type: "f",
+                type: 'f',
                 value: 3.0
               },
               // tDiffuse: {
-              //   type: "t",
+              //   type: 't',
               //   value: diffuse
               // },
               // tDiffuseNight: {
-              //   type: "t",
+              //   type: 't',
               //   value: diffuseNight
               // },
               tDisplacement: {
-                type: "t",
+                type: 't',
                 value: 0
               },
               tSkyboxDiffuse: {
-                type: "t",
+                type: 't',
                 value: 0
               },
               fNightScale: {
-                type: "f",
+                type: 'f',
                 value: 1
               }
             };
-            var sky =
-            {
-                geometry : new THREE.SphereGeometry( atmosphere.innerRadius, 500, 500 ),
-                material : new THREE.ShaderMaterial( {
-                    uniforms       : uniforms,
-                    vertexShader   : document.getElementById( 'sky-vertex-shader' ).innerText,
-                    fragmentShader : document.getElementById( 'sky-fragment-shader' ).innerText
-                } )
-            };
 
-            sky.mesh = new THREE.Mesh( sky.geometry, sky.material );
+            this.sky.geometry = new THREE.SphereGeometry( atmosphere.innerRadius, 256, 256 );
+            this.sky.material = new THREE.ShaderMaterial( {
+                uniforms       : this.sky.uniforms,
+                vertexShader   : document.getElementById( 'sky-vertex-shader' ).innerText,
+                fragmentShader : document.getElementById( 'sky-fragment-shader' ).innerText
+            } );
 
-            sky.material.side = THREE.BackSide;
+            this.sky.mesh = new THREE.Mesh( this.sky.geometry, this.sky.material );
 
-            sky.material.transparent = true;
+            this.sky.material.side        = THREE.BackSide;
+            this.sky.material.transparent = true;
+            this.sky.material.blending    = THREE.AdditiveBlending;
 
-            this.scene.add( sky.mesh );
+            this.scene.add( this.sky.mesh );
         },
 
         /**
@@ -284,6 +300,9 @@
             };
         },
 
+        /**
+         * GET SHADER MATERIAL
+         */
         get_shader_material : function( texture_map, bump_map )
         {
             var vertexShader   = document.getElementById( 'planet-vertex-shader' ).innerText,
@@ -298,12 +317,12 @@
                     {
                         type  : 't',
                         value : texture_map
-                    },
-                    normalMap :
-                    {
-                        type  : 't',
-                        value : this.height_to_normal_map( bump_map, 0 )
-                    }
+                    }//,
+                    // normalMap :
+                    // {
+                    //     type  : 't',
+                    //     value : this.height_to_normal_map( bump_map, 4 )
+                    // }
                 };
 
             return new THREE.ShaderMaterial({
@@ -314,6 +333,9 @@
             });
         },
 
+        /**
+         * GET TEXTURE GENERATOR MATERIAL
+         */
         get_texture_generator_material : function( index )
         {
             var vertexShader   = document.getElementById( 'planet-texture-vertex-shader' ).innerText,
@@ -335,6 +357,9 @@
             } );
         },
 
+        /**
+         * HEIGHT TO NORMAL MAP
+         */
         height_to_normal_map : function( map, intensity )
         {
             var width  = map.image.width,
@@ -349,7 +374,7 @@
                 x = Math.min( x, width - 1 );
                 y = Math.min( y, height - 1 );
 
-                return (
+                return - (
                     map.image.data[ ( y * width + x ) * 4     ] / 255 +
                     map.image.data[ ( y * width + x ) * 4 + 1 ] / 255 +
                     map.image.data[ ( y * width + x ) * 4 + 2 ] / 255
@@ -374,6 +399,17 @@
             }
 
             return normal_map;
+        },
+
+        /**
+         * FRAME
+         */
+        frame : function()
+        {
+            var camera_length = this.camera.position.length();
+
+            // this.sky.uniforms.fCameraHeight  = camera_length;
+            // this.sky.uniforms.fCameraHeight2 = camera_length * camera_length;
         }
     });
 })();

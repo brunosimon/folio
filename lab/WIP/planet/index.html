@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Template - Three.js - GUI - Stats - Shaders - Multi-composer - World - Classes</title>
+    <title>Procedural Planet</title>
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
@@ -41,7 +41,6 @@
         varying vec3 v3Direction;
         varying vec3 c0;
         varying vec3 c1;
-
 
         float scale(float fCos)
         {
@@ -98,6 +97,7 @@
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
             c0          = v3FrontColor * ( v3InvWavelength * fKrESun );
             c1          = v3FrontColor * fKmESun;
+
             v3Direction = cameraPosition - position;
         }
     </script>
@@ -205,7 +205,8 @@
             float PI       = 3.14159265358979323846264;
             vec3 light     = pointLightPosition - vPosition;
             vec3 cameraDir = normalize( cameraVector );
-            vec3 newNormal = bumpNormal( normalMap, vUv );
+            vec3 newNormal = vNormal;
+            // vec3 newNormal = bumpNormal( normalMap, vUv );
 
             light = normalize( light );
 
@@ -223,7 +224,7 @@
             dProd += invertedViewAngle * 0.5 * ( max( - 0.35, dot( vNormal, light ) ) + 0.35 );
             dProd *= 0.7 + pow( invertedViewAngle / ( PI / 2.0 ), 2.0 );
             dProd *= 0.5;
-            vec4 atmColor = vec4( dProd * 0.5, dProd * 0.5, dProd, 1.0 );
+            vec4 atmColor = vec4( dProd * 0.2, dProd * 0.2, dProd, 1.0 );
 
             // Shadow
             vec4 texelColor = texture2D( map, vUv ) * min( asin( lightAngle ), 1.0 );
@@ -320,7 +321,7 @@
         float getHeight( float x, float y, float z )
         {
             float h = 0.5;
-            for( int i = 0; i < 9; ++i )
+            for( int i = 0; i < 5; ++i )
             {
                 float resolution = pow( 2.0, 2.0 + float( i ) * 2.0 );
                 float level      = helper( x, y, z, resolution );
@@ -336,7 +337,7 @@
         vec4 getCloud( float x, float y, float z )
         {
             float h = 0.5;
-            for( int i = 0; i < 11; ++i )
+            for( int i = 0; i < 7; ++i )
             {
                 float resolution = pow( 2.0, 4.0 + float( i ) * 2.0 );
                 float level      = helper( x, y, z, resolution );
@@ -367,7 +368,7 @@
 
             else
             {
-                color.r = height;
+                color.r = height * 0.9;
                 color.g = height * 0.2;
                 color.b = height * 0.2;
             }
@@ -379,57 +380,6 @@
                 color.g = height * 0.8;
                 color.b = height * 0.5 + 0.5;
             }
-
-            // // Red / blue
-            // if(height < 0.5)
-            // {
-            //     color.x = height * 0.3;
-            //     color.y = height * 0.2;
-            //     color.z = height * 0.4;
-            // }
-
-            // else
-            // {
-            //     color.x = height;
-            //     color.y = height * 0.2;
-            //     color.z = height * 0.2;
-            // }
-
-            // // Green / blue
-            // if(height < 0.48)
-            // {
-            //     color.x = height * 0.1;
-            //     color.y = height * 0.1;
-            //     color.z = height * 0.2;
-            // }
-
-            // else if(height < 0.5)
-            // {
-            //     color.x = height * 0.0;
-            //     color.y = height * 0.6;
-            //     color.z = height * 0.5;
-            // }
-
-            // else if(height < 0.51)
-            // {
-            //     color.x = height * 1.0;
-            //     color.y = height * 0.8;
-            //     color.z = height * 0.2;
-            // }
-
-            // else if(height < 0.9)
-            // {
-            //     color.x = height * 0.5;
-            //     color.y = height * 0.6;
-            //     color.z = height * 0.1;
-            // }
-
-            // else
-            // {
-            //     color.x = height * 1.0;
-            //     color.y = height * 1.0;
-            //     color.z = height * 1.0;
-            // }
 
             return vec4( color, 1.0 );
         }

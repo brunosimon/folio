@@ -83,7 +83,7 @@
             // Axis helper
             var axis_helper = new THREE.AxisHelper();
             axis_helper.scale.set(5,5,5);
-            this.scene.add(axis_helper);
+            // this.scene.add(axis_helper);
 
             // Renderer
             this.renderer = new APP.COMPONENTS.WORLD.Renderer( { canvas : this.canvas } );
@@ -93,7 +93,8 @@
             this.planet = new APP.COMPONENTS.WORLD.Planet({
                 scene     : this.scene,
                 sun_light : this.sun_light,
-                renderer  : this.renderer.instance
+                renderer  : this.renderer.instance,
+                camera    : this.camera
             });
 
             // Ticker
