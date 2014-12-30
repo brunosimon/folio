@@ -132,11 +132,11 @@
             // Init Debug
             this.init_debug();
 
-            // Ticker
-            this.ticker.on( 'tick' , function()
-            {
-                that.frame();
-            } );
+            // // Ticker
+            // this.ticker.on( 'tick' , function()
+            // {
+            //     that.frame();
+            // } );
         },
 
         /**
@@ -264,6 +264,7 @@
          */
         frame: function()
         {
+            // console.log('render');
             if( !this.options.shaders )
             {
                 this.instance.render( this.scene, this.camera );

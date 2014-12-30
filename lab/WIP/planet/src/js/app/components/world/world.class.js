@@ -57,27 +57,27 @@
             // Camera
             this.camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 100000 );
             this.center = new THREE.Vector3( 0, 0, 0 );
-            this.camera.position.set( 0, 0, 10 );
-            this.distance = 10;
+            this.camera.position.set( 0, 0, 300 );
+            this.distance = 300;
 
             this.mouse.on('wheel',function()
             {
-                that.distance -= that.mouse.wheel.delta / 20;
-                if( that.distance < 2.4 )
-                    that.distance = 2.4;
+                that.distance -= that.mouse.wheel.delta / 2;
+                if( that.distance < 150 )
+                    that.distance = 150;
             });
 
             // Sun
             this.sun_light = new THREE.PointLight( new THREE.Color( 0xffffff ), 1.0 );
-            this.sun_light.position.set( - 10, 1, 10 );
+            this.sun_light.position.set( - 400, 20, 400 );
             this.scene.add( this.sun_light );
 
             /* DUMMY */
             var material = new THREE.MeshNormalMaterial(),
-                geometry = new THREE.BoxGeometry(1,1,1),
+                geometry = new THREE.BoxGeometry(50,50,50),
                 mesh     = new THREE.Mesh(geometry,material);
 
-            mesh.position.set( - 10, 1, 10 );
+            mesh.position.set( - 400, 20, 400 );
             this.scene.add(mesh);
 
             // Axis helper
@@ -114,6 +114,9 @@
             this.camera.position.y = - ( this.mouse.ratio.y - 0.5 ) * 4 * this.distance;
 
             this.camera.lookAt( this.center );
+
+            this.planet.frame();
+            this.renderer.frame();
         }
     });
 })();
