@@ -90,7 +90,7 @@
             this.renderer.start( this.scene, this.camera );
 
             // Planet
-            this.planet = new APP.COMPONENTS.WORLD.Planet({
+            this.planet = new APP.COMPONENTS.WORLD.PLANET.Planet({
                 scene     : this.scene,
                 sun_light : this.sun_light,
                 renderer  : this.renderer.instance,

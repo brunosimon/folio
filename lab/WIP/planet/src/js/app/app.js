@@ -3,8 +3,7 @@ APP.CORE                      = {};
 APP.TOOLS                     = {};
 APP.COMPONENTS                = {};
 APP.COMPONENTS.WORLD          = {};
-APP.COMPONENTS.WORLD.ROOMS    = {};
-APP.COMPONENTS.WORLD.ELEMENTS = {};
+APP.COMPONENTS.WORLD.PLANET   = {};
 
 
 (function() {

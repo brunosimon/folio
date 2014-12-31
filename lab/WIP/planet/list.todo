@@ -1,0 +1,7 @@
+[√] Refactoring planet class
+[√] Better sun vector handling
+[ ] Gradient texture for planet diffuse
+[ ] Night diffuse
+[ ] Position Y atmosphere bug
+[ ] More debug tweaks
+[ ] Resize
