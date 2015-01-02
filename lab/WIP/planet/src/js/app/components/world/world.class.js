@@ -98,9 +98,16 @@
             });
 
             // Ticker
-            this.ticker.on( 'tick' , function()
+            this.ticker.on( 'tick' ,function()
             {
                 that.frame();
+            } );
+
+            // Browser resize
+            this.browser.on( 'resize', function( width, height )
+            {
+                that.camera.aspect = width / height,
+                that.camera.updateProjectionMatrix();
             } );
         },
 

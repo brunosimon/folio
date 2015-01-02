@@ -6,9 +6,10 @@
     {
         options :
         {
+            ice_scale  : 0.50,
             atmosphere :
             {
-                Kr            : 0.0003,
+                Kr            : 0.0005,
                 Km            : 0.001,
                 ESun          : 30.0,
                 g             : - 0.950,
@@ -163,9 +164,14 @@
                         type: 'f',
                         value: 1
                     },
+                    fIceScale :
+                    {
+                        type: 'f',
+                        value: this.options.ice_scale
+                    },
                     time :
                     {
-                        type: "f",
+                        type: 'f',
                         value: 0.0
                     }
                 };
@@ -197,19 +203,18 @@
 
             this.debug = {};
             this.debug.instance = new APP.COMPONENTS.Debug();
-            this.debug.instance.gui.planet = this.debug.instance.gui.instance.addFolder( 'Planet' );
-            this.debug.instance.gui.planet.open();
 
-            this.debug.Kr            = this.debug.instance.gui.planet.add( this.options.atmosphere, 'Kr', 0, 0.01 ).step( 0.0001 ).name( 'Kr' );
-            this.debug.Km            = this.debug.instance.gui.planet.add( this.options.atmosphere, 'Km', 0, 0.01 ).step( 0.0001 ).name( 'Km' );
-            this.debug.ESun          = this.debug.instance.gui.planet.add( this.options.atmosphere, 'ESun', 1, 200 ).step( 1 ).name( 'ESun' );
-            this.debug.g             = this.debug.instance.gui.planet.add( this.options.atmosphere, 'g', -1, 0 ).step( 0.001 ).name( 'g' );
-            this.debug.wavelength_r  = this.debug.instance.gui.planet.add( this.options.atmosphere.wavelength, 'r', 0, 1 ).step( 0.001 ).name( 'wavelength r' );
-            this.debug.wavelength_g  = this.debug.instance.gui.planet.add( this.options.atmosphere.wavelength, 'g', 0, 1 ).step( 0.001 ).name( 'wavelength g' );
-            this.debug.wavelength_b  = this.debug.instance.gui.planet.add( this.options.atmosphere.wavelength, 'b', 0, 1 ).step( 0.001 ).name( 'wavelength b' );
-            this.debug.scaleDepth    = this.debug.instance.gui.planet.add( this.options.atmosphere, 'scaleDepth', 0, 1 ).step( 0.001 ).name( 'scaleDepth' );
-            // this.debug.innerRadius   = this.debug.instance.gui.planet.add( this.options.atmosphere, 'innerRadius', 1, 200 ).step( 0.01 ).name( 'innerRadius' );
-            // this.debug.outerRadius   = this.debug.instance.gui.planet.add( this.options.atmosphere, 'outerRadius', 1, 200 ).step( 0.01 ).name( 'outerRadius' );
+            // Atmosphere
+            this.debug.instance.gui.atmosphere = this.debug.instance.gui.instance.addFolder( 'Planet | Atmosphere' );
+
+            this.debug.Kr            = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'Kr', 0, 0.01 ).step( 0.0001 ).name( 'Kr' );
+            this.debug.Km            = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'Km', 0, 0.01 ).step( 0.0001 ).name( 'Km' );
+            this.debug.ESun          = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'ESun', 1, 200 ).step( 1 ).name( 'ESun' );
+            this.debug.g             = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'g', -1, 0 ).step( 0.001 ).name( 'g' );
+            this.debug.wavelength_r  = this.debug.instance.gui.atmosphere.add( this.options.atmosphere.wavelength, 'r', 0, 1 ).step( 0.001 ).name( 'wavelength r' );
+            this.debug.wavelength_g  = this.debug.instance.gui.atmosphere.add( this.options.atmosphere.wavelength, 'g', 0, 1 ).step( 0.001 ).name( 'wavelength g' );
+            this.debug.wavelength_b  = this.debug.instance.gui.atmosphere.add( this.options.atmosphere.wavelength, 'b', 0, 1 ).step( 0.001 ).name( 'wavelength b' );
+            this.debug.scaleDepth    = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'scaleDepth', 0, 1 ).step( 0.001 ).name( 'scaleDepth' );
 
             function update_uniforms( uniforms )
             {
@@ -223,6 +228,7 @@
                 uniforms.g.value               = that.options.atmosphere.g;
                 uniforms.g2.value              = that.options.atmosphere.g * that.options.atmosphere.g;
                 uniforms.fScaleDepth.value     = that.options.atmosphere.scaleDepth;
+                uniforms.fIceScale.value       = that.options.ice_scale;
             }
 
             function update()
@@ -246,8 +252,14 @@
             this.debug.wavelength_g.onChange( update );
             this.debug.wavelength_b.onChange( update );
             this.debug.scaleDepth.onChange( update );
-            // this.debug.innerRadius.onChange( update );
-            // this.debug.outerRadius.onChange( update );
+
+            // General
+            this.debug.instance.gui.planet = this.debug.instance.gui.instance.addFolder( 'Planet' );
+            this.debug.instance.gui.planet.open();
+
+            this.debug.ice_scale = this.debug.instance.gui.planet.add( this.options, 'ice_scale', 0, 1 ).step( 0.001 ).name( 'Ice Scale' );
+
+            this.debug.ice_scale.onChange( update );
         },
 
         /**

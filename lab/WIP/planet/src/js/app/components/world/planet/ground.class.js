@@ -24,6 +24,9 @@
             this.sun_light         = this.options.sun_light;
             this.generate_uniforms = this.options.generate_uniforms;
 
+            // Init textures
+            this.init_textures();
+
             // Geometry
             this.geometry = this.generate_geometry();
 
@@ -33,6 +36,44 @@
             // Mesh
             this.mesh = new THREE.Mesh( this.geometry, this.material );
             this.scene.add( this.mesh );
+        },
+
+        /**
+         * INIT TEXTURES
+         */
+        init_textures: function()
+        {
+            this.textures        = {};
+            this.textures.ground = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
+                items :
+                {
+                    item_0 : { pos : 0.00, color : '#2d0000' },
+                    item_1 : { pos : 0.49, color : '#660000' },
+                    item_2 : { pos : 0.50, color : '#aa0000' },
+                    item_3 : { pos : 0.75, color : '#cd1010' },
+                    item_4 : { pos : 1.00, color : '#ff0000' },
+                },
+                debug :
+                {
+                    name : 'Planet | Ground texture'
+                }
+            } );
+            this.textures.ice = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
+                items :
+                {
+                    item_0 : { pos : 0.00, color : '#ff9bbe' },
+                    item_1 : { pos : 0.43, color : '#ffebf2' },
+                    item_2 : { pos : 0.44, color : '#ffffff' }
+                },
+                debug :
+                {
+                    name : 'Planet | Ice texture'
+                },
+                style :
+                {
+                    top : 86
+                }
+            } );
         },
 
         /**
@@ -103,6 +144,7 @@
         {
             var textures   = [],
                 bumps      = [],
+                materials  = [],
                 resolution = 1024;
 
             // Each face
@@ -112,10 +154,14 @@
                 var texture        = new THREE.WebGLRenderTarget( resolution, resolution, { minFilter : THREE.LinearFilter, magFilter : THREE.LinearFilter, format : THREE.RGBFormat } ),
                     texture_camera = new THREE.OrthographicCamera( - resolution / 2, resolution / 2, resolution / 2, - resolution / 2, -100, 100 ),
                     texture_scene  = new THREE.Scene(),
+                    geometry       = new THREE.PlaneBufferGeometry( resolution, resolution ),
+                    material       = new this.get_texture_shader_material( i, this.textures.ground.texture ),
                     plane          = new THREE.Mesh(
-                        new THREE.PlaneBufferGeometry( resolution, resolution ),
-                        new this.get_texture_shader_material( i )
+                        geometry,
+                        material
                     );
+
+                materials.push( material );
 
                 texture_camera.position.z = 10;
                 plane.position.z          = - 10;
@@ -145,8 +191,9 @@
 
             // Return
             return {
-                textures : textures,
-                bumps    : bumps
+                textures  : textures,
+                bumps     : bumps,
+                materials : materials,
             };
         },
 
@@ -159,6 +206,18 @@
                 fragmentShader = document.getElementById( 'planet-fragment-shader' ).innerText,
                 uniforms       = this.generate_uniforms( texture_map );
 
+            uniforms.tGroundGradient =
+            {
+                type  : 't',
+                value : this.textures.ground.texture
+            };
+
+            uniforms.tIceGradient =
+            {
+                type  : 't',
+                value : this.textures.ice.texture
+            };
+
             return new THREE.ShaderMaterial( {
                 uniforms       : uniforms,
                 vertexShader   : vertexShader,
@@ -170,7 +229,7 @@
         /**
          * GET TEXTURE GENERATOR MATERIAL
          */
-        get_texture_shader_material : function( index )
+        get_texture_shader_material : function( index, texture )
         {
             var vertexShader   = document.getElementById( 'planet-texture-vertex-shader' ).innerText,
                 fragmentShader = document.getElementById( 'planet-texture-fragment-shader' ).innerText,

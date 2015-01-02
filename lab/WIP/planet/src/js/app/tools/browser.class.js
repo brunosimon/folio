@@ -285,7 +285,7 @@
         {
             var keys = Object.keys(this.shall_trigger);
             for( var i = 0; i < keys.length; i++ )
-                this.trigger( keys[ i ] , [ this.shall_trigger[ keys[ i ]  ] ] );
+                this.trigger( keys[ i ] , this.shall_trigger[ keys[ i ] ] );
 
             if( keys.length )
                 this.shall_trigger = {};
