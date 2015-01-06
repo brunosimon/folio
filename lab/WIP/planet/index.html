@@ -39,8 +39,8 @@
         const float fSamples = 3.0;
 
         varying vec3 v3Direction;
-        varying vec3 c0;
-        varying vec3 c1;
+        varying vec3 vColor0;
+        varying vec3 vColor1;
 
         float scale(float fCos)
         {
@@ -68,7 +68,7 @@
             float fStartAngle  = dot( v3Ray, v3Start ) / fOuterRadius;
             float fStartDepth  = exp( - 1.0 / fScaleDepth );
             float fStartOffset = fStartDepth * scale( fStartAngle );
-            //c0 = vec3(1.0, 0, 0) * fStartAngle;
+            //vColor0 = vec3(1.0, 0, 0) * fStartAngle;
 
             // Initialize the scattering loop variables
             float fSampleLength = fFar / fSamples;
@@ -84,7 +84,7 @@
             {
                 float fHeight      = length( v3SamplePoint );
                 float fDepth       = exp( fScaleOverScaleDepth * ( fInnerRadius - fHeight ) );
-                float fLightAngle  = dot( v3LightPosition, v3SamplePoint ) / fHeight;
+                float fLightAngle  = dot( normalize(v3LightPosition), v3SamplePoint ) / fHeight;
                 float fCameraAngle = dot( v3Ray, v3SamplePoint ) / fHeight;
                 float fScatter     = ( fStartOffset + fDepth * ( scale( fLightAngle ) - scale( fCameraAngle ) ) );
                 vec3 v3Attenuate   = exp( - fScatter * ( v3InvWavelength * fKr4PI + fKm4PI ) );
@@ -95,8 +95,8 @@
 
             // Finally, scale the Mie and Rayleigh colors and set up the varying variables for the pixel shader
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-            c0          = v3FrontColor * ( v3InvWavelength * fKrESun );
-            c1          = v3FrontColor * fKmESun;
+            vColor0          = v3FrontColor * ( v3InvWavelength * fKrESun );
+            vColor1          = v3FrontColor * fKmESun;
 
             v3Direction = cameraPosition - position;
         }
@@ -117,8 +117,8 @@
         uniform float g2;
 
         varying vec3 v3Direction;
-        varying vec3 c0;
-        varying vec3 c1;
+        varying vec3 vColor0;
+        varying vec3 vColor1;
 
         // Calculates the Mie phase function
         float getMiePhase( float fCos, float fCos2, float g, float g2 )
@@ -137,7 +137,7 @@
             float fCos  = dot( v3LightPos, v3Direction ) / length( v3Direction );
             float fCos2 = fCos * fCos;
 
-            vec3 color = getRayleighPhase( fCos2 ) * c0 + getMiePhase( fCos, fCos2, g, g2 ) * c1;
+            vec3 color = getRayleighPhase( fCos2 ) * vColor0 + getMiePhase( fCos, fCos2, g, g2 ) * vColor1;
 
             gl_FragColor   = vec4( color, 1.0 );
             gl_FragColor.a = gl_FragColor.b;
@@ -167,15 +167,13 @@
         uniform sampler2D tDiffuse;
 
         // varying vec3 v3Direction;
-        varying vec3 c0;
-        varying vec3 c1;
+        varying vec3 vColor0;
+        varying vec3 vColor1;
         varying vec3 vNormal;
         varying vec2 vUv;
         varying vec3 vPosition;
-        // varying float vSpecular;
-        varying vec3 normalInterp;
-        varying vec3 vertPos;
-        varying vec3 vTest;
+        varying vec3 vViewPosition;
+        varying vec3 vLigthViewPosition;
 
         const int nSamples = 3;
         const float fSamples = 3.0;
@@ -198,85 +196,53 @@
             v3Ray /= fFar;
 
             // Calculate the closest intersection of the ray with the outer atmosphere (which is the near point of the ray passing through the atmosphere)
-            float B = 2.0 * dot(cameraPosition, v3Ray);
-            float C = fCameraHeight2 - fOuterRadius2;
-            float fDet = max(0.0, B*B - 4.0 * C);
+            float B     = 2.0 * dot(cameraPosition, v3Ray);
+            float C     = fCameraHeight2 - fOuterRadius2;
+            float fDet  = max(0.0, B*B - 4.0 * C);
             float fNear = 0.5 * (-B - sqrt(fDet));
 
             // Calculate the ray's starting position, then calculate its scattering offset
             vec3 v3Start = cameraPosition + v3Ray * fNear;
             fFar -= fNear;
             float fDepth = exp((fInnerRadius - fOuterRadius) / fScaleDepth);
-            float fCameraAngle = dot(-v3Ray, vPosition) / length(vPosition);
-            float fLightAngle = dot(v3LightPosition, vPosition) / length(vPosition);
-            float fCameraScale = scale(fCameraAngle);
-            float fLightScale = scale(fLightAngle);
+            float fCameraAngle  = dot(-v3Ray, vPosition) / length(vPosition);
+            float fLightAngle   = dot(normalize(v3LightPosition), vPosition) / length(vPosition);
+            float fCameraScale  = scale(fCameraAngle);
+            float fLightScale   = scale(fLightAngle);
             float fCameraOffset = fDepth*fCameraScale;
-            float fTemp = (fLightScale + fCameraScale);
+            float fTemp         = (fLightScale + fCameraScale);
 
             // Initialize the scattering loop variables
             float fSampleLength = fFar / fSamples;
             float fScaledLength = fSampleLength * fScale;
-            vec3 v3SampleRay = v3Ray * fSampleLength;
-            vec3 v3SamplePoint = v3Start + v3SampleRay * 0.5;
+            vec3 v3SampleRay    = v3Ray * fSampleLength;
+            vec3 v3SamplePoint  = v3Start + v3SampleRay * 0.5;
 
             // Now loop through the sample rays
             vec3 v3FrontColor = vec3(0.0, 0.0, 0.0);
             vec3 v3Attenuate;
             for(int i=0; i<nSamples; i++)
             {
-                float fHeight = length(v3SamplePoint);
-                float fDepth = exp(fScaleOverScaleDepth * (fInnerRadius - fHeight));
+                float fHeight  = length(v3SamplePoint);
+                float fDepth   = exp(fScaleOverScaleDepth * (fInnerRadius - fHeight));
                 float fScatter = fDepth*fTemp - fCameraOffset;
-                v3Attenuate = exp(-fScatter * (v3InvWavelength * fKr4PI + fKm4PI));
-                v3FrontColor += v3Attenuate * (fDepth * fScaledLength);
+                v3Attenuate    = exp(-fScatter * (v3InvWavelength * fKr4PI + fKm4PI));
+                v3FrontColor  += v3Attenuate * (fDepth * fScaledLength);
                 v3SamplePoint += v3SampleRay;
             }
 
             // Calculate the attenuation factor for the ground
-            c0 = v3Attenuate;
-            c1 = v3FrontColor * (v3InvWavelength * fKrESun + fKmESun);
+            vColor0 = v3Attenuate;
+            vColor1 = v3FrontColor * (v3InvWavelength * fKrESun + fKmESun);
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
             vUv = uv;
-            vNormal = normal;
 
-            // // Specular version 1
-            // vec4 vertPos4   = modelViewMatrix * vec4(position, 1.0);
-            // vec3 vertPos    = vec3(vertPos4) / vertPos4.w;
-            // vec3 lightDir   = normalize(v3LightPosition - vertPos);
-            // vec3 reflectDir = reflect(-lightDir, normal);
-            // vec3 viewDir    = normalize(-vertPos);
+            // Specular
+            vViewPosition = vec3( modelViewMatrix * vec4( position, 1.0 ) );
+            vNormal       = normalMatrix * normal;
 
-            // float lambertian = max(dot(lightDir,normal), 0.0);
-            // float specular   = 0.0;
-
-            // int mode = 4;
-
-            // if(lambertian > 0.0)
-            // {
-            //     float specAngle = max(dot(reflectDir, viewDir), 0.0);
-            //     // specular = pow(specAngle, 4.0);
-            //     specular = pow(specAngle, 16.0);
-            //     specular *= lambertian;
-            // }
-
-            // // vSpecular = vec4(lambertian*vec3(0.5, 0.0, 0.0) + specular*vec3(1.0, 1.0, 1.0), 1.0);
-            // // vSpecular = vec4(1.0,1.0,1.0,specular);
-            // vSpecular = specular;
-
-            // Specular version 2
-            vec4 vertPos4 = modelViewMatrix * vec4( position, 1.0 );
-
-            // vertPos       = vec3( vertPos4 ) / vertPos4.w;
-            vertPos       = vec3( vertPos4 );
-
-            // normalInterp  = vec3(normalMatrix * vec4(normal, 0.0));
-            normalInterp  = normalMatrix * normal;
-            // normalInterp  = normal;
-
-            vTest = vec3( modelViewMatrix * vec4( v3LightPosition2, 1.0 ) );
-            // vTest = vec3(-300.0,0.0,-2000.0);
+            vLigthViewPosition = vec3( viewMatrix * vec4( v3LightPosition, 1.0 ) );
         }
 
     </script>
@@ -292,15 +258,13 @@
         uniform sampler2D tGroundGradient;
         uniform sampler2D tIceGradient;
 
-        varying vec3 c0;
-        varying vec3 c1;
+        varying vec3 vColor0;
+        varying vec3 vColor1;
         varying vec3 vNormal;
         varying vec2 vUv;
         varying vec3 vPosition;
-        // varying float vSpecular;
-        varying vec3 normalInterp;
-        varying vec3 vertPos;
-        varying vec3 vTest;
+        varying vec3 vViewPosition;
+        varying vec3 vLigthViewPosition;
 
         void main (void)
         {
@@ -319,20 +283,16 @@
             vec3 diffuseNightTex = texture2D( tDiffuseNight, vUv ).xyz;
             diffuseNightTex = vec3( 0.0, 0.0, 0.0 );
             // diffuseNightTex = vec3( diffuseData.g, diffuseData.g, diffuseData.g );
-            vec3 night = 2.0 * fNightScale * diffuseNightTex * diffuseNightTex * (1.0 - c0);
+            vec3 night = 2.0 * fNightScale * diffuseNightTex * diffuseNightTex * (1.0 - vColor0);
 
             // Day
-            vec3 day = groundColor * c0;
-            // vec3 day = mix( groundColor, iceColor, diffuseData.g ) * c0;
+            vec3 day = groundColor * vColor0;
+            // vec3 day = mix( groundColor, iceColor, diffuseData.g ) * vColor0;
 
-            // Specular version 1
-            // vec4 v4Specular = vec4(vSpecular) * vec4(1.0 - diffuseData.b) * vec4(1.0,0.5,0.5,1.0) * 1.0;
-
-            // Specular version 2
-            vec3 normal   = normalize( normalInterp );
-            vec3 lightRelativePosition = v3LightPosition - cameraPosition;
-            vec3 lightDir = normalize( vTest - vertPos );
-            // vec3 lightDir = normalize( v3LightPosition - vertPos );
+            // Specular
+            vec3 normal   = normalize( vNormal );
+            vec3 lightRelativePosition = normalize(v3LightPosition) - cameraPosition;
+            vec3 lightDir = normalize( vLigthViewPosition - vViewPosition );
 
             float lambertian = max( dot( lightDir, normal ), 0.0 );
             float specular   = 0.0;
@@ -340,22 +300,19 @@
             if( lambertian > 0.0 )
             {
                 vec3 reflectDir = reflect( - lightDir, normal );
-                vec3 viewDir    = normalize( - vertPos );
+                vec3 viewDir    = normalize( - vViewPosition );
 
                 float specAngle = max( dot( reflectDir, viewDir ), 0.0 );
-                specular = pow( specAngle, 4.0 );
+                specular  = pow( specAngle, 4.0 );
                 specular *= lambertian;
             }
             vec4 v4Specular = vec4( specular ) * vec4( 1.0 - diffuseData.b ) * vec4( 1.0, 0.5, 0.5, 1.0 ) * 1.0;
 
             // Frag color
-            // gl_FragColor = vec4(c1, 1.0);  // Atmosphere
+            // gl_FragColor = vec4(vColor1, 1.0);  // Atmosphere
             // gl_FragColor = vec4(day, 1.0); // Texture
-            // gl_FragColor = vec4(c1, 1.0) + vec4(day + night, 1.0); // Texture + Night texture + Atmosphere
-            gl_FragColor = vec4(c1, 1.0) + vec4(day + night, 1.0) + vec4(1.0, 1.0, 1.0, 1.0) * v4Specular; // Texture + Night texture + Atmosphere + Specular
-            // gl_FragColor = vec4(normal,1.0);
-            // gl_FragColor = vec4(vertPos,1.0);
-            // gl_FragColor = vec4(specular,specular,specular,1.0);
+            // gl_FragColor = vec4(vColor1, 1.0) + vec4(day + night, 1.0); // Texture + Night texture + Atmosphere
+            gl_FragColor = vec4(vColor1, 1.0) + vec4(day + night, 1.0) + vec4(1.0, 1.0, 1.0, 1.0) * v4Specular; // Texture + Night texture + Atmosphere + Specular
         }
 
     </script>
