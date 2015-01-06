@@ -1,7 +1,9 @@
 [√] Refactoring planet class
 [√] Better sun vector handling
 [√] Gradient texture for planet diffuse
+[√] Resize
 [ ] Night diffuse
+[ ] Refraction with water level
 [ ] Position Y atmosphere bug
 [ ] More debug tweaks (sphere size)
-[√] Resize
+[ ] Bug Firefox

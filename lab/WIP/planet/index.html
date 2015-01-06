@@ -149,6 +149,7 @@
     <script type="x-shader/x-vertex" id="planet-vertex-shader">
 
         uniform vec3 v3LightPosition;       // The direction vector to the light source
+        uniform vec3 v3LightPosition2;      // Test
         uniform vec3 v3InvWavelength;       // 1 / pow(wavelength, 4) for the red, green, and blue channels
         uniform float fCameraHeight;        // The camera's current height
         uniform float fCameraHeight2;       // fCameraHeight^2
@@ -168,9 +169,13 @@
         // varying vec3 v3Direction;
         varying vec3 c0;
         varying vec3 c1;
-        // varying vec3 vNormal;
+        varying vec3 vNormal;
         varying vec2 vUv;
         varying vec3 vPosition;
+        // varying float vSpecular;
+        varying vec3 normalInterp;
+        varying vec3 vertPos;
+        varying vec3 vTest;
 
         const int nSamples = 3;
         const float fSamples = 3.0;
@@ -232,9 +237,46 @@
             c0 = v3Attenuate;
             c1 = v3FrontColor * (v3InvWavelength * fKrESun + fKmESun);
 
-          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-          vUv = uv;
-          // vNormal = normal;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+            vUv = uv;
+            vNormal = normal;
+
+            // // Specular version 1
+            // vec4 vertPos4   = modelViewMatrix * vec4(position, 1.0);
+            // vec3 vertPos    = vec3(vertPos4) / vertPos4.w;
+            // vec3 lightDir   = normalize(v3LightPosition - vertPos);
+            // vec3 reflectDir = reflect(-lightDir, normal);
+            // vec3 viewDir    = normalize(-vertPos);
+
+            // float lambertian = max(dot(lightDir,normal), 0.0);
+            // float specular   = 0.0;
+
+            // int mode = 4;
+
+            // if(lambertian > 0.0)
+            // {
+            //     float specAngle = max(dot(reflectDir, viewDir), 0.0);
+            //     // specular = pow(specAngle, 4.0);
+            //     specular = pow(specAngle, 16.0);
+            //     specular *= lambertian;
+            // }
+
+            // // vSpecular = vec4(lambertian*vec3(0.5, 0.0, 0.0) + specular*vec3(1.0, 1.0, 1.0), 1.0);
+            // // vSpecular = vec4(1.0,1.0,1.0,specular);
+            // vSpecular = specular;
+
+            // Specular version 2
+            vec4 vertPos4 = modelViewMatrix * vec4( position, 1.0 );
+
+            // vertPos       = vec3( vertPos4 ) / vertPos4.w;
+            vertPos       = vec3( vertPos4 );
+
+            // normalInterp  = vec3(normalMatrix * vec4(normal, 0.0));
+            normalInterp  = normalMatrix * normal;
+            // normalInterp  = normal;
+
+            vTest = vec3( modelViewMatrix * vec4( v3LightPosition2, 1.0 ) );
+            // vTest = vec3(-300.0,0.0,-2000.0);
         }
 
     </script>
@@ -252,9 +294,13 @@
 
         varying vec3 c0;
         varying vec3 c1;
-        // varying vec3 vNormal;
+        varying vec3 vNormal;
         varying vec2 vUv;
         varying vec3 vPosition;
+        // varying float vSpecular;
+        varying vec3 normalInterp;
+        varying vec3 vertPos;
+        varying vec3 vTest;
 
         void main (void)
         {
@@ -279,8 +325,37 @@
             vec3 day = groundColor * c0;
             // vec3 day = mix( groundColor, iceColor, diffuseData.g ) * c0;
 
-            // gl_FragColor = vec4(c1, 1.0);
-            gl_FragColor = vec4(c1, 1.0) + vec4(day + night, 1.0);
+            // Specular version 1
+            // vec4 v4Specular = vec4(vSpecular) * vec4(1.0 - diffuseData.b) * vec4(1.0,0.5,0.5,1.0) * 1.0;
+
+            // Specular version 2
+            vec3 normal   = normalize( normalInterp );
+            vec3 lightRelativePosition = v3LightPosition - cameraPosition;
+            vec3 lightDir = normalize( vTest - vertPos );
+            // vec3 lightDir = normalize( v3LightPosition - vertPos );
+
+            float lambertian = max( dot( lightDir, normal ), 0.0 );
+            float specular   = 0.0;
+
+            if( lambertian > 0.0 )
+            {
+                vec3 reflectDir = reflect( - lightDir, normal );
+                vec3 viewDir    = normalize( - vertPos );
+
+                float specAngle = max( dot( reflectDir, viewDir ), 0.0 );
+                specular = pow( specAngle, 4.0 );
+                specular *= lambertian;
+            }
+            vec4 v4Specular = vec4( specular ) * vec4( 1.0 - diffuseData.b ) * vec4( 1.0, 0.5, 0.5, 1.0 ) * 1.0;
+
+            // Frag color
+            // gl_FragColor = vec4(c1, 1.0);  // Atmosphere
+            // gl_FragColor = vec4(day, 1.0); // Texture
+            // gl_FragColor = vec4(c1, 1.0) + vec4(day + night, 1.0); // Texture + Night texture + Atmosphere
+            gl_FragColor = vec4(c1, 1.0) + vec4(day + night, 1.0) + vec4(1.0, 1.0, 1.0, 1.0) * v4Specular; // Texture + Night texture + Atmosphere + Specular
+            // gl_FragColor = vec4(normal,1.0);
+            // gl_FragColor = vec4(vertPos,1.0);
+            // gl_FragColor = vec4(specular,specular,specular,1.0);
         }
 
     </script>
@@ -416,8 +491,11 @@
             if( height * abs( y ) > 0.45 && height * abs( y ) < 0.5 )
                 color.g = 1.0;
 
-            // // Lights
-            // color.b = 0.0;
+            // Continent (for specular)
+            if( height > 0.495 )
+                color.b = 0.7;
+            else
+                color.b = 0.0;
 
             return vec4( color, 1.0 );
         }

@@ -50,6 +50,12 @@
                         // value: new THREE.Vector3(1e8, 0, 1e8).normalize()
                         value: new THREE.Vector3().copy( this.sun_light.position ).normalize()
                     },
+                    v3LightPosition2 :
+                    {
+                        type: 'v3',
+                        // value: new THREE.Vector3(1e8, 0, 1e8).normalize()
+                        value: new THREE.Vector3().copy( this.sun_light.position )
+                    },
                     v3InvWavelength :
                     {
                         type: 'v3',
@@ -289,8 +295,8 @@
             for( i = 0; i < this.ground.uniforms.length; i++ )
                 update_uniforms( this.ground.uniforms[ i ] );
 
-            // Rotate ground
-            this.ground.mesh.rotation.y += 0.001;
+            // // Rotate ground
+            // this.ground.mesh.rotation.y += 0.01;
         }
     });
 })();
