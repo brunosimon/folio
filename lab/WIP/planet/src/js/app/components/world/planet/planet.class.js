@@ -6,7 +6,17 @@
     {
         options :
         {
-            ice_scale  : 0.50,
+            water_level : 0.5,
+            ice :
+            {
+                offset             : -0.1,
+                orientation_impact : 0.62
+            },
+            specular :
+            {
+                water  : 1,
+                ground : 0.5
+            },
             atmosphere :
             {
                 Kr            : 0.0005,
@@ -164,10 +174,30 @@
                         type: 'f',
                         value: 1
                     },
-                    fIceScale :
+                    fWaterLevel :
                     {
                         type: 'f',
-                        value: this.options.ice_scale
+                        value: this.options.water_level
+                    },
+                    fWaterSpecular :
+                    {
+                        type: 'f',
+                        value: this.options.specular.water
+                    },
+                    fGroundSpecular :
+                    {
+                        type: 'f',
+                        value: this.options.specular.ground
+                    },
+                    fIceOffset :
+                    {
+                        type: 'f',
+                        value: this.options.ice.offset
+                    },
+                    fIceOrientationImpact :
+                    {
+                        type: 'f',
+                        value: this.options.ice.orientation_impact
                     },
                     time :
                     {
@@ -205,7 +235,7 @@
             this.debug.instance = new APP.COMPONENTS.Debug();
 
             // Atmosphere
-            this.debug.instance.gui.atmosphere = this.debug.instance.gui.instance.addFolder( 'Planet | Atmosphere' );
+            this.debug.instance.gui.atmosphere = this.debug.instance.gui.instance.addFolder( 'Planet - atmosphere' );
 
             this.debug.Kr            = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'Kr', 0, 0.01 ).step( 0.0001 ).name( 'Kr' );
             this.debug.Km            = this.debug.instance.gui.atmosphere.add( this.options.atmosphere, 'Km', 0, 0.01 ).step( 0.0001 ).name( 'Km' );
@@ -218,17 +248,21 @@
 
             function update_uniforms( uniforms )
             {
-                uniforms.v3InvWavelength.value = new THREE.Vector3( 1 / Math.pow( that.options.atmosphere.wavelength.r, 4 ), 1 / Math.pow( that.options.atmosphere.wavelength.g, 4 ), 1 / Math.pow( that.options.atmosphere.wavelength.b, 4 ) );
-                uniforms.fKrESun.value         = that.options.atmosphere.Kr * that.options.atmosphere.ESun;
-                uniforms.fKr4PI.value          = that.options.atmosphere.Kr * 4.0 * Math.PI;
-                uniforms.fKmESun.value         = that.options.atmosphere.Km * that.options.atmosphere.ESun;
-                uniforms.fKm4PI.value          = that.options.atmosphere.Km * 4.0 * Math.PI;
-                uniforms.fKrESun.value         = that.options.atmosphere.Kr * that.options.atmosphere.ESun;
-                uniforms.fKmESun.value         = that.options.atmosphere.Km * that.options.atmosphere.ESun;
-                uniforms.g.value               = that.options.atmosphere.g;
-                uniforms.g2.value              = that.options.atmosphere.g * that.options.atmosphere.g;
-                uniforms.fScaleDepth.value     = that.options.atmosphere.scaleDepth;
-                uniforms.fIceScale.value       = that.options.ice_scale;
+                uniforms.v3InvWavelength.value       = new THREE.Vector3( 1 / Math.pow( that.options.atmosphere.wavelength.r, 4 ), 1 / Math.pow( that.options.atmosphere.wavelength.g, 4 ), 1 / Math.pow( that.options.atmosphere.wavelength.b, 4 ) );
+                uniforms.fKrESun.value               = that.options.atmosphere.Kr * that.options.atmosphere.ESun;
+                uniforms.fKr4PI.value                = that.options.atmosphere.Kr * 4.0 * Math.PI;
+                uniforms.fKmESun.value               = that.options.atmosphere.Km * that.options.atmosphere.ESun;
+                uniforms.fKm4PI.value                = that.options.atmosphere.Km * 4.0 * Math.PI;
+                uniforms.fKrESun.value               = that.options.atmosphere.Kr * that.options.atmosphere.ESun;
+                uniforms.fKmESun.value               = that.options.atmosphere.Km * that.options.atmosphere.ESun;
+                uniforms.g.value                     = that.options.atmosphere.g;
+                uniforms.g2.value                    = that.options.atmosphere.g * that.options.atmosphere.g;
+                uniforms.fScaleDepth.value           = that.options.atmosphere.scaleDepth;
+                uniforms.fWaterLevel.value           = that.options.water_level;
+                uniforms.fWaterSpecular.value        = that.options.specular.water;
+                uniforms.fGroundSpecular.value       = that.options.specular.ground;
+                uniforms.fIceOffset.value            = that.options.ice.offset;
+                uniforms.fIceOrientationImpact.value = that.options.ice.orientation_impact;
             }
 
             function update()
@@ -257,9 +291,17 @@
             this.debug.instance.gui.planet = this.debug.instance.gui.instance.addFolder( 'Planet' );
             this.debug.instance.gui.planet.open();
 
-            this.debug.ice_scale = this.debug.instance.gui.planet.add( this.options, 'ice_scale', 0, 1 ).step( 0.001 ).name( 'Ice Scale' );
+            this.debug.water_level            = this.debug.instance.gui.planet.add( this.options, 'water_level', 0, 1 ).step( 0.001 ).name( 'water level' );
+            this.debug.specular_water         = this.debug.instance.gui.planet.add( this.options.specular, 'water', 0, 1 ).step( 0.001 ).name( 'water specular' );
+            this.debug.specular_ground        = this.debug.instance.gui.planet.add( this.options.specular, 'ground', 0, 1 ).step( 0.001 ).name( 'ground specular' );
+            this.debug.ice_offset             = this.debug.instance.gui.planet.add( this.options.ice, 'offset', -2, 2 ).step( 0.001 ).name( 'ice offset' );
+            this.debug.ice_orientation_impact = this.debug.instance.gui.planet.add( this.options.ice, 'orientation_impact', 0, 1 ).step( 0.001 ).name( 'ice orientation imp.' );
 
-            this.debug.ice_scale.onChange( update );
+            this.debug.water_level.onChange( update );
+            this.debug.specular_water.onChange( update );
+            this.debug.specular_ground.onChange( update );
+            this.debug.ice_offset.onChange( update );
+            this.debug.ice_orientation_impact.onChange( update );
         },
 
         /**

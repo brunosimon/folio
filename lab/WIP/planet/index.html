@@ -251,10 +251,15 @@
         uniform float time;
 
         uniform float fNightScale;
-        uniform float fIceScale;
+        uniform float fWaterLevel;
+        uniform float fWaterSpecular;
+        uniform float fGroundSpecular;
+        uniform float fIceOffset;
+        uniform float fIceOrientationImpact;
         uniform vec3 v3LightPosition;
         uniform sampler2D tDiffuse;
         uniform sampler2D tDiffuseNight;
+        uniform sampler2D tWaterGradient;
         uniform sampler2D tGroundGradient;
         uniform sampler2D tIceGradient;
 
@@ -270,14 +275,25 @@
         {
             // Data
             vec3 diffuseData = texture2D( tDiffuse, vUv ).xyz;
+            float height     = diffuseData.r;
 
-            // Ground / Ice
+            // Water / Ground / Ice
             vec3 groundColor = vec3( 0.0, 0.0, 0.0 );
 
-            if( diffuseData.r * abs( vPosition.y / 100.0 ) < fIceScale )
-                groundColor = texture2D( tGroundGradient, vec2( diffuseData.r, 0.0 ) ).xyz;
+            if( height + abs( vPosition.y / 100.0 ) * fIceOrientationImpact - (1.0 - fIceOffset) < 0.0 )
+            {
+                // Water
+                if( height < fWaterLevel )
+                    groundColor = texture2D( tWaterGradient, vec2( height / fWaterLevel, 0.0 ) ).xyz;
+                // Ground
+                else
+                    groundColor = texture2D( tGroundGradient, vec2( ( height - fWaterLevel ) / ( 1.0 - fWaterLevel ), 0.0 ) ).xyz;
+            }
+            // Ice
             else
-                groundColor = texture2D( tIceGradient, vec2( diffuseData.r / ( 1.0 - fIceScale ) - fIceScale, 0.0 ) ).xyz;
+            {
+                groundColor = texture2D( tIceGradient, vec2( height / ( 1.0 - fIceOffset ) - fIceOffset, 0.0 ) ).xyz;
+            }
 
             // Night
             vec3 diffuseNightTex = texture2D( tDiffuseNight, vUv ).xyz;
@@ -306,13 +322,19 @@
                 specular  = pow( specAngle, 4.0 );
                 specular *= lambertian;
             }
-            vec4 v4Specular = vec4( specular ) * vec4( 1.0 - diffuseData.b ) * vec4( 1.0, 0.5, 0.5, 1.0 ) * 1.0;
+            float specularStrength = 0.0;
+            if( height < fWaterLevel )
+                specularStrength = fWaterSpecular;
+            else
+                specularStrength = fGroundSpecular;
+
+            vec4 v4Specular = vec4( specular * specularStrength ) * vec4( 1.0, 0.5, 0.5, 1.0 ) * 1.0;
 
             // Frag color
             // gl_FragColor = vec4(vColor1, 1.0);  // Atmosphere
             // gl_FragColor = vec4(day, 1.0); // Texture
             // gl_FragColor = vec4(vColor1, 1.0) + vec4(day + night, 1.0); // Texture + Night texture + Atmosphere
-            gl_FragColor = vec4(vColor1, 1.0) + vec4(day + night, 1.0) + vec4(1.0, 1.0, 1.0, 1.0) * v4Specular; // Texture + Night texture + Atmosphere + Specular
+            gl_FragColor = vec4(vColor1, 1.0) + vec4(day + night, 1.0) + v4Specular; // Texture + Night texture + Atmosphere + Specular
         }
 
     </script>
@@ -447,12 +469,6 @@
             color.g = 0.0;
             if( height * abs( y ) > 0.45 && height * abs( y ) < 0.5 )
                 color.g = 1.0;
-
-            // Continent (for specular)
-            if( height > 0.495 )
-                color.b = 0.7;
-            else
-                color.b = 0.0;
 
             return vec4( color, 1.0 );
         }

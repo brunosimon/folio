@@ -70,7 +70,7 @@
             // Sun
             this.sun_light = new THREE.PointLight( new THREE.Color( 0xffffff ), 1.0 );
             // this.sun_light.position.set( - 400, 20, 400 );
-            this.sun_light.position.set( 200, 0, 0 );
+            this.sun_light.position.set( 100, 0, 400 );
             this.scene.add( this.sun_light );
 
             /* DUMMY */
@@ -79,7 +79,7 @@
                 mesh     = new THREE.Mesh(geometry,material);
 
             // mesh.position.set( - 400, 20, 400 );
-            mesh.position.set( 200, 0, 0 );
+            mesh.position.set( 100, 0, 400 );
             this.scene.add(mesh);
 
             // Axis helper

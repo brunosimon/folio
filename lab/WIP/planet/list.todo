@@ -2,8 +2,11 @@
 [√] Better sun vector handling
 [√] Gradient texture for planet diffuse
 [√] Resize
+[ ] Clouds
+[√] Better ice generation
 [ ] Night diffuse
-[ ] Refraction with water level
+[ ] Reflection
+[√] Water level
 [ ] Position Y atmosphere bug
 [ ] More debug tweaks (sphere size)
 [ ] Bug Firefox

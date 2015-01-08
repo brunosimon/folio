@@ -44,18 +44,32 @@
         init_textures: function()
         {
             this.textures        = {};
-            this.textures.ground = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
+            this.textures.water = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
                 items :
                 {
                     item_0 : { pos : 0.00, color : '#2d0000' },
-                    item_1 : { pos : 0.49, color : '#660000' },
-                    item_2 : { pos : 0.50, color : '#aa0000' },
-                    item_3 : { pos : 0.75, color : '#cd1010' },
-                    item_4 : { pos : 1.00, color : '#ff0000' },
+                    item_1 : { pos : 0.20, color : '#2d0000' },
+                    item_2 : { pos : 0.99, color : '#660000' },
                 },
                 debug :
                 {
-                    name : 'Planet | Ground texture'
+                    name : 'Planet - water texture'
+                }
+            } );
+            this.textures.ground = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
+                items :
+                {
+                    item_0 : { pos : 0.00, color : '#aa0000' },
+                    item_1 : { pos : 0.50, color : '#cd1010' },
+                    item_2 : { pos : 1.00, color : '#ff0000' },
+                },
+                debug :
+                {
+                    name : 'Planet - ground texture'
+                },
+                style :
+                {
+                    top : 86
                 }
             } );
             this.textures.ice = new APP.COMPONENTS.WORLD.PLANET.Gradient_Texture( {
@@ -67,11 +81,11 @@
                 },
                 debug :
                 {
-                    name : 'Planet | Ice texture'
+                    name : 'Planet - ice texture'
                 },
                 style :
                 {
-                    top : 86
+                    top : 126
                 }
             } );
         },
@@ -205,6 +219,12 @@
             var vertexShader   = document.getElementById( 'planet-vertex-shader' ).innerText,
                 fragmentShader = document.getElementById( 'planet-fragment-shader' ).innerText,
                 uniforms       = this.generate_uniforms( texture_map );
+
+            uniforms.tWaterGradient =
+            {
+                type  : 't',
+                value : this.textures.water.texture
+            };
 
             uniforms.tGroundGradient =
             {
