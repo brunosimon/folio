@@ -78,41 +78,53 @@ HERE IS A COOL DINOSAUR TO WAIT
         </p>
 
         <h2>Some projects I worked on</h2>
-        <p>
-            <a target="_blank" href="http://valeriemartinez.com">Valérie Martinez</a>
-            <br /><a target="_blank" href="http://jr-associee.com">JR &amp; Associée</a>
-            <br /><a target="_blank" href="http://www.myprovence.fr/snapshots2013/">Myprovence - Snapshots 2013</a>
-            <br /><a target="_blank" href="http://randheli.chevalblanc.com">Cheval Blanc - Randheli</a>
-        </p>
+
+        <ul>
+            <li>
+                 <a target="_blank" href="http://valeriemartinez.com"><img class="retina" width="250" height="100" src="src/img/projects/valerie-martinez.jpg" alt="Valérie Martinez"></a>
+            </li>
+            <li>
+                 <a target="_blank" href="http://jr-associee.com"><img class="retina" width="250" height="100" src="src/img/projects/jr-associee.jpg" alt="JR &amp; Associée"></a>
+            </li>
+            <li>
+                 <a target="_blank" href="http://randheli.chevalblanc.com"><img class="retina" width="250" height="100" src="src/img/projects/cheval-blanc-randheli.jpg" alt="Cheval Blanc - Randheli"></a>
+            </li>
+            <li>
+                 <a target="_blank" href="http://www.myprovence.fr/snapshots2013/"><img class="retina" width="250" height="100" src="src/img/projects/snapshots-of-provence-2013.jpg" alt="Myprovence - Snapshots 2013"></a>
+            </li>
+        </ul>
 
         <h2>My lab</h2>
         <ul>
             <li>
-                <a target="_blank" href="lab/snow-shader/"><img class="retina" width="250" height="100" src="src/img/lab/snow-shader.jpg" alt=""></a>
+                <a href="lab/procedural-planet/"><img class="retina" width="250" height="100" src="src/img/lab/procedural-planet.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="http://christmasexperiments.com/experiments/5"><img class="retina" width="250" height="100" src="src/img/lab/christmas-experiment.jpg" alt=""></a>
+                <a href="lab/snow-shader/"><img class="retina" width="250" height="100" src="src/img/lab/snow-shader.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/impacts/"><img class="retina" width="250" height="100" src="src/img/lab/impacts.jpg" alt=""></a>
+                <a href="http://christmasexperiments.com/experiments/5"><img class="retina" width="250" height="100" src="src/img/lab/christmas-experiment.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/morphing-cloud/"><img class="retina" width="250" height="100" src="src/img/lab/morphing-cloud.jpg" alt=""></a>
+                <a href="lab/impacts/"><img class="retina" width="250" height="100" src="src/img/lab/impacts.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/shaders-terrain/"><img class="retina" width="250" height="100" src="src/img/lab/shaders-terrain.jpg" alt=""></a>
+                <a href="lab/morphing-cloud/"><img class="retina" width="250" height="100" src="src/img/lab/morphing-cloud.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/sticks/"><img class="retina" width="250" height="100" src="src/img/lab/sticks.jpg" alt=""></a>
+                <a href="lab/shaders-terrain/"><img class="retina" width="250" height="100" src="src/img/lab/shaders-terrain.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/css3-boxes/"><img class="retina" width="250" height="100" src="src/img/lab/css3-boxes.jpg" alt=""></a>
+                <a href="lab/sticks/"><img class="retina" width="250" height="100" src="src/img/lab/sticks.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/draw-particles/"><img class="retina" width="250" height="100" src="src/img/lab/draw-particles.jpg" alt=""></a>
+                <a href="lab/css3-boxes/"><img class="retina" width="250" height="100" src="src/img/lab/css3-boxes.jpg" alt=""></a>
             </li>
             <li>
-                <a target="_blank" href="lab/wind-particles/"><img class="retina" width="250" height="100" src="src/img/lab/wind-particles.jpg" alt=""></a>
+                <a href="lab/draw-particles/"><img class="retina" width="250" height="100" src="src/img/lab/draw-particles.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="lab/wind-particles/"><img class="retina" width="250" height="100" src="src/img/lab/wind-particles.jpg" alt=""></a>
             </li>
         </ul>
     </div>
