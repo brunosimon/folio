@@ -20,7 +20,7 @@ HERE IS A COOL DINOSAUR TO WAIT
 <head>
     <meta charset="UTF-8">
     <title>Bruno Simon</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
     <!-- ICONS -->
     <link rel="shortcut icon" href="src/img/icons/open/favicon.ico">
