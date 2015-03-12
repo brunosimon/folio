@@ -16,7 +16,7 @@ HERE IS A COOL DINOSAUR TO WAIT
 
 -->
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Bruno Simon</title>
@@ -80,6 +80,9 @@ HERE IS A COOL DINOSAUR TO WAIT
         <h2>Some projects I worked on</h2>
 
         <ul>
+            <li>
+                 <a target="_blank" href="http://nicolas-bussiere.fr"><img class="retina" width="250" height="100" src="src/img/projects/nicolas-bussiere.jpg" alt="Nicolas Bussière"></a>
+            </li>
             <li>
                  <a target="_blank" href="http://valeriemartinez.com"><img class="retina" width="250" height="100" src="src/img/projects/valerie-martinez.jpg" alt="Valérie Martinez"></a>
             </li>
