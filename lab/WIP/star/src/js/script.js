@@ -7,7 +7,7 @@ var scene      = new THREE.Scene(),
     mouse      = { x : 0, y : 0 },
     start_time = + new Date();
 
-camera.position.z = 3;
+camera.position.z = 2;
 renderer.setClearColor( 0x000000, 1 );
 
 /**
@@ -37,45 +37,62 @@ var mouse_move = function( e )
 document.onmousemove = mouse_move;
 
 /**
- * Texture
+ * Star
  */
-var texture = THREE.ImageUtils.loadTextureCube( [
-    'src/img/1/px.jpg',
-    'src/img/1/nx.jpg',
-    'src/img/1/py.jpg',
-    'src/img/1/ny.jpg',
-    'src/img/1/pz.jpg',
-    'src/img/1/nz.jpg'
-]/*, undefined, function( texture )
-{
-    texture.magFilter = THREE.LinearFilter;
-    texture.minFilter = THREE.LinearFilter;
-}*/ );
+var star_object = new THREE.Object3D();
+scene.add(star_object);
 
 /**
- * Shader
+ * Sphere
  */
-var vertex_shader   = document.getElementById( 'shader-vertex-1' ).textContent,
-    fragment_shader = document.getElementById( 'shader-fragment-1' ).textContent,
-    uniforms        = {
+var sphere_vertex_shader   = document.getElementById( 'shader-vertex-star-sphere' ).textContent,
+    sphere_fragment_shader = document.getElementById( 'shader-fragment-star-sphere' ).textContent,
+    sphere_uniforms        = {
         time :
         {
             type  : 'f',
             value : 0
-        },
-        texCube :
-        {
-            type  : 't',
-            value : texture
         }
     },
-    attributes = {
-        new_color :
+    sphere_geometry = new THREE.SphereGeometry( 1, 100, 100 ),
+    sphere_material = new THREE.ShaderMaterial( {
+        wireframe      : false,
+        vertexShader   : sphere_vertex_shader,
+        fragmentShader : sphere_fragment_shader,
+        uniforms       : sphere_uniforms,
+        transparent    : true
+    } ),
+    sphere_object = new THREE.Mesh( sphere_geometry, sphere_material );
+
+// star_object.add( sphere_object );
+
+/**
+ * Halo
+ */
+var halo_vertex_shader   = document.getElementById( 'shader-vertex-star-halo' ).textContent,
+    halo_fragment_shader = document.getElementById( 'shader-fragment-star-halo' ).textContent,
+    halo_uniforms        = {
+        time :
         {
-            type  : 'c',
-            value : []
+            type  : 'f',
+            value : 0
         }
-    };
+    },
+    halo_geometry = new THREE.PlaneBufferGeometry( 3, 3, 1, 1 ),
+    halo_material = new THREE.ShaderMaterial( {
+        vertexShader   : halo_vertex_shader,
+        fragmentShader : halo_fragment_shader,
+        uniforms       : sphere_uniforms,
+        transparent    : true
+    } ),
+    // halo_material = new THREE.MeshBasicMaterial( { color : 0xff0000 } ),
+    halo_object = new THREE.Mesh( halo_geometry, halo_material );
+
+scene.add( halo_object );
+
+
+
+
 
 /**
  * Frame function
@@ -84,50 +101,20 @@ var frame = function()
 {
     window.requestAnimationFrame( frame );
 
-    // Update uniforms
-    uniforms.time.value = + new Date() - start_time;
-
     // Update camera
     camera.position.x = (mouse.x / window.innerWidth - 0.5) * 10;
     camera.position.y = - (mouse.y / window.innerHeight - 0.5) * 10;
     camera.lookAt( new THREE.Vector3() );
 
+    // Update sphere
+    sphere_uniforms.time.value = + new Date() - start_time;
+
+    // Update halo
+    halo_object.lookAt(camera.position);
+
     // Render
     renderer.render( scene, camera );
 };
 frame();
-
-/**
- * Create scene function
- */
-// var object_geometry = new THREE.BoxGeometry( 1, 1, 1, 48, 48, 48 ),
-var object_geometry = new THREE.SphereGeometry( 1, 100, 100 ),
-    object_material = new THREE.ShaderMaterial( {
-        wireframe      : false,
-        vertexShader   : vertex_shader,
-        fragmentShader : fragment_shader,
-        transparent    : true,
-        uniforms       : uniforms,
-        attributes     : attributes,
-        // shading        : THREE.FlatShading
-    } ),
-    object = new THREE.Mesh( object_geometry, object_material );
-
-scene.add( object );
-
-/**
- * Update shaders
- */
-for( var i = 0; i < object_geometry.vertices.length; i++ )
-{
-    var color = new THREE.Color();
-    color.r = Math.random();
-    color.g = Math.random();
-    color.b = Math.random();
-
-    attributes.new_color.value.push( color );
-}
-
-
 
 
