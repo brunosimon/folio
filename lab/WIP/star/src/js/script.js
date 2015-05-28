@@ -52,6 +52,50 @@ var sphere_vertex_shader   = document.getElementById( 'shader-vertex-star-sphere
         {
             type  : 'f',
             value : 0
+        },
+        global_speed :
+        {
+            type  : 'f',
+            value : 0.0003
+        },
+        color_step_1 :
+        {
+            type  : 'c',
+            value : new THREE.Color( 0x440000 )
+            // value : new THREE.Color( 0x001159 )
+        },
+        color_step_2 :
+        {
+            type  : 'c',
+            value : new THREE.Color( 0xff6600 )
+            // value : new THREE.Color( 0x0072ff )
+        },
+        color_step_3 :
+        {
+            type  : 'c',
+            value : new THREE.Color( 0xffd236 )
+            // value : new THREE.Color( 0x00c7ff )
+        },
+        color_step_4 :
+        {
+            type  : 'c',
+            value : new THREE.Color( 0xffe68f )
+            // value : new THREE.Color( 0x90f6ff )
+        },
+        ratio_step_1 :
+        {
+            type  : 'f',
+            value : 0.4
+        },
+        ratio_step_2 :
+        {
+            type  : 'f',
+            value : 0.999
+        },
+        displacement :
+        {
+            type  : 'f',
+            value : 0.03
         }
     },
     sphere_geometry = new THREE.SphereGeometry( 1, 100, 100 ),
@@ -64,31 +108,31 @@ var sphere_vertex_shader   = document.getElementById( 'shader-vertex-star-sphere
     } ),
     sphere_object = new THREE.Mesh( sphere_geometry, sphere_material );
 
-// star_object.add( sphere_object );
+star_object.add( sphere_object );
 
-/**
- * Halo
- */
-var halo_vertex_shader   = document.getElementById( 'shader-vertex-star-halo' ).textContent,
-    halo_fragment_shader = document.getElementById( 'shader-fragment-star-halo' ).textContent,
-    halo_uniforms        = {
-        time :
-        {
-            type  : 'f',
-            value : 0
-        }
-    },
-    halo_geometry = new THREE.PlaneBufferGeometry( 3, 3, 1, 1 ),
-    halo_material = new THREE.ShaderMaterial( {
-        vertexShader   : halo_vertex_shader,
-        fragmentShader : halo_fragment_shader,
-        uniforms       : sphere_uniforms,
-        transparent    : true
-    } ),
-    // halo_material = new THREE.MeshBasicMaterial( { color : 0xff0000 } ),
-    halo_object = new THREE.Mesh( halo_geometry, halo_material );
+// /**
+//  * Halo
+//  */
+// var halo_vertex_shader   = document.getElementById( 'shader-vertex-star-halo' ).textContent,
+//     halo_fragment_shader = document.getElementById( 'shader-fragment-star-halo' ).textContent,
+//     halo_uniforms        = {
+//         time :
+//         {
+//             type  : 'f',
+//             value : 0
+//         }
+//     },
+//     halo_geometry = new THREE.PlaneBufferGeometry( 3, 3, 1, 1 ),
+//     halo_material = new THREE.ShaderMaterial( {
+//         vertexShader   : halo_vertex_shader,
+//         fragmentShader : halo_fragment_shader,
+//         uniforms       : sphere_uniforms,
+//         transparent    : true
+//     } ),
+//     // halo_material = new THREE.MeshBasicMaterial( { color : 0xff0000 } ),
+//     halo_object = new THREE.Mesh( halo_geometry, halo_material );
 
-scene.add( halo_object );
+// scene.add( halo_object );
 
 
 
@@ -109,8 +153,8 @@ var frame = function()
     // Update sphere
     sphere_uniforms.time.value = + new Date() - start_time;
 
-    // Update halo
-    halo_object.lookAt(camera.position);
+    // // Update halo
+    // halo_object.lookAt(camera.position);
 
     // Render
     renderer.render( scene, camera );

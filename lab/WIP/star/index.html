@@ -227,8 +227,17 @@
 
         uniform samplerCube texCube;
         uniform float time;
+        uniform float global_speed;
+        uniform vec3 color_step_1;
+        uniform vec3 color_step_2;
+        uniform vec3 color_step_3;
+        uniform vec3 color_step_4;
+        uniform float ratio_step_1;
+        uniform float ratio_step_2;
+        uniform float displacement;
         varying float v_angle;
         varying vec3 v_position;
+        varying float v_intensity;
 
         vec3 get_position(vec3 position)
         {
@@ -255,6 +264,27 @@
             return new_position;
         }
 
+        float get_intensity(vec3 position,float angle)
+        {
+            // Perlins
+            float value = 0.0;
+
+            //                            | frequency                                | speed
+            float perlin_1 = (cnoise(vec4(2.0   * position,time * global_speed * 0.2)) + 1.0) / 2.0;
+            float perlin_2 = (cnoise(vec4(6.0   * position,time * global_speed * 0.3)) + 1.0) / 2.0;
+            float perlin_3 = (cnoise(vec4(12.0  * position,time * global_speed * 0.5)) + 1.0) / 2.0;
+
+            float value_1 = clamp(perlin_1,0.4,0.5) - 0.35;
+            float value_2 = perlin_2;
+            float value_3 = perlin_3;
+
+            // Final value
+            value = value_1 * perlin_2 * 8.0 * value_3 * 0.4;
+            value += clamp(angle - 1.0,0.0,1.0) * 1.2;
+
+            return value;
+        }
+
         void main()
         {
             // vec3 new_position = get_position(position);
@@ -262,8 +292,9 @@
 
             vec3 direction = cameraPosition - position;
 
-            v_position = position;
-            v_angle    = acos(dot(normalize(normal),normalize(direction)));
+            v_position  = position;
+            v_angle     = acos(dot(normalize(normal),normalize(direction)));
+            v_intensity = get_intensity(v_position,v_angle);
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4(new_position,1.0);
         }
@@ -440,9 +471,18 @@
           return 2.2 * n_xyzw;
         }
 
+        uniform float time;
+        uniform float global_speed;
+        uniform vec3 color_step_1;
+        uniform vec3 color_step_2;
+        uniform vec3 color_step_3;
+        uniform vec3 color_step_4;
+        uniform float ratio_step_1;
+        uniform float ratio_step_2;
+        uniform float displacement;
         varying float v_angle;
         varying vec3 v_position;
-        uniform float time;
+        varying float v_intensity;
 
         vec3 get_color_from_gradient(float value)
         {
@@ -460,62 +500,63 @@
 
             float step_1 = 0.6;
 
-            if(value < step_1)
+            if(value < ratio_step_1)
             {
-                value = smoothstep(0.0,step_1,value);
-                color = mix( color_1, color_2, vec3(value,value,value));
+                value = smoothstep(0.0,ratio_step_1,value);
+                color = mix( color_step_1, color_step_2, vec3(value,value,value));
+                // color = vec3(1.0,0.0,0.0);
+            }
+            else if(value < ratio_step_2)
+            {
+                value = smoothstep(ratio_step_1,ratio_step_2,value);
+                color = mix( color_step_2, color_step_3, vec3(value,value,value));
+                // color = vec3(0.0,1.0,0.0);
             }
             else
             {
-                value = smoothstep(step_1,1.0,value);
-                color = mix( color_2, color_3, vec3(value,value,value));
+                value = smoothstep(ratio_step_2,1.0,value);
+                color = mix( color_step_3, color_step_4, vec3(value,value,value));
+                // color = vec3(0.0,0.0,1.0);
             }
 
             return color;
         }
 
-        vec3 get_color(vec3 position,float angle)
+        float get_intensity(vec3 position)
         {
             vec3 new_position = position;
 
             // Displacement
-            float displacement_1 = (cnoise(vec4(36.0 * position,time * 0.0003 * 0.5)) + 1.0) / 2.0;
-            new_position.x += displacement_1 * 0.04;
-            new_position.y += displacement_1 * 0.04;
-            new_position.z += displacement_1 * 0.04;
+            if(displacement != 0.0)
+            {
+                float displacement_1 = (cnoise(vec4(36.0 * position,time * 0.0003 * 0.5)) + 1.0) / 2.0;
+                new_position.x += displacement_1 * displacement;
+                new_position.y += displacement_1 * displacement;
+                new_position.z += displacement_1 * displacement;
+            }
 
             // Perlins
-            float value        = 0.0;
-            float global_speed = 0.0003;
+            float value = 1.0;
 
             //                            | frequency                                | speed
-            float perlin_1 = (cnoise(vec4(2.0   * new_position,time * global_speed * 0.2)) + 1.0) / 2.0;
-            float perlin_2 = (cnoise(vec4(6.0   * new_position,time * global_speed * 0.3)) + 1.0) / 2.0;
-            float perlin_3 = (cnoise(vec4(12.0  * new_position,time * global_speed * 0.5)) + 1.0) / 2.0;
             float perlin_4 = (cnoise(vec4(100.0 * new_position,time * global_speed * 1.0)) + 1.0) / 2.0;
             float perlin_5 = (cnoise(vec4(200.0 * new_position,time * global_speed * 1.0)) + 1.0) / 2.0;
 
-            float value_1 = clamp(perlin_1,0.4,0.5) - 0.35;
-            float value_2 = perlin_2;
-            float value_3 = perlin_3;
             float value_4 = 1.0 - clamp(perlin_4,0.0,0.3) * 3.0;
             float value_5 = perlin_5;
 
             // Final value
-            value = value_1 * perlin_2 * 8.0 * value_3 * 0.4 * (value_4 * perlin_5) * 0.6 * 20.0;
-            value += clamp(angle - 1.0,0.0,1.0) * 0.6;
-            value *= 3.0;
+            value *= value_4;
+            value *= value_5;
+            value *= 14.0;
 
-            vec3 color = get_color_from_gradient(value);
-
-            // color = vec3(displacement_1,displacement_1,displacement_1);
-
-            return color;
+            return value;
         }
 
         void main()
         {
-            vec3 color = get_color(v_position,v_angle);
+            float intensity = get_intensity(v_position) * v_intensity * 3.0;
+            vec3 color = get_color_from_gradient(intensity);
 
             gl_FragColor = vec4(color,1.0);
         }
