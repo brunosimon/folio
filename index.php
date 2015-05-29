@@ -100,6 +100,9 @@ HERE IS A COOL DINOSAUR TO WAIT
         <h2>My lab</h2>
         <ul>
             <li>
+                <a href="lab/procedural-star/"><img class="retina" width="250" height="100" src="src/img/lab/procedural-star.jpg" alt=""></a>
+            </li>
+            <li>
                 <a href="lab/procedural-planet/"><img class="retina" width="250" height="100" src="src/img/lab/procedural-planet.jpg" alt=""></a>
             </li>
             <li>
