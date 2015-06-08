@@ -81,6 +81,9 @@ HERE IS A COOL DINOSAUR TO WAIT
 
         <ul>
             <li>
+                 <a target="_blank" href="http://sonicblocks.com"><img class="retina" width="250" height="100" src="src/img/projects/sonic-blocks.jpg" alt="Sonic Blocks"></a>
+            </li>
+            <li>
                  <a target="_blank" href="http://nicolas-bussiere.fr"><img class="retina" width="250" height="100" src="src/img/projects/nicolas-bussiere.jpg" alt="Nicolas Bussière"></a>
             </li>
             <li>
