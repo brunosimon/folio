@@ -2,7 +2,8 @@ B.Components.Light = B.Core.Abstract.extend(
 {
     options :
     {
-        position_mode : 'circular'
+        position_mode : 'circular',
+        color         : 'red'
     },
 
     construct : function( options )
@@ -10,18 +11,19 @@ B.Components.Light = B.Core.Abstract.extend(
         this._super( options );
 
         // Set up
+        this.color            = this.options.color;
         this.mouse            = new B.Tools.Mouse();
         this.registry         = new B.Tools.Registry();
         this.audio            = new B.Tools.Audio();
         this.canvas           = this.registry.get( 'canvas' );
         this.animation        = {};
-        this.animation.radius = 0.15;
+        this.animation.radius = 0.10;
         this.animation.speed  = 0.1; // t / s
         this.disc_1           = {};
         this.disc_1.radius    = 2 * this.canvas.pixel_ratio;
         this.disc_1.opacity   = 1;
         this.disc_2           = {};
-        this.disc_2.radius    = 6 * this.canvas.pixel_ratio;
+        this.disc_2.radius    = 2 * this.canvas.pixel_ratio;
         this.disc_2.opacity   = 0.5;
         this.disc_3           = {};
         this.disc_3.radius    = 30 * this.canvas.pixel_ratio;
@@ -29,9 +31,7 @@ B.Components.Light = B.Core.Abstract.extend(
         this.x                = 100;
         this.y                = 100;
         this.position_mode    = this.options.position_mode;
-
-        // Init
-        this.init_tweaks();
+        this.frequency_value  = 0;
     },
 
     /**
@@ -39,20 +39,57 @@ B.Components.Light = B.Core.Abstract.extend(
      */
     update : function( time )
     {
+        var rotation_offset;
+        switch( this.color )
+        {
+            case 'blue' :
+                rotation_offset = ( Math.PI * 2 ) / 3 * 0;
+                break;
+
+            case 'green' :
+                rotation_offset = ( Math.PI * 2 ) / 3 * 1;
+                break;
+
+            case 'red' :
+                rotation_offset = ( Math.PI * 2 ) / 3 * 2;
+                break;
+        }
+
         if( this.registry.items.mode === 'music' )
         {
-            this.x = this.canvas.sizes.half.width  + Math.cos( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * ( this.audio.volume * 0.1 );
-            this.y = this.canvas.sizes.half.height + Math.sin( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * ( this.audio.volume * 0.1 );
+            var frequency_value = 0;
+            switch( this.color )
+            {
+                case 'blue' :
+                    frequency_value = this.audio.frequency_data[ 40 ] + 30;
+                    break;
+
+                case 'green' :
+                    frequency_value = this.audio.frequency_data[ 0 ] + 35;
+                    break;
+
+                case 'red' :
+                    frequency_value = this.audio.frequency_data[ 15 ] + 40;
+                    break;
+            }
+            this.frequency_value += ( frequency_value - this.frequency_value ) * 0.3;
+
+            this.x = this.canvas.sizes.half.width  + Math.cos( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * ( this.frequency_value * 0.0007 );
+            this.y = this.canvas.sizes.half.height + Math.sin( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * ( this.frequency_value * 0.0007 );
         }
         else if( this.registry.items.mode === 'circular' )
         {
-            this.x = this.canvas.sizes.half.width  + Math.cos( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * this.animation.radius;
-            this.y = this.canvas.sizes.half.height + Math.sin( ( time / 1000 ) * this.animation.speed * Math.PI * 2 ) * this.canvas.sizes.width * this.animation.radius;
+            this.x = this.canvas.sizes.half.width  + Math.cos( ( time / 1000 ) * this.animation.speed * Math.PI * 2 + rotation_offset ) * this.canvas.sizes.width * this.animation.radius;
+            this.y = this.canvas.sizes.half.height + Math.sin( ( time / 1000 ) * this.animation.speed * Math.PI * 2 + rotation_offset ) * this.canvas.sizes.width * this.animation.radius;
         }
         else if( this.registry.items.mode === 'mouse' )
         {
-            this.x = this.mouse.position.x * this.canvas.pixel_ratio;
-            this.y = this.mouse.position.y * this.canvas.pixel_ratio;
+            var offset = { x : 0, y : 0 };
+            offset.x = Math.cos( ( time / 1000 ) * this.animation.speed * Math.PI * 2 + rotation_offset ) * 30;
+            offset.y = Math.sin( ( time / 1000 ) * this.animation.speed * Math.PI * 2 + rotation_offset ) * 30;
+
+            this.x = ( this.mouse.position.x + offset.x ) * this.canvas.pixel_ratio;
+            this.y = ( this.mouse.position.y + offset.y ) * this.canvas.pixel_ratio;
         }
     },
 
@@ -61,11 +98,29 @@ B.Components.Light = B.Core.Abstract.extend(
      */
     draw : function()
     {
-
-        // Draw dics 3
+        // Draw disc 3
         var gradient_3 = this.canvas.context.createRadialGradient( this.x, this.y, 0, this.x, this.y, this.disc_3.radius );
-        gradient_3.addColorStop( 0, 'rgba(255,0,59,' + ( this.disc_3.opacity - ( Math.random() * 0.05 ) ) + ')' );
-        gradient_3.addColorStop( 1, 'rgba(255,0,120,0)' );
+
+        switch( this.color )
+        {
+            case 'blue' :
+                gradient_3.addColorStop( 0, 'rgba(0,200,255,' + ( this.disc_3.opacity - ( Math.random() * 0.05 ) ) + ')' );
+                gradient_3.addColorStop( 1, 'rgba(0,0,255,0)' );
+
+                break;
+
+            case 'green' :
+                gradient_3.addColorStop( 0, 'rgba(100,255,0,' + ( this.disc_3.opacity - ( Math.random() * 0.05 ) ) + ')' );
+                gradient_3.addColorStop( 1, 'rgba(0,255,0,0)' );
+
+                break;
+
+            case 'red' :
+                gradient_3.addColorStop( 0, 'rgba(255,0,59,' + ( this.disc_3.opacity - ( Math.random() * 0.05 ) ) + ')' );
+                gradient_3.addColorStop( 1, 'rgba(255,0,120,0)' );
+
+                break;
+        }
 
         this.canvas.context.globalCompositeOperation = 'lighter';
         this.canvas.context.fillStyle = gradient_3;
@@ -94,29 +149,5 @@ B.Components.Light = B.Core.Abstract.extend(
         this.canvas.context.beginPath();
         this.canvas.context.arc( this.x, this.y, this.disc_1.radius, 0, Math.PI * 2 );
         this.canvas.context.fill();
-    },
-
-    /**
-     * INIT TWEAKS
-     */
-    init_tweaks : function()
-    {
-        // Set up
-        this.tweaker = new B.Tools.Tweaker();
-
-        // Create folder
-        var folder = this.tweaker.gui.addFolder( 'Light' );
-        folder.open();
-
-        // Add tweaks
-        folder.add( this, 'position_mode', [ 'circular', 'mouse' ] ).name( 'position mode' );
-        folder.add( this.animation, 'radius' ).min( 0 ).max( 1 ).step( 0.01 ).name( 'radius' );
-        folder.add( this.animation, 'speed' ).min( 0 ).max( 2 ).step( 0.01 ).name( 'speed' );
-        folder.add( this.disc_1, 'radius' ).min( 0 ).max( 100 ).step( 1 ).name( 'disc 1 radius' );
-        folder.add( this.disc_2, 'radius' ).min( 0 ).max( 100 ).step( 1 ).name( 'disc 2 radius' );
-        folder.add( this.disc_3, 'radius' ).min( 0 ).max( 100 ).step( 1 ).name( 'disc 3 radius' );
-        folder.add( this.disc_1, 'opacity' ).min( 0 ).max( 1 ).step( 0.01 ).name( 'disc 1 opacity' );
-        folder.add( this.disc_2, 'opacity' ).min( 0 ).max( 1 ).step( 0.01 ).name( 'disc 2 opacity' );
-        folder.add( this.disc_3, 'opacity' ).min( 0 ).max( 1 ).step( 0.01 ).name( 'disc 3 opacity' );
     }
 } );

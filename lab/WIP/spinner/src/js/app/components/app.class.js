@@ -9,7 +9,7 @@ B.Components.App = B.Core.Abstract.extend(
         this.ticker   = new B.Tools.Ticker( { pause_on_blur : true } );
         this.registry = new B.Tools.Registry();
         this.audio    = new B.Tools.Audio();
-        this.spinner  = new B.Components.Spinner( {
+        this.spinners = new B.Components.Spinners( {
             canvas : document.querySelector( 'canvas.experiment' )
         } );
 
@@ -57,7 +57,7 @@ B.Components.App = B.Core.Abstract.extend(
 
         // Dummy
         var dummy = {};
-        dummy.mode = 'music';
+        dummy.mode = this.registry.get( 'mode' );
 
         // Add tweaks
         var mode_tweak = folder.add( dummy, 'mode', [ 'music', 'circular', 'mouse' ] );

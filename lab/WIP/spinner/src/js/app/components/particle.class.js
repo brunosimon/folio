@@ -1,12 +1,16 @@
 B.Components.Particle = B.Core.Abstract.extend(
 {
-    options : {},
+    options :
+    {
+        color : 'red'
+    },
 
     construct : function( options )
     {
         this._super( options );
 
         // Set up
+        this.color            = this.options.color;
         this.registry         = new B.Tools.Registry();
         this.canvas           = this.registry.get( 'canvas' );
         this.x                = this.options.x;
@@ -69,21 +73,45 @@ B.Components.Particle = B.Core.Abstract.extend(
      */
     get_color : function( ratio )
     {
-        var r     = 200,
-            g     = Math.round( 255 * ratio * 0.5 ),
-            b     = 185 + Math.round( 70 * ratio ),
-            a     = ratio,
-            color = [
-                'rgba(',
-                r,
-                ',',
-                g,
-                ',',
-                b,
-                ',',
-                a,
-                ')'
-            ].join( '' );
+        var r, g, b, a, color;
+
+        switch( this.color )
+        {
+            case 'blue' :
+                r = 0;
+                g = Math.round( 200 * ratio );
+                b = 255;
+
+                break;
+
+            case 'green' :
+                r = Math.round( 255 * ratio * 0.5 );
+                g = 200;
+                b = 120;
+
+                break;
+
+            case 'red' :
+                r = 200;
+                g = Math.round( 255 * ratio * 0.5 );
+                b = 185 + Math.round( 70 * ratio );
+
+                break;
+        }
+
+        a = ratio;
+
+        color = [
+            'rgba(',
+            r,
+            ',',
+            g,
+            ',',
+            b,
+            ',',
+            a,
+            ')'
+        ].join( '' );
 
         return color;
     }

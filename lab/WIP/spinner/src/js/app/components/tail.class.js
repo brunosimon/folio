@@ -1,23 +1,24 @@
 B.Components.Tail = B.Core.Abstract.extend(
 {
-    options : {},
+    options :
+    {
+        color : 'red'
+    },
 
     construct : function( options )
     {
         this._super( options );
 
         // Set up
+        this.color                        = this.options.color;
         this.registry                     = new B.Tools.Registry();
         this.canvas                       = this.registry.get( 'canvas' );
-        this.line_width                   = 2 * this.canvas.pixel_ratio;
+        this.line_width                   = 1.5 * this.canvas.pixel_ratio;
         this.points                       = {};
         this.points.life_time             = 8000;
         this.points.all                   = [];
         this.points.turbulence            = {};
         this.points.turbulence.multiplier = 0.7;
-
-        // Init
-        this.init_tweaks();
     },
 
     /**
@@ -98,40 +99,46 @@ B.Components.Tail = B.Core.Abstract.extend(
      */
     get_color : function( ratio )
     {
-        var r     = 200,
-            g     = Math.round( 255 * ratio * 0.5 ),
-            b     = 185 + Math.round( 70 * ratio ),
-            a     = ratio,
-            color = [
-                'rgba(',
-                r,
-                ',',
-                g,
-                ',',
-                b,
-                ',',
-                a,
-                ')'
-            ].join( '' );
+        var r, g, b, a, color;
+
+        switch( this.color )
+        {
+            case 'blue' :
+                r = 0;
+                g = Math.round( 200 * ratio );
+                b = 255;
+
+                break;
+
+            case 'green' :
+                r = Math.round( 255 * ratio * 0.5 );
+                g = 200;
+                b = 120;
+
+                break;
+
+            case 'red' :
+                r = 200;
+                g = Math.round( 255 * ratio * 0.5 );
+                b = 185 + Math.round( 70 * ratio );
+
+                break;
+        }
+
+        a = ratio;
+
+        color = [
+            'rgba(',
+            r,
+            ',',
+            g,
+            ',',
+            b,
+            ',',
+            a,
+            ')'
+        ].join( '' );
 
         return color;
-    },
-
-    /**
-     * INIT TWEAKS
-     */
-    init_tweaks : function()
-    {
-        // Set up
-        this.tweaker = new B.Tools.Tweaker();
-
-        // Create folder
-        var folder = this.tweaker.gui.addFolder( 'Tail' );
-        folder.open();
-
-        // Add tweaks
-        folder.add( this, 'line_width' ).min( 0 ).max( 50 ).step( 1 ).name( 'line width' );
-        folder.add( this.points, 'life_time' ).min( 0 ).max( 20000 ).step( 1 ).name( 'life time' );
-        folder.add( this.points.turbulence, 'multiplier' ).min( 0 ).max( 3 ).step( 0.01 ).name( 'turbulence mult.' );
     }
 } );

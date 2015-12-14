@@ -1,16 +1,20 @@
 B.Components.Particles = B.Core.Abstract.extend(
 {
-    options : {},
+    options :
+    {
+        color : 'red'
+    },
 
     construct : function( options )
     {
         this._super( options );
 
         // Set up
+        this.color           = this.options.color;
         this.registry        = new B.Tools.Registry();
         this.audio           = new B.Tools.Audio();
         this.canvas          = this.registry.get( 'canvas' );
-        this.new_per_seconds = 200;
+        this.new_per_seconds = 50;
         this.all             = [];
 
         // Particle set up
@@ -18,9 +22,6 @@ B.Components.Particles = B.Core.Abstract.extend(
         this.radius     = 1;
         this.velocity   = 0.5;
         this.turbulence = 20;
-
-        // Init
-        this.init_tweaks();
     },
 
     /**
@@ -54,8 +55,9 @@ B.Components.Particles = B.Core.Abstract.extend(
                 y          : y,
                 life_time  : Math.random() * this.life_time,
                 radius     : Math.random() * this.radius * this.canvas.pixel_ratio,
-                velocity   : this.registry.items.mode === 'music' ? Math.random() * this.audio.volume * 2 : Math.random() * this.velocity,
-                turbulence : this.registry.items.mode === 'music' ? this.audio.volume * 5 : this.turbulence
+                velocity   : this.registry.items.mode === 'music' ? Math.random() * Math.pow( this.audio.volume * this.velocity, 2 ) * 0.1 : Math.random() * this.velocity,
+                turbulence : this.registry.items.mode === 'music' ? this.audio.volume * this.turbulence / 4 : this.turbulence,
+                color      : this.color
             } );
             this.all.push( new_particle );
         }
@@ -73,25 +75,5 @@ B.Components.Particles = B.Core.Abstract.extend(
             var particle = this.all[ i ];
             particle.draw();
         }
-    },
-
-    /**
-     * INIT TWEAKS
-     */
-    init_tweaks : function()
-    {
-        // Set up
-        this.tweaker = new B.Tools.Tweaker();
-
-        // Create folder
-        var folder = this.tweaker.gui.addFolder( 'Particles' );
-        folder.open();
-
-        // Add tweaks
-        folder.add( this, 'new_per_seconds' ).min( 0 ).max( 1000 ).step( 1 ).name( 'per second' );
-        folder.add( this, 'life_time' ).min( 0 ).max( 20000 ).step( 1 ).name( 'life time' );
-        folder.add( this, 'radius' ).min( 0 ).max( 20 ).step( 1 ).name( 'radius' );
-        folder.add( this, 'velocity' ).min( 0 ).max( 20 ).step( 0.01 ).name( 'velocity' );
-        folder.add( this, 'turbulence' ).min( 0 ).max( 200 ).step( 1 ).name( 'turbulence' );
     }
 } );
