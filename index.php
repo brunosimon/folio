@@ -81,6 +81,15 @@ HERE IS A COOL DINOSAUR TO WAIT
 
         <ul>
             <li>
+                 <a target="_blank" href="http://www.eveetdaphne.com"><img class="retina" width="250" height="100" src="src/img/projects/eve-daphnee.jpg" alt="Eve &amp; Daphnée"></a>
+            </li>
+            <li>
+                 <a target="_blank" href="http://www.cera-groupecera.com"><img class="retina" width="250" height="100" src="src/img/projects/cera.jpg" alt="Cera"></a>
+            </li>
+            <li>
+                 <a target="_blank" href="http://galerieleloutrelefevre.com"><img class="retina" width="250" height="100" src="src/img/projects/galerie-leloutre-lefevre.jpg" alt="Galerie Leloutre Lefèvre"></a>
+            </li>
+            <li>
                  <a target="_blank" href="http://sonicblocks.com"><img class="retina" width="250" height="100" src="src/img/projects/sonic-blocks.jpg" alt="Sonic Blocks"></a>
             </li>
             <li>
@@ -102,6 +111,9 @@ HERE IS A COOL DINOSAUR TO WAIT
 
         <h2>My lab</h2>
         <ul>
+            <li>
+                <a href="lab/music-spinners/"><img class="retina" width="250" height="100" src="src/img/lab/music-spinners.jpg" alt=""></a>
+            </li>
             <li>
                 <a href="lab/procedural-star/"><img class="retina" width="250" height="100" src="src/img/lab/procedural-star.jpg" alt=""></a>
             </li>
