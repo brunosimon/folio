@@ -3,21 +3,27 @@ B.Components.App = B.Core.Abstract.extend(
     options : {},
     construct : function( options )
     {
+        var that = this;
+
         this._super( options );
 
         // Set up
         this.ticker   = new B.Tools.Ticker( { pause_on_blur : true } );
         this.registry = new B.Tools.Registry();
         this.audio    = new B.Tools.Audio();
-        this.spinners = new B.Components.Spinners( {
-            canvas : document.querySelector( 'canvas.experiment' )
+
+        this.audio.on( 'load', function()
+        {
+            that.spinners = new B.Components.Spinners( {
+                canvas : document.querySelector( 'canvas.experiment' )
+            } );
+
+            that.registry.set( 'mode', 'music' );
+
+            // Init
+            that.init_stats();
+            that.init_tweaks();
         } );
-
-        this.registry.set( 'mode', 'music' );
-
-        // Init
-        this.init_stats();
-        this.init_tweaks();
     },
 
     /**

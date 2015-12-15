@@ -1,10 +1,12 @@
-B.Tools.Audio = B.Core.Abstract.extend(
+B.Tools.Audio = B.Core.Event_Emitter.extend(
 {
     static  : 'audio',
     options : {},
 
     construct : function( options )
     {
+        var that = this;
+
         this._super( options );
 
         // Set up
@@ -25,12 +27,20 @@ B.Tools.Audio = B.Core.Abstract.extend(
         this.element.loop     = true;
         this.analyser.fftSize = 512;
 
-        // Init
-        this.init_tweaks();
-        this.init_ticker();
+        // Load
+        this.element.addEventListener( 'canplaythrough', function()
+        {
+            // Init
+            that.init_tweaks();
+            that.init_ticker();
 
-        // Play
-        this.element.play();
+            // Play
+            that.element.play();
+
+            // Trigger
+            that.trigger( 'load' );
+        } );
+        this.element.load();
     },
 
     /**
