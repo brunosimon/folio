@@ -1,0 +1,46 @@
+footer {
+    text-align:right;
+    height:60px;
+    padding:0 10px 0 0;
+
+    .item {
+        position:relative;
+        display:inline-block;
+        padding:10px;
+        vertical-align:bottom;
+
+        .svg {
+            display:inline-block;
+            position:relative;
+        }
+        svg,path {
+            fill:$purple;
+        }
+        &.github {
+            .svg {
+                width:13px;
+                height:13px;
+            }
+        }
+        &.twitter {
+            .svg {
+                width:14px;
+                height:12px;
+                top:-1px;
+            }
+        }
+        &.linkedin {
+            .svg {
+                width:12px;
+                height:12px;
+            }
+        }
+        &.mail {
+            .svg {
+                width:13px;
+                height:12px;
+                top:-1px;
+            }
+        }
+    }
+}

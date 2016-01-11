@@ -1,0 +1,38 @@
+mixin project(data)
+    article.project
+        .carousel
+            .content
+                .items
+                    each item in data.pictures
+                        .item
+                            .picture
+                                img(src=item,width="800")
+            .pagination
+                .items
+                    each item in data.pictures
+                        a.item(href="#")
+        .details
+            .background
+            .num= data.num
+            .title= data.title
+            span.separator
+            .infos
+                each item in data.infos
+                    .info
+                        .label= item.label
+                        if (typeof item.value === 'string')
+                            .value
+                                | #{item.value}
+                        else if (typeof item.value === 'object')
+                            each _item in item.value
+                                if (typeof _item === 'string')
+                                    .value
+                                        | #{_item}
+                                else
+                                    a.value(target="blank",href=_item.link)
+                                        | #{_item.title}
+                                    br
+            if data.link
+                a(target="blank",href=data.link).discover.framed
+                    | discover
+

@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport",content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no")
+        meta(name="description",content=general.description)
+        title= general.title
+        link(rel="stylesheet",href="src/css/style.css")
+        link(rel="stylesheet",href="https://fonts.googleapis.com/css?family=Rajdhani:500")
+    body
+        include ./partials/_header.jade
+
+        .wrapper
+            .lines
+                .line.line-left
+                .line.line-middle
+                .line.line-right
+            include ./partials/_who_am_i.jade
+            include ./partials/_works.jade
+            include ./partials/_lab.jade
+            include ./partials/_footer.jade
+

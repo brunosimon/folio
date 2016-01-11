@@ -1,0 +1,4 @@
+mixin svg(slug)
+    - var file = '../src/svg/' + slug + '.svg'
+    - var xml  = fs.readFileSync(file)
+    span.svg!= xml
