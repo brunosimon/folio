@@ -8,7 +8,6 @@ section.projects {
         width:calc(100% - 2px);
         height:380px;
         margin:0 0 30px 0;
-        overflow:hidden;
 
         .details {
             position:absolute;
@@ -83,6 +82,67 @@ section.projects {
             right:0;
             bottom:0;
             left:0;
+
+            .content {
+                position:absolute;
+                top:0;
+                right:0;
+                bottom:0;
+                left:0;
+                overflow:hidden;
+
+                .items,
+                .item,
+                .picture {
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    bottom:0;
+                    left:0;
+                    overflow:hidden;
+                }
+            }
+            .pagination {
+                position:absolute;
+                right:0;
+                bottom:0;
+                left:0;
+                height:40px;
+                background:rgba(#130f1d,0.7);
+                text-align:center;
+                opacity:0;
+                transform:translateY(20px);
+                transition:all 0.3s cubic-bezier(0.75, 0, 1, 0.35);
+
+                .items {
+                    display:inline-block;
+                    height:100%;
+                }
+                .item {
+                    position:relative;
+                    display:inline-block;
+                    width:20px;
+                    height:100%;
+                    opacity:0.5;
+                    transition:opacity 0.15s;
+
+                    &:after {
+                        content:'';
+                        display:block;
+                        position:absolute;
+                        top:50%;
+                        left:50%;
+                        width:6px;
+                        height:6px;
+                        margin:-3px 0 0 -3px;
+                        border:1px solid #fff;
+                    }
+                    &.active,
+                    &:hover {
+                        opacity:1;
+                    }
+                }
+            }
         }
         &:nth-child(odd) {
             .details {
@@ -97,6 +157,15 @@ section.projects {
                 .info {
                     padding-right:0;
                     padding-left:60px;
+                }
+            }
+        }
+        &:hover {
+            .carousel {
+                .pagination {
+                    opacity:1;
+                    transform:translateY(0px);
+                    transition:all 0.3s cubic-bezier(0, 0.75, 0.35, 1);
                 }
             }
         }

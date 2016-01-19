@@ -72,7 +72,7 @@
                 ]
             },
             {
-                "title" : "Groupe Cera",
+                "title" : "Cera Engineering",
                 "infos" :
                 [
                     {
@@ -495,7 +495,7 @@
                 ],
                 "pictures" :
                 [
-                    "src/medias/lab/burno-js/1.jpg"
+                    "src/medias/lab/burno-js/0.jpg"
                 ],
                 "link" : "https://github.com/brunosimon/burno.js"
             },

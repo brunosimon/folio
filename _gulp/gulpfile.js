@@ -33,20 +33,25 @@ options.paths.sass        = '../src/sass/';
 options.paths.fonts       = '../src/fonts/';
 options.paths.images      = '../src/img/';
 options.paths.medias      = '../src/medias/';
+options.paths.js          = '../src/js/';
 options.jade              = {};
-options.jade.pretty       = true;
+options.jade.pretty       = false;
 options.sass              = {};
 options.sass.output_style = 'compressed'; // nested | expanded | compact | compressed
 
 /**
  * JS
  */
-gulp.task( 'js', function()
+gulp.task( 'js', () =>
 {
-    browserify( {
-        entries   : '../src/js/test/index.js',
-        debug     : true,
+    // Browserify
+    browserify( `${options.paths.js}script.js`, {
+        paths      : [ './node_modules', options.paths.js ],
+        debug      : true,
+        extensions : ['.js', '.json']
     } )
+
+    // Babel
     .transform(
         babelify,
         {
@@ -57,17 +62,26 @@ gulp.task( 'js', function()
         }
     )
     .bundle()
-    .pipe( gulp_plumber() )
+
+    // Error (plumber not working)
+    .on( 'error', gulp_notify.onError( '<%= error.message %>' ) )
+
+    // Send to build
     .pipe( source( 'script.js') )
-    .pipe( gulp.dest( '../src/js/build' ) );
+    .pipe( gulp.dest(
+        `${options.paths.build}src/js/`
+    ) )
+
+    // Notify
+    .pipe( gulp_notify( 'js' ) );
 } );
 
 /**
  * HTML
  */
-gulp.task( 'html', function()
+gulp.task( 'html', () =>
 {
-    return gulp.src( options.paths.templates + '*.jade' )
+    return gulp.src( `${options.paths.templates}*.jade` )
 
         // Plumber
         .pipe( gulp_plumber( {
@@ -75,9 +89,9 @@ gulp.task( 'html', function()
         } ) )
 
         // Add data
-        .pipe( gulp_data( function( file )
+        .pipe( gulp_data( ( file ) =>
         {
-            var data = requireUncached( options.paths.data + 'all.json' );
+            var data = requireUncached( `${options.paths.data}all.json` );
             data.fs = require( 'fs' )
             return data;
         } ) )
@@ -99,9 +113,9 @@ gulp.task( 'html', function()
 /**
  * CSS
  */
-gulp.task( 'css', function()
+gulp.task( 'css', () =>
 {
-    return gulp.src( options.paths.sass + 'main.scss' )
+    return gulp.src( `${options.paths.sass}main.scss` )
 
         // Plumber
         .pipe( gulp_plumber( {
@@ -123,7 +137,7 @@ gulp.task( 'css', function()
 
         // Send to build
         .pipe( gulp.dest(
-            options.paths.build + 'src/css/'
+            `${options.paths.build}src/css/`
         ) )
 
         // Notify
@@ -133,13 +147,13 @@ gulp.task( 'css', function()
 /**
  * COPY
  */
-gulp.task( 'copy', function()
+gulp.task( 'copy', () =>
 {
     return gulp.src(
             [
-                options.paths.fonts  + '**/**',
-                options.paths.images + '**/**',
-                options.paths.medias + '**/**',
+                `${options.paths.fonts}**/**`,
+                `${options.paths.images}**/**`,
+                `${options.paths.medias}**/**`,
             ],
             {
                 base : './',
@@ -162,8 +176,11 @@ gulp.task( 'copy', function()
 /**
  * WATCH
  */
-gulp.task( 'watch', function()
+gulp.task( 'watch', () =>
 {
+    // JS
+    gulp.watch( options.paths.js + '**/*.js', [ 'js' ] );
+
     // TEMPLATE
     gulp.watch( options.paths.templates + '**/*.jade', [ 'html' ] );
 
@@ -176,9 +193,9 @@ gulp.task( 'watch', function()
     // COPY
     gulp.watch(
         [
-            options.paths.fonts  + '**',
-            options.paths.images + '**',
-            options.paths.medias + '**',
+            `${options.paths.fonts}**`,
+            `${options.paths.images}**`,
+            `${options.paths.medias}**`,
         ],
         [ 'copy' ]
     );
@@ -192,4 +209,4 @@ gulp.task( 'start', [ 'default', 'watch' ] );
 /**
  * DEFAULT
  */
-gulp.task( 'default', [ 'html', 'css', 'copy' ] );
+gulp.task( 'default', [ 'js', 'html', 'css', 'copy' ] );

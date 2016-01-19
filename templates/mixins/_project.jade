@@ -7,10 +7,11 @@ mixin project(data)
                         .item
                             .picture
                                 img(src=item,width="800")
-            .pagination
-                .items
-                    each item in data.pictures
-                        a.item(href="#")
+            if data.pictures.length > 1
+                .pagination
+                    .items
+                        each item in data.pictures
+                            a.item(href="#")
         .details
             .background
             .num= data.num
