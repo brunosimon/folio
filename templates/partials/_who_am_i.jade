@@ -5,23 +5,23 @@ section.who-am-i
     +arrows_title("Who am I")
     .content
         .description
-            p
+            p.b-unveil
                 | French developer living in Paris. Currently working at <a target="_blank" href="#">Uzik</a>, also teaching classes at <a target="_blank" href="#">HETIC</a> and doing freelance work.
         .skills
-            p
+            p.b-unveil
                 | Some of my skills
             .items
                 each item in who.skills
-                    - var classes = "item " + item.slug
+                    - var classes = "item b-unveil " + item.slug
                     span(class=classes)
                         +svg(item.slug)
                         .title= item.title
         .find
-            p
+            p.b-unveil
                 | Find me
             .items
                 each item in who.social
-                    - var classes = "item " + item.slug
+                    - var classes = "item b-unveil " + item.slug
                     a(class=classes,href=item.link,target="_blank")
                         +svg(item.slug)
                         .title= item.title

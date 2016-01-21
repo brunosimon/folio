@@ -14,7 +14,19 @@ section.who-am-i {
             padding:12px;
             height:45px;
             vertical-align:bottom;
+            transform:translateY(-20px) translateZ(0);
+            transition:all 0.4s;
 
+            @for $i from 0 through 20
+            {
+                &:nth-child(#{$i})
+                {
+                    transition-delay:$i * 0.04s;
+                }
+            }
+            &.b-unveil-100-0 {
+                transform:translateY(0) translateZ(0);
+            }
             .svg {
                 display:inline-block;
                 position:relative;
@@ -123,7 +135,19 @@ section.who-am-i {
             height:55px;
             vertical-align:bottom;
             overflow:hidden;
+            transform:translateY(-20px) translateZ(0);
+            transition:all 0.4s;
 
+            @for $i from 0 through 20
+            {
+                &:nth-child(#{$i})
+                {
+                    transition-delay:$i * 0.04s;
+                }
+            }
+            &.b-unveil-100-0 {
+                transform:translateY(0) translateZ(0);
+            }
             .title {
                 display:block;
                 position:absolute;

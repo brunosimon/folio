@@ -1,5 +1,5 @@
 mixin project(data)
-    article.project
+    article.project.b-unveil(data-unveiler-steps="100-50")
         .carousel
             .content
                 .items
@@ -10,9 +10,12 @@ mixin project(data)
             if data.pictures.length > 1
                 .pagination
                     .items
+                        a.item.prev(href="#")
                         each item in data.pictures
-                            a.item(href="#")
-        .details
+                            a.item.page(href="#")
+                        a.item.next(href="#")
+        - var classes = 'details infos-count-' + data.infos.length
+        div(class=classes)
             .background
             .num= data.num
             .title= data.title

@@ -35,9 +35,9 @@ options.paths.images      = '../src/img/';
 options.paths.medias      = '../src/medias/';
 options.paths.js          = '../src/js/';
 options.jade              = {};
-options.jade.pretty       = false;
+options.jade.pretty       = true;
 options.sass              = {};
-options.sass.output_style = 'compressed'; // nested | expanded | compact | compressed
+options.sass.output_style = 'expanded'; // nested | expanded | compact | compressed
 
 /**
  * JS

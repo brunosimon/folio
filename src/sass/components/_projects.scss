@@ -18,6 +18,7 @@ section.projects {
             padding:60px 0 0 0;
             text-align:left;
             font-size:9px;
+            z-index:2;
 
             .background {
                 position:absolute;
@@ -33,6 +34,9 @@ section.projects {
                 color:$orange;
                 text-shadow:0px 0px 2px $orange;
                 line-height:11px;
+                transform:translateX(20px) translateZ(0);
+                opacity:0;
+                transition:all 0.4s 0.5s;
             }
             .title {
                 position:relative;
@@ -40,6 +44,9 @@ section.projects {
                 font-size:13px;
                 text-transform:uppercase;
                 line-height:11px;
+                transform:translateX(20px) translateZ(0);
+                opacity:0;
+                transition:all 0.4s 0.6s;
             }
             .separator {
                 display:block;
@@ -54,8 +61,18 @@ section.projects {
                 margin:0 0 40px 0;
 
                 .info {
+                    position:relative;
                     margin:0 0 8px 0;
                     padding-right:60px;
+                    transform:translateX(20px) translateZ(0);
+                    opacity:0;
+                    transition:all 0.4s;
+
+                    @for $i from 1 through 10 {
+                        &:nth-child(#{$i}) {
+                            transition-delay:0.6s + $i * 0.1s;
+                        }
+                    }
                 }
                 .label {
                     color:$orange;
@@ -74,6 +91,17 @@ section.projects {
             }
             .discover {
                 position:relative;
+                transform:translateX(20px) translateZ(0);
+                opacity:0;
+                transition:all 0.4s 1s;
+            }
+            @for $i from 0 through 10
+            {
+                &.infos-count-#{$i} {
+                    .discover {
+                        transition-delay:0.7s + $i * 0.1s;
+                    }
+                }
             }
         }
         .carousel {
@@ -101,6 +129,34 @@ section.projects {
                     left:0;
                     overflow:hidden;
                 }
+                .items {
+                    z-index:0;
+                }
+                .item {
+                    box-shadow:0px 0px 30px rgba(0,0,0,0.15);
+
+                    &.animated {
+                        transition:transform 1s;
+
+                        .picture {
+                            transition:transform 1s;
+                        }
+                    }
+                    &.right {
+                        transform:translateX(100%) translateZ(0);
+
+                        .picture {
+                            transform:translateX(-90%) translateZ(0);
+                        }
+                    }
+                    &.left {
+                        transform:translateX(-100%) translateZ(0);
+
+                        .picture {
+                            transform:translateX(90%) translateZ(0);
+                        }
+                    }
+                }
             }
             .pagination {
                 position:absolute;
@@ -110,6 +166,7 @@ section.projects {
                 height:40px;
                 background:rgba(#130f1d,0.7);
                 text-align:center;
+                z-index:2;
                 opacity:0;
                 transform:translateY(20px);
                 transition:all 0.3s cubic-bezier(0.75, 0, 1, 0.35);
@@ -126,16 +183,39 @@ section.projects {
                     opacity:0.5;
                     transition:opacity 0.15s;
 
-                    &:after {
-                        content:'';
-                        display:block;
-                        position:absolute;
-                        top:50%;
-                        left:50%;
-                        width:6px;
-                        height:6px;
-                        margin:-3px 0 0 -3px;
-                        border:1px solid #fff;
+                    &.page {
+                        &:after {
+                            content:'';
+                            display:block;
+                            position:absolute;
+                            top:50%;
+                            left:50%;
+                            width:6px;
+                            height:6px;
+                            margin:-3px 0 0 -3px;
+                            border:1px solid #fff;
+                        }
+                    }
+                    &.prev,
+                    &.next {
+                        &:after {
+                            content:'';
+                            display:block;
+                            position:absolute;
+                            top:50%;
+                            left:50%;
+                            width:4px;
+                            height:6px;
+                            margin:-3px 0 0 -2px;
+                            background:url('../img/small-arrow.png') center center no-repeat;
+                            @include image-2x('../img/small-arrow@2x.png', 4px, 6px);
+                        }
+                        &.prev {
+                            transform:rotate(180deg);
+                        }
+                    }
+                    &.prev {
+
                     }
                     &.active,
                     &:hover {
@@ -166,6 +246,24 @@ section.projects {
                     opacity:1;
                     transform:translateY(0px);
                     transition:all 0.3s cubic-bezier(0, 0.75, 0.35, 1);
+                }
+            }
+        }
+        &.b-unveil {
+            opacity:0;
+            transition:opacity 1s;
+
+            &.b-unveil-100-50 {
+                opacity:1;
+
+                .details {
+                    .num,
+                    .title,
+                    .info,
+                    .discover {
+                        opacity:1;
+                        transform:translateX(0) translateZ(0);
+                    }
                 }
             }
         }

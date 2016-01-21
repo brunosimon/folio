@@ -48,19 +48,60 @@ body {
             width:4px;
             height:9px;
             margin:0 3px 0 0px;
+            opacity:0;
+            transition:all 0.5s;
             background:url('../img/arrow.png');
             @include image-2x('../img/arrow@2x.png', 4px, 9px);
         }
 
         &.left {
             margin-right:16px;
-        }
 
+            span {
+                transform:translateX(-10px) rotate(0deg) translateZ(0);
+
+                &:nth-child(1) {
+                    transition-delay:0.3s;
+                }
+                &:nth-child(2) {
+                    transition-delay:0.2s;
+                }
+                &:nth-child(3) {
+                    transition-delay:0.1s;
+                }
+            }
+        }
         &.right {
             margin-left:16px;
 
             span {
-                transform:rotate(180deg);
+                transform:translateX(10px) rotate(180deg) translateZ(0);
+
+                &:nth-child(1) {
+                    transition-delay:0.1s;
+                }
+                &:nth-child(2) {
+                    transition-delay:0.2s;
+                }
+                &:nth-child(3) {
+                    transition-delay:0.3s;
+                }
+            }
+        }
+    }
+    &.b-unveil-100-100 {
+        .arrows {
+            &.left {
+                span {
+                    opacity:1;
+                    transform:translateX(0px) rotate(0deg) translateZ(0);
+                }
+            }
+            &.right {
+                span {
+                    opacity:1;
+                    transform:translateX(0px) rotate(180deg) translateZ(0);
+                }
             }
         }
     }
@@ -95,5 +136,14 @@ a {
             // color:$orange;
             border-color:$orange;
         }
+    }
+}
+
+.b-unveil {
+    opacity:0;
+    transition:opacity 1s;
+
+    &.b-unveil-100-100 {
+        opacity:1;
     }
 }
