@@ -113,13 +113,32 @@ p {
     -moz-osx-font-smoothing:grayscale;
 
     a {
+        position:relative;
         color:$orange;
         text-decoration:none;
         text-shadow:0px 0px 2px $orange;
         transition:text-shadow 1s;
+
+        &:after {
+            content:'';
+            position:absolute;
+            right:0;
+            bottom:-1px;
+            left:0;
+            height:3px;
+            border-bottom:1px solid $orange;
+            text-shadow:0px 0px 2px $orange;
+            transform:scaleX(0) translateZ(0);
+            transform-origin:0 0;
+            transition:transform 0.15s;
+        }
+        &:hover {
+            &:after {
+                transform:scaleX(1) translateZ(0);
+            }
+        }
     }
 }
-
 a {
     &.framed {
         display:inline-block;
@@ -138,7 +157,6 @@ a {
         }
     }
 }
-
 .b-unveil {
     opacity:0;
     transition:opacity 1s;
