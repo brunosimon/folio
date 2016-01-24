@@ -11,7 +11,8 @@ var gulp                = require( 'gulp' ),
     gulp_notify         = require( 'gulp-notify' ),
     gulp_sass           = require( 'gulp-sass' ),
     gulp_rename         = require( 'gulp-rename' ),
-    gulp_autoprefixer   = require( 'gulp-autoprefixer' );
+    gulp_autoprefixer   = require( 'gulp-autoprefixer' ),
+    glslify             = require( 'glslify' );
 
 /**
  * FUNCTIONS
@@ -48,7 +49,8 @@ gulp.task( 'js', () =>
     browserify( `${options.paths.js}script.js`, {
         paths      : [ './node_modules', options.paths.js ],
         debug      : true,
-        extensions : ['.js', '.json']
+        extensions : ['.js', '.json'],
+        transform  : ['glslify']
     } )
 
     // Babel

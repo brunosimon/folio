@@ -1,7 +1,8 @@
 var $        = require( 'jquery' ),
     B        = require( '../libs/burno-0.3.js' ),
     Carousel = require( './components/carousel.js' ),
-    Unveiler = require( './tools/unveiler.js' )
+    Unveiler = require( './tools/unveiler.js' ),
+    Header   = require( './components/header.js' )
 
 module.exports = B.Core.Abstract.extend( {
 
@@ -12,6 +13,7 @@ module.exports = B.Core.Abstract.extend( {
         // Init
         this.init_carousels()
         this.init_unveiler()
+        this.init_header()
     },
 
     init_carousels : function()
@@ -30,5 +32,10 @@ module.exports = B.Core.Abstract.extend( {
         this.unveiler = new Unveiler( {
             safe_duration : 0
         } )
+    },
+
+    init_header : function()
+    {
+        this.header = new Header()
     }
 } )

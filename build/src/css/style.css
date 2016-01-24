@@ -354,6 +354,7 @@ a.framed:hover {
 header.header {
   position: relative;
   height: 100vh;
+  overflow: hidden;
 }
 
 header.header canvas {
