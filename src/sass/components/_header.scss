@@ -1,15 +1,26 @@
 header.header {
     position:relative;
     height:100vh;
+    background:#190b18;
     overflow:hidden;
+    cursor:move;
 
-    canvas {
+    canvas,
+    .fallback {
+        display:block;
         position:absolute;
         top:0;
         left:0;
         width:100%;
         height:100%;
         background:#000;
+        opacity:0;
+        transition:opacity 1s;
+    }
+    .fallback {
+        display:none;
+        background:#190b18 url(../img/header-fallback-1800x1800.jpg) center center no-repeat;
+        background-size:cover;
     }
     .title {
         position:absolute;
@@ -19,13 +30,26 @@ header.header {
         margin-top:-35px;
     }
     h1 {
+        display:block;
+        position:relative;
         font-family:'ailerons';
         font-size:40px;
         margin-bottom:15px;
+        overflow:hidden;
+
+        span {
+            display:block;
+            position:relative;
+            opacity:0;
+            transition:opacity 1s 3s ease-out;
+        }
     }
     h2 {
+        display:block;
         font-size:14px;
         letter-spacing:2px;
+        opacity:0;
+        transition:opacity 1.5s 4.2s;
     }
     a.scroll {
         display:block;
@@ -37,5 +61,55 @@ header.header {
         height:40px;
         background:url('../img/scroll.png') center center no-repeat;
         @include image-2x('../img/scroll@2x.png', 7px, 12px);
+        animation:scroll_jump 4s infinite;
+
+        @keyframes scroll_jump {
+            84%  {transform:translateY(0px) translateZ(0);}
+            88%  {transform:translateY(-5px) translateZ(0);}
+            92%  {transform:translateY(0px) translateZ(0);}
+            96%  {transform:translateY(-5px) translateZ(0);}
+            100% {transform:translateY(0px) translateZ(0);}
+        }
+    }
+    &.visible {
+        canvas,
+        .fallback {
+            opacity:1;
+        }
+        h1 {
+            span {
+                opacity:1;
+            }
+        }
+        h2 {
+            opacity:1;
+        }
+    }
+    @media only screen and (max-width:628px) {
+        .fallback {
+            display:block;
+            background-image:url(../img/header-fallback-900x900.jpg);
+        }
+        canvas {
+            display:none;
+        }
+        h1 {
+            span {
+                transition-delay:1s;
+            }
+        }
+        h2 {
+            transition-delay:2.2s;
+        }
+    }
+}
+html.no-webgl {
+    header.header {
+        .fallback {
+            display:block;
+        }
+        canvas {
+            display:none;
+        }
     }
 }

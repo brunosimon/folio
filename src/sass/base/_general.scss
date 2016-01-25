@@ -37,6 +37,7 @@ body {
     display:inline-block;
     font-family:'ailerons';
     font-size:20px;
+    opacity:1;
 
     .arrows {
         display:inline-block;
@@ -48,59 +49,73 @@ body {
             width:4px;
             height:9px;
             margin:0 3px 0 0px;
-            opacity:0;
-            transition:all 0.5s;
             background:url('../img/arrow.png');
             @include image-2x('../img/arrow@2x.png', 4px, 9px);
         }
 
         &.left {
             margin-right:16px;
-
-            span {
-                transform:translateX(-10px) rotate(0deg) translateZ(0);
-
-                &:nth-child(1) {
-                    transition-delay:0.3s;
-                }
-                &:nth-child(2) {
-                    transition-delay:0.2s;
-                }
-                &:nth-child(3) {
-                    transition-delay:0.1s;
-                }
-            }
         }
         &.right {
             margin-left:16px;
 
             span {
-                transform:translateX(10px) rotate(180deg) translateZ(0);
-
-                &:nth-child(1) {
-                    transition-delay:0.1s;
-                }
-                &:nth-child(2) {
-                    transition-delay:0.2s;
-                }
-                &:nth-child(3) {
-                    transition-delay:0.3s;
-                }
+                transform:translateX(0) rotate(180deg) translateZ(0);
             }
         }
     }
-    &.b-unveil-100-100 {
-        .arrows {
-            &.left {
+    @include no-touch {
+        &.b-unveil {
+            .arrows {
                 span {
-                    opacity:1;
-                    transform:translateX(0px) rotate(0deg) translateZ(0);
+                    opacity:0;
+                    transition:all 0.5s;
+                }
+                &.left {
+                    span {
+                        transform:translateX(-10px) rotate(0deg) translateZ(0);
+
+                        &:nth-child(1) {
+                            transition-delay:0.3s;
+                        }
+                        &:nth-child(2) {
+                            transition-delay:0.2s;
+                        }
+                        &:nth-child(3) {
+                            transition-delay:0.1s;
+                        }
+                    }
+                }
+                &.right {
+                    span {
+                        transform:translateX(10px) rotate(180deg) translateZ(0);
+
+                        &:nth-child(1) {
+                            transition-delay:0.1s;
+                        }
+                        &:nth-child(2) {
+                            transition-delay:0.2s;
+                        }
+                        &:nth-child(3) {
+                            transition-delay:0.3s;
+                        }
+                    }
                 }
             }
-            &.right {
-                span {
-                    opacity:1;
-                    transform:translateX(0px) rotate(180deg) translateZ(0);
+        }
+        &.b-unveil-100-100 {
+            .arrows {
+                &.left {
+                    span {
+                        opacity:1;
+                        transform:translateX(0px) rotate(0deg) translateZ(0);
+                    }
+                }
+                &.right {
+                    span {
+                        opacity:1;
+                        transform:translateX(0px) rotate(180deg) translateZ(0);
+                    }
                 }
             }
         }
@@ -132,9 +147,11 @@ p {
             transform-origin:0 0;
             transition:transform 0.15s;
         }
-        &:hover {
-            &:after {
-                transform:scaleX(1) translateZ(0);
+        @include no-touch {
+            &:hover {
+                &:after {
+                    transform:scaleX(1) translateZ(0);
+                }
             }
         }
     }
@@ -151,17 +168,34 @@ a {
         text-transform:uppercase;
         transition:color 0.15s,border-color 0.3s;
 
-        &:hover {
-            // color:$orange;
-            border-color:$orange;
+        @include no-touch {
+            &:hover {
+                // color:$orange;
+                border-color:$orange;
+            }
         }
     }
 }
-.b-unveil {
-    opacity:0;
-    transition:opacity 1s;
+@include no-touch {
+    .b-unveil {
+        opacity:0;
+        transition:opacity 1s;
 
-    &.b-unveil-100-100 {
-        opacity:1;
+        &.b-unveil-100-100 {
+            opacity:1;
+        }
+    }
+}
+.no-select {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+       -moz-user-select:none;
+        -ms-user-select:none;
+            user-select:none;
+}
+@media only screen and (max-width:815px) {
+    .wrapper {
+        width:auto;
+        overflow:hidden;
     }
 }

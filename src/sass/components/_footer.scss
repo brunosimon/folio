@@ -43,9 +43,11 @@ footer {
                 top:-1px;
             }
         }
-        &:hover {
-            svg,path {
-                fill:#fff;
+        @include no-touch {
+            &:hover {
+                svg,path {
+                    fill:#fff;
+                }
             }
         }
     }

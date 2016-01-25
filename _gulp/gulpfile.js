@@ -12,7 +12,8 @@ var gulp                = require( 'gulp' ),
     gulp_sass           = require( 'gulp-sass' ),
     gulp_rename         = require( 'gulp-rename' ),
     gulp_autoprefixer   = require( 'gulp-autoprefixer' ),
-    glslify             = require( 'glslify' );
+    glslify             = require( 'glslify' ),
+    uglifyify           = require( 'uglifyify' );
 
 /**
  * FUNCTIONS
@@ -30,15 +31,16 @@ options.paths             = {};
 options.paths.build       = '../build/';
 options.paths.templates   = '../templates/';
 options.paths.data        = '../data/';
+options.paths.css         = '../src/css/';
 options.paths.sass        = '../src/sass/';
 options.paths.fonts       = '../src/fonts/';
 options.paths.images      = '../src/img/';
 options.paths.medias      = '../src/medias/';
 options.paths.js          = '../src/js/';
 options.jade              = {};
-options.jade.pretty       = true;
+options.jade.pretty       = false;
 options.sass              = {};
-options.sass.output_style = 'expanded'; // nested | expanded | compact | compressed
+options.sass.output_style = 'compressed'; // nested | expanded | compact | compressed
 
 /**
  * JS
@@ -48,7 +50,7 @@ gulp.task( 'js', () =>
     // Browserify
     browserify( `${options.paths.js}script.js`, {
         paths      : [ './node_modules', options.paths.js ],
-        debug      : true,
+        debug      : false,
         extensions : ['.js', '.json'],
         transform  : ['glslify']
     } )
@@ -62,6 +64,12 @@ gulp.task( 'js', () =>
                 babel_preset_es2015
             ]
         }
+    )
+    .transform(
+        {
+            global : true
+        },
+        'uglifyify'
     )
     .bundle()
 
@@ -156,6 +164,8 @@ gulp.task( 'copy', () =>
                 `${options.paths.fonts}**/**`,
                 `${options.paths.images}**/**`,
                 `${options.paths.medias}**/**`,
+                `${options.paths.css}**/**`,
+                `${options.paths.js}libs/modernizr-custom.js`,
             ],
             {
                 base : './',

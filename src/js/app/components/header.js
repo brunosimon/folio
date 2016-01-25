@@ -3,10 +3,20 @@ var B       = require( '../../libs/burno-0.3.js' ),
     $       = require( 'jquery' ),
     THREE   = require( 'three-js' )()
 
+require( '../../libs/three-js/CopyShader.js' )( THREE )
+require( '../../libs/three-js/EffectComposer.js' )( THREE )
+require( '../../libs/three-js/FXAAShader.js' )( THREE )
+require( '../../libs/three-js/MaskPass.js' )( THREE )
+require( '../../libs/three-js/RenderPass.js' )( THREE )
+require( '../../libs/three-js/ShaderPass.js' )( THREE )
+
 module.exports = B.Core.Abstract.extend( {
 
     options : {},
 
+    /**
+     * CONSTRUCT
+     */
     construct : function( options )
     {
         this._super( options )
@@ -18,11 +28,15 @@ module.exports = B.Core.Abstract.extend( {
         this.viewport    = new B.Tools.Viewport()
         this.$.container = $( 'header.header' )
         this.$.canvas    = this.$.container.find( 'canvas' )
+        this.$.fallback  = this.$.container.find( '.fallback' )
 
         // Init
         this.init_scroll()
-        this.init_sun()
 
+        if( Modernizr.webgl )
+            this.init_sun()
+
+        this.$.container.addClass( 'visible' )
     },
 
     /**
@@ -33,22 +47,85 @@ module.exports = B.Core.Abstract.extend( {
         var that = this;
 
         this.$.scroll_trigger = this.$.container.find( 'a.scroll' )
-        console.log(this.$.scroll_trigger);
+
+        this.scroll = {}
 
         // Viewport scroll event
         this.viewport.on( 'scroll', function()
         {
             // Update canvas position
             that.$.canvas.css( { transform : 'translateY(' + that.viewport.top * 0.40 + 'px) translateZ(0)' } )
+            that.$.fallback.css( { transform : 'translateY(' + that.viewport.top * 0.40 + 'px) translateZ(0)' } )
         } )
 
         // Scroll trigger click event
         this.$.scroll_trigger.on( 'click', function()
         {
-            console.log('ok');
+            that.scroll_to( that.viewport.height, 900 );
 
-            return
+            return false
         } )
+
+        this.ticker.on( 'tick', function()
+        {
+            if( that.scroll.currentTime < that.scroll.duration )
+            {
+                // increment the time
+                that.scroll.currentTime += that.scroll.increment;
+                // find the value with the quadratic in-out easing function
+                var val = Math.easeInOutQuad(that.scroll.currentTime, that.scroll.start, that.scroll.change, that.scroll.duration);
+                // move the document.body
+                that.scroll_move(val);
+            }
+        } )
+    },
+
+    /**
+     * SCROLL MOVE
+     */
+    scroll_move : function( amount )
+    {
+        document.documentElement.scrollTop = amount;
+        document.body.parentNode.scrollTop = amount;
+        document.body.scrollTop = amount;
+    },
+
+    /**
+     * SCROLL POSITION
+     */
+    scroll_position : function( amount )
+    {
+        return document.documentElement.scrollTop || document.body.parentNode.scrollTop || document.body.scrollTop;
+    },
+
+    scroll_to : function( to, duration, callback )
+    {
+        // easing functions http://goo.gl/5HLl8
+        Math.easeInOutQuad = function (t, b, c, d) {
+            t /= d/2;
+            if (t < 1)
+                return c/2*t*t + b
+            t--;
+            return -c/2 * (t*(t-2) - 1) + b;
+        };
+
+        Math.easeInCubic = function(t, b, c, d) {
+            var tc = (t/=d)*t*t;
+            return b+c*(tc);
+        };
+
+        Math.inOutQuintic = function(t, b, c, d) {
+            var ts = (t/=d)*t,
+            tc = ts*t;
+            return b+c*(6*tc*ts + -15*ts*ts + 10*tc);
+        };
+
+        this.scroll.start       = this.scroll_position(),
+        this.scroll.change      = to - this.scroll.start,
+        this.scroll.currentTime = 0,
+        this.scroll.increment   = 20;
+
+        this.scroll.duration = typeof duration === 'undefined' ? 500 : duration;
     },
 
     /**
@@ -61,31 +138,46 @@ module.exports = B.Core.Abstract.extend( {
         /**
          * Set up
          */
-        var canvas     = document.querySelector( 'header.header canvas' ),
+        var $canvas    = this.$.container.find( 'canvas' ),
+            canvas     = $canvas[ 0 ],
             scene      = new THREE.Scene(),
             camera     = new THREE.PerspectiveCamera( 55, this.viewport.width / this.viewport.height, 0.1, 100000 ),
             renderer   = new THREE.WebGLRenderer( { canvas : canvas, alpha : true } ),
             mouse      = { down : false, origin : { x : 0, y : 0 }, offset : { x : 0, y : 0 }, wheel : 300 },
             start_time = + new Date();
 
-        camera.position.z = 10;
-        renderer.setClearColor( 0x1a0107, 1 );
+        camera.position.x = -10;
+        renderer.setClearColor( 0x190b18, 1 );
+
+        /**
+         * Render (FXAA)
+         */
+        var antialisasing_active = true,
+            render_pass = new THREE.RenderPass( scene, camera ),
+            fxaa_pass = new THREE.ShaderPass( THREE.FXAAShader )
+            fxaa_pass.uniforms.resolution.value.set( 1 / (this.viewport.width ), 1 / ( this.viewport.height ) )
+
+        fxaa_pass.renderToScreen = true;
+
+        var composer = new THREE.EffectComposer( renderer );
+        composer.setSize( this.viewport.width, this.viewport.height );
+        composer.addPass( render_pass );
+        composer.addPass( fxaa_pass );
 
         /**
          * Resize function
          */
-        var resize = function()
+        this.viewport.on( 'resize', function()
         {
             // Resize renderer
             renderer.setSize( that.viewport.width, that.viewport.height );
+            fxaa_pass.uniforms.resolution.value.set( 1 / ( that.viewport.width ), 1 / ( that.viewport.height ) );
+            composer.setSize( that.viewport.width, that.viewport.height );
 
             // Update camera
             camera.aspect = that.viewport.width / that.viewport.height;
             camera.updateProjectionMatrix();
-        };
-
-        window.onresize = resize;
-        resize();
+        } )
 
         /**
          * Mouse function
@@ -284,7 +376,7 @@ module.exports = B.Core.Abstract.extend( {
         this.ticker.on( 'tick', function()
         {
             // Not in screen
-            if( that.viewport.top > that.viewport.height )
+            if( that.viewport.top > that.viewport.height || that.viewport.width < 628 )
                 return
 
             // Update camera
@@ -295,9 +387,9 @@ module.exports = B.Core.Abstract.extend( {
                 y = ( mouse.wheel / 100 + 1 ) * Math.sin( phi ),
                 z = ( mouse.wheel / 100 + 1 ) * Math.cos( phi ) * Math.sin( theta );
 
-            camera.position.x += (x - camera.position.x) / 4;
-            camera.position.y += (y - camera.position.y) / 4;
-            camera.position.z += (z - camera.position.z) / 4;
+            camera.position.x += (x - camera.position.x) / 40;
+            camera.position.y += (y - camera.position.y) / 40;
+            camera.position.z += (z - camera.position.z) / 40;
 
             camera.lookAt( new THREE.Vector3() );
 
@@ -308,7 +400,10 @@ module.exports = B.Core.Abstract.extend( {
             halo_object.lookAt( camera.position );
 
             // Render
-            renderer.render( scene, camera );
+            if(antialisasing_active)
+                composer.render();
+            else
+                renderer.render( scene, camera );
         } )
     }
 } )

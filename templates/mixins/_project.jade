@@ -3,10 +3,18 @@ mixin project(data)
         .carousel
             .content
                 .items
-                    each item in data.pictures
+                    each item, index in data.pictures
                         .item
                             .picture
-                                img(src=item,width="800")
+                                picture
+                                    source(srcset="src/medias/2x/" + item,media="(-webkit-min-device-pixel-ratio: 1.3),(min-resolution: 124.8dpi)")
+                                    img.img(src="src/medias/1x/" + item,width="800",height="380")
+                                if (index == 0 )
+                                    if (typeof data.logo === 'string')
+                                        .logo
+                                            picture
+                                                source(srcset="src/medias/2x/" + data.logo,media="(-webkit-min-device-pixel-ratio: 1.3),(min-resolution: 124.8dpi)")
+                                                img(src="src/medias/1x/" + data.logo)
             if data.pictures.length > 1
                 .pagination
                     .items
@@ -17,8 +25,9 @@ mixin project(data)
         - var classes = 'details infos-count-' + data.infos.length
         div(class=classes)
             .background
-            .num= data.num
-            .title= data.title
+            .title-group
+                .num= data.num
+                .title= data.title
             span.separator
             .infos
                 each item in data.infos
