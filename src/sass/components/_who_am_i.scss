@@ -137,7 +137,6 @@ section.who-am-i {
             padding:12px 12px 12px 12px;
             height:55px;
             vertical-align:bottom;
-            overflow:hidden;
             @include no-touch {
                 transform:translateY(-20px) translateZ(0);
                 transition:all 0.4s;
@@ -165,6 +164,12 @@ section.who-am-i {
                 opacity:0.5;
                 color:$purple;
                 transition:all 0.15s;
+
+                &.email {
+                    transform:translateX(0px) translateY(10px) translateZ(0);
+                    left:89px;
+                    opacity:0;
+                }
             }
             .svg {
                 display:inline-block;
@@ -206,6 +211,11 @@ section.who-am-i {
                     .title {
                         color:#fff;
                         opacity:1;
+
+                        &.email {
+                            opacity:1;
+                            transform:translateX(0) translateY(0) translateZ(0);
+                        }
                     }
                     svg,path {
                         fill:#fff;

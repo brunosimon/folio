@@ -25,6 +25,9 @@ section.who-am-i
                     a(class=classes,href=item.link,target="_blank")
                         +svg(item.slug)
                         .title= item.title
+                        if item.slug == 'mail'
+                            .title.email
+                                | (contact@bruno-simon.com)
 
 
 

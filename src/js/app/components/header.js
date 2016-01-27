@@ -1,7 +1,8 @@
-var B       = require( '../../libs/burno-0.3.js' ),
-    glslify = require( 'glslify' ),
-    $       = require( 'jquery' ),
-    THREE   = require( 'three-js' )()
+var B        = require( '../../libs/burno-0.3.js' ),
+    glslify  = require( 'glslify' ),
+    $        = require( 'jquery' ),
+    THREE    = require( 'three-js' )(),
+    Scroller = require( '../tools/scroller.js' )
 
 require( '../../libs/three-js/CopyShader.js' )( THREE )
 require( '../../libs/three-js/EffectComposer.js' )( THREE )
@@ -47,8 +48,7 @@ module.exports = B.Core.Abstract.extend( {
         var that = this;
 
         this.$.scroll_trigger = this.$.container.find( 'a.scroll' )
-
-        this.scroll = {}
+        this.scroller = new Scroller();
 
         // Viewport scroll event
         this.viewport.on( 'scroll', function()
@@ -61,71 +61,10 @@ module.exports = B.Core.Abstract.extend( {
         // Scroll trigger click event
         this.$.scroll_trigger.on( 'click', function()
         {
-            that.scroll_to( that.viewport.height, 900 );
+            that.scroller.animate_to( that.viewport.height, 900 );
 
             return false
         } )
-
-        this.ticker.on( 'tick', function()
-        {
-            if( that.scroll.currentTime < that.scroll.duration )
-            {
-                // increment the time
-                that.scroll.currentTime += that.scroll.increment;
-                // find the value with the quadratic in-out easing function
-                var val = Math.easeInOutQuad(that.scroll.currentTime, that.scroll.start, that.scroll.change, that.scroll.duration);
-                // move the document.body
-                that.scroll_move(val);
-            }
-        } )
-    },
-
-    /**
-     * SCROLL MOVE
-     */
-    scroll_move : function( amount )
-    {
-        document.documentElement.scrollTop = amount;
-        document.body.parentNode.scrollTop = amount;
-        document.body.scrollTop = amount;
-    },
-
-    /**
-     * SCROLL POSITION
-     */
-    scroll_position : function( amount )
-    {
-        return document.documentElement.scrollTop || document.body.parentNode.scrollTop || document.body.scrollTop;
-    },
-
-    scroll_to : function( to, duration, callback )
-    {
-        // easing functions http://goo.gl/5HLl8
-        Math.easeInOutQuad = function (t, b, c, d) {
-            t /= d/2;
-            if (t < 1)
-                return c/2*t*t + b
-            t--;
-            return -c/2 * (t*(t-2) - 1) + b;
-        };
-
-        Math.easeInCubic = function(t, b, c, d) {
-            var tc = (t/=d)*t*t;
-            return b+c*(tc);
-        };
-
-        Math.inOutQuintic = function(t, b, c, d) {
-            var ts = (t/=d)*t,
-            tc = ts*t;
-            return b+c*(6*tc*ts + -15*ts*ts + 10*tc);
-        };
-
-        this.scroll.start       = this.scroll_position(),
-        this.scroll.change      = to - this.scroll.start,
-        this.scroll.currentTime = 0,
-        this.scroll.increment   = 20;
-
-        this.scroll.duration = typeof duration === 'undefined' ? 500 : duration;
     },
 
     /**

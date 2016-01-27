@@ -3,6 +3,45 @@ footer {
     height:60px;
     padding:0 10px 0 0;
 
+    a.scroll-top {
+        display:inline-block;
+        position:fixed;
+        bottom:12px;
+        left:50%;
+        margin:0 0 0 -494px;
+        padding:30px 10px 20px 10px;
+        font-size:10px;
+        color:#9a8fb4;
+        text-decoration:none;
+        opacity:0;
+        transition:color 0.15s,opacity 0.3s;
+
+        &:after {
+            content:'';
+            display:block;
+            position:absolute;
+            top:15px;
+            left:50%;
+            width:4px;
+            height:6px;
+            margin:0 0 0 -2px;
+            background:url('../img/small-arrow.png') center center no-repeat;
+            @include image-2x('../img/small-arrow@2x.png', 4px, 6px);
+            opacity:0.5;
+            transform:rotate(-90deg);
+            transition:opacity 0.15s;
+        }
+        &.visible {
+            opacity:1;
+        }
+        &:hover {
+            color:#fff;
+
+            &:after {
+                opacity:1;
+            }
+        }
+    }
     .item {
         position:relative;
         display:inline-block;
@@ -49,6 +88,19 @@ footer {
                     fill:#fff;
                 }
             }
+        }
+    }
+    @media only screen and (max-width:1024px) {
+        position:relative;
+
+        a.scroll-top {
+            position:absolute;
+            margin:0 0 0 -32px;
+        }
+    }
+    @media only screen and (max-width:360px) {
+        a.scroll-top {
+            left:25%;
         }
     }
 }

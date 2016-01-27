@@ -1,4 +1,7 @@
 footer
+    a.scroll-top(href="#")
+        span
+            | Scroll top
     each item in who.social
         - var classes = "item " + item.slug
         a(class=classes,href=item.link,target="_blank")

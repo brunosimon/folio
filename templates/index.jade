@@ -1,12 +1,13 @@
 doctype html
 html(lang="en")
     head
+        //- MISCELLANEOUS
         meta(charset="utf-8")
         meta(name="viewport",content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no")
         meta(name="description",content=general.description)
-
         title= general.title
 
+        //- ICONS
         link(rel="apple-touch-icon", sizes="57x57", href="src/img/icons/apple-touch-icon-57x57.png")
         link(rel="apple-touch-icon", sizes="60x60", href="src/img/icons/apple-touch-icon-60x60.png")
         link(rel="apple-touch-icon", sizes="72x72", href="src/img/icons/apple-touch-icon-72x72.png")
@@ -29,22 +30,33 @@ html(lang="en")
         meta(name="msapplication-TileImage", content="src/img/icons/mstile-144x144.png")
         meta(name="theme-color", content="#ffffff")
 
+        //- SOCIAL
+        meta(property="og:title",content="Bruno Simon")
+        meta(property="og:url",content="http://bruno-simon.com")
+        meta(property="og:site_name",content="Bruno Simon")
+        meta(property="og:type",content="website")
+        meta(property="og:description",content="French developer living in Paris. Currently working at Uzik, also teaching classes at HETIC and doing freelance work.")
+        meta(property="og:image",content="http://bruno-simon.com/src/img/social/open-graph.jpg")
+
+        //- CSS
         link(rel="stylesheet",href="src/css/style.css")
         link(rel="stylesheet",href="https://fonts.googleapis.com/css?family=Rajdhani:500")
 
+        //- JS
         script(src="src/js/libs/modernizr-custom.js")
     body
         include ./partials/_header.jade
 
         .wrapper
-            .lines
-                .line.line-left
-                .line.line-middle
-                .line.line-right
-            include ./partials/_who_am_i.jade
-            include ./partials/_works.jade
-            include ./partials/_lab.jade
-            include ./partials/_footer.jade
+            .inner
+                .lines
+                    .line.line-left
+                    .line.line-middle
+                    .line.line-right
+                include ./partials/_who_am_i.jade
+                include ./partials/_works.jade
+                include ./partials/_lab.jade
+                include ./partials/_footer.jade
 
         script(src="src/js/script.js")
 

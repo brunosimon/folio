@@ -4,6 +4,7 @@ header.header {
     background:#190b18;
     overflow:hidden;
     cursor:move;
+    z-index:1;
 
     canvas,
     .fallback {

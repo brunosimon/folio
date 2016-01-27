@@ -3,6 +3,7 @@ var $         = require( 'jquery' ),
     Carousel  = require( './components/carousel.js' ),
     Unveiler  = require( './tools/unveiler.js' ),
     Header    = require( './components/header.js' ),
+    Scroller  = require( './tools/scroller.js' ),
     fastclick = require( 'fastclick' )
 
 module.exports = B.Core.Abstract.extend( {
@@ -14,11 +15,15 @@ module.exports = B.Core.Abstract.extend( {
     {
         this._super( options )
 
+        // Set up
+        this.viewport = new B.Tools.Viewport()
+
         // Init
         this.init_carousels()
         this.init_unveiler()
         this.init_header()
         this.init_fastclick()
+        this.init_scroll_top()
     },
 
     /**
@@ -58,6 +63,42 @@ module.exports = B.Core.Abstract.extend( {
      */
     init_fastclick : function()
     {
-        fastclick( document.body );
+        fastclick( document.body )
+    },
+
+    /**
+     * INIT SCROLL TOP
+     */
+    init_scroll_top : function()
+    {
+        var that = this
+
+        // Set up
+        this.scroller = new Scroller()
+        this.scroll_top           = { $ : {} }
+        this.scroll_top.$.trigger = $( 'a.scroll-top' )
+
+        // Scroll top click event
+        this.scroll_top.$.trigger.on( 'click', function()
+        {
+            // Scroll to top
+            that.scroller.animate_to( 0, 900 )
+
+            // Prevent default
+            return false
+        } )
+
+        // Viewport scroll event
+        this.viewport.on( 'scroll', function()
+        {
+            if( that.viewport.top > that.viewport.height * 0.5 )
+            {
+                that.scroll_top.$.trigger.addClass( 'visible' )
+            }
+            else
+            {
+                that.scroll_top.$.trigger.removeClass( 'visible' )
+            }
+        } )
     }
 } )

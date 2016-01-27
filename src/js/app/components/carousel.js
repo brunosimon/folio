@@ -60,7 +60,9 @@ module.exports = B.Core.Event_Emitter.extend( {
      */
     init_slides : function()
     {
-        this.$.slides.eq( this.index ).css( { zIndex : ++this.z_index } )
+        var $target = this.$.slides.eq( this.index )
+        $target.css( { zIndex : ++this.z_index } )
+        $target.addClass( 'active' );
     },
 
     /**
@@ -176,6 +178,10 @@ module.exports = B.Core.Event_Emitter.extend( {
             // Remove animation
             $target.removeClass( 'animated' )
         }, 1050 )
+
+        // Update classes
+        this.$.slides.removeClass( 'active' )
+        $target.addClass( 'active' )
 
         // Update index
         this.index = index

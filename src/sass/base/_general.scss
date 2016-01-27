@@ -9,26 +9,29 @@ body {
 
 .wrapper {
     position:relative;
-    width:800px;
-    margin:0 auto;
 
-    .line {
-        position:absolute;
-        top:0;
-        width:1px;
-        height:100%;
-        background:#fff;
-        opacity:0.05;
+    .inner {
+        width:800px;
+        margin:0 auto;
 
-        &.line-left {
-            left:0;
-        }
-        &.line-middle {
-            left:50%;
-            margin-left:-1px;
-        }
-        &.line-right {
-            right:0;
+        .line {
+            position:absolute;
+            top:0;
+            width:1px;
+            height:100%;
+            background:#fff;
+            opacity:0.05;
+
+            &.line-left {
+                left:0;
+            }
+            &.line-middle {
+                left:50%;
+                margin-left:-1px;
+            }
+            &.line-right {
+                right:0;
+            }
         }
     }
 }
@@ -195,7 +198,9 @@ a {
 }
 @media only screen and (max-width:815px) {
     .wrapper {
-        width:auto;
-        overflow:hidden;
+        .inner {
+            width:auto;
+            overflow:hidden;
+        }
     }
 }
