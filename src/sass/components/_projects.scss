@@ -285,7 +285,7 @@ section.projects {
                 }
             }
         }
-        &:nth-child(odd) {
+        &:nth-child(even) {
             .details {
                 right:0;
                 left:auto;

@@ -468,6 +468,44 @@
         "items" :
         [
             {
+                "title" : "Claude",
+                "infos" :
+                [
+                    {
+                        "label" : "features",
+                        "value" : "ARDUINO - NODE WEBKIT"
+                    },
+                    {
+                        "label" : "description",
+                        "value" : "A colorful desk cloud, USB powered, controlled by an OSX app"
+                    },
+                    {
+                        "label" : "With",
+                        "value" :
+                        [
+                            {
+                                "title" : "Stéphanie Chhim"
+                            },
+                            {
+                                "title" : "Céline Tonnelier"
+                            }
+                        ]
+                    }
+                ],
+                "link"     : "https://github.com/brunosimon/claude",
+                "pictures" :
+                [
+                    "lab/claude/1.jpg",
+                    "lab/claude/2.jpg",
+                    "lab/claude/3.jpg",
+                    "lab/claude/4.jpg",
+                    "lab/claude/5.jpg",
+                    "lab/claude/6.jpg",
+                    "lab/claude/7.jpg",
+                    "lab/claude/8.jpg"
+                ]
+            },
+            {
                 "title" : "Music Spinners",
                 "infos" :
                 [
@@ -499,7 +537,7 @@
                     },
                     {
                         "label" : "Description",
-                        "value" : "A light and simple JS framework made to help you develop well structured web applications quickly."
+                        "value" : "A light and simple JS front framework made to help you develop well structured web applications quickly."
                     }
                 ],
                 "pictures" :
