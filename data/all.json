@@ -35,6 +35,43 @@
         "items" :
         [
             {
+                "title" : "Xavier Bourdil",
+                "infos" :
+                [
+                    {
+                        "label" : "Role",
+                        "value" : "Front developer"
+                    },
+                    {
+                        "label" : "As",
+                        "value" : "Freelancer"
+                    },
+                    {
+                        "label" : "Client",
+                        "value" : "Xavier Bourdil"
+                    },
+                    {
+                        "label" : "With",
+                        "value" : [
+                            {
+                                "title" : "Xavier Bourdil",
+                                "link"  : "http://xavierbourdil.com"
+                            }
+                        ]
+                    }
+                ],
+                "link"     : "http://xavierbourdil.com",
+                "logo"     : "projects/xavier-bourdil/logo.png",
+                "pictures" :
+                [
+                    "projects/xavier-bourdil/0.jpg",
+                    "projects/xavier-bourdil/1.jpg",
+                    "projects/xavier-bourdil/2.jpg",
+                    "projects/xavier-bourdil/3.jpg",
+                    "projects/xavier-bourdil/4.jpg"
+                ]
+            },
+            {
                 "title" : "Eve & Daphnée",
                 "infos" :
                 [
@@ -502,7 +539,8 @@
                     "lab/claude/5.jpg",
                     "lab/claude/6.jpg",
                     "lab/claude/7.jpg",
-                    "lab/claude/8.jpg"
+                    "lab/claude/8.jpg",
+                    "lab/claude/9.jpg"
                 ]
             },
             {
