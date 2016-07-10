@@ -505,6 +505,27 @@
         "items" :
         [
             {
+                "title" : "UZIK commits - circular calendar",
+                "infos" :
+                [
+                    {
+                        "label" : "features",
+                        "value" : "CANVAS"
+                    },
+                    {
+                        "label" : "description",
+                        "value" : "Circular calendar of the 2015 year showing commits from UZIK developers"
+                    }
+                ],
+                "link"     : "",
+                "pictures" :
+                [
+                    "lab/uzik-commits-circular-calendar/1.jpg",
+                    "lab/uzik-commits-circular-calendar/2.jpg",
+                    "lab/uzik-commits-circular-calendar/3.jpg"
+                ]
+            },
+            {
                 "title" : "Claude",
                 "infos" :
                 [
