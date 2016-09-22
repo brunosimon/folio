@@ -11,7 +11,7 @@ H.World.Renderer = B.Core.Event_Emitter.extend(
             bloom :
             {
                 active   : true,
-                strength : 0.8
+                strength : 1.4
             }
         }
     },

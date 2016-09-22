@@ -7,7 +7,7 @@ H.World.Grid = B.Core.Abstract.extend(
         elevation_multiplier            : 1,
         elevation_offset                : -4,
         perlin_elevation                : 0.05,
-        color_saturation                : 1.2,
+        color_saturation                : 0.8,
         color_convergence               : 0.45,
         color_convergence_frequency_min : 30,
         color_convergence_frequency_max : 70

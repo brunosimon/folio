@@ -505,6 +505,46 @@
         "items" :
         [
             {
+                "title" : "Keppler",
+                "infos" :
+                [
+                    {
+                        "label" : "description",
+                        "value" : "An efficient way to share your code while presenting"
+                    }
+                ],
+                "link"     : "https://github.com/brunosimon/keppler",
+                "pictures" :
+                [
+                    "lab/keppler/1.jpg",
+                    "lab/keppler/2.jpg",
+                    "lab/keppler/3.jpg"
+                ]
+            },
+            {
+                "title" : "Voice Waves",
+                "infos" :
+                [
+                    {
+                        "label" : "features",
+                        "value" : "WebGL / GLSL / Audio"
+                    },
+                    {
+                        "label" : "description",
+                        "value" : "Waves responding to the sound of your voice"
+                    }
+                ],
+                "link"     : "/lab/voice-waves/",
+                "pictures" :
+                [
+                    "lab/voice-waves/1.jpg",
+                    "lab/voice-waves/2.jpg",
+                    "lab/voice-waves/3.jpg",
+                    "lab/voice-waves/4.jpg",
+                    "lab/voice-waves/5.jpg"
+                ]
+            },
+            {
                 "title" : "UZIK commits - circular calendar",
                 "infos" :
                 [
@@ -586,10 +626,6 @@
                 "title" : "Burno.js",
                 "infos" :
                 [
-                    {
-                        "label" : "Role",
-                        "value" : "Developer"
-                    },
                     {
                         "label" : "For",
                         "value" : "Fun"
