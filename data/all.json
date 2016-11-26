@@ -1,68 +1,133 @@
 {
-    "general" :
+    "general":
     {
-        "title" : "Bruno Simon - Creative Developer",
-        "description" : "French developer living in Paris. Currently working at Uzik, also teaching classes at HETIC and doing freelance work."
+        "title": "Bruno Simon - Creative Developer",
+        "description": "French developer living in Paris. Currently working at Immersive, former Uzik, also teaching classes at HETIC and doing freelance work."
     },
-    "who" :
+    "who":
     {
-        "description" : "French developer living in Paris. Currently working at <a href='#'>Uzik</a>, also teaching classes at HETIC and doing freelance work.",
-        "skills"      :
+        "description": "French developer living in Paris. Currently working at <a href='http://immersive-g.com/'>Immersive Garden</a>, former Uzik, also teaching classes at HETIC and doing freelance work.",
+        "skills"     :
         [
-            { "slug" : "html5",   "title" : "HTML5" },
-            { "slug" : "css3",    "title" : "CSS3" },
-            { "slug" : "es6",     "title" : "JS ES6" },
-            { "slug" : "gulp",    "title" : "Gulp" },
-            { "slug" : "sass",    "title" : "Sass" },
-            { "slug" : "angular", "title" : "AngularJS" },
-            { "slug" : "nodejs",  "title" : "Node.js" },
-            { "slug" : "webgl",   "title" : "WebGL" },
-            { "slug" : "php",     "title" : "PHP / MySQL" },
-            { "slug" : "zend",    "title" : "Zend" },
-            { "slug" : "silex",   "title" : "Silex" },
-            { "slug" : "git",     "title" : "Git" }
+            { "slug": "html5",   "title": "HTML5" },
+            { "slug": "css3",    "title": "CSS3" },
+            { "slug": "es6",     "title": "JS ES6" },
+            { "slug": "gulp",    "title": "Gulp" },
+            { "slug": "sass",    "title": "Sass" },
+            { "slug": "angular", "title": "AngularJS" },
+            { "slug": "nodejs",  "title": "Node.js" },
+            { "slug": "webgl",   "title": "WebGL" },
+            { "slug": "php",     "title": "PHP / MySQL" },
+            { "slug": "zend",    "title": "Zend" },
+            { "slug": "silex",   "title": "Silex" },
+            { "slug": "git",     "title": "Git" }
         ],
-        "social" :
+        "social":
         [
-            { "slug" : "github",   "title" : "Github",   "link" : "https://github.com/brunosimon/" },
-            { "slug" : "twitter",  "title" : "Twitter",  "link" : "https://twitter.com/bruno_simon" },
-            { "slug" : "linkedin", "title" : "LinkedIn", "link" : "https://www.linkedin.com/in/simonbruno77" },
-            { "slug" : "mail",     "title" : "Mail",     "link" : "mailto:contact@bruno-simon.com" }
+            { "slug": "github",   "title": "Github",   "link": "https://github.com/brunosimon/" },
+            { "slug": "twitter",  "title": "Twitter",  "link": "https://twitter.com/bruno_simon" },
+            { "slug": "linkedin", "title": "LinkedIn", "link": "https://www.linkedin.com/in/simonbruno77" },
+            { "slug": "mail",     "title": "Mail",     "link": "mailto:contact@bruno-simon.com" }
         ]
     },
-    "works" :
+    "works":
     {
-        "items" :
+        "items":
         [
             {
-                "title" : "Xavier Bourdil",
-                "infos" :
+                "title": "Angstrom",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Xavier Bourdil"
+                        "label": "Client",
+                        "value": "Angstrom"
+                    }
+                ],
+                "link"    : "http://weareangstrom.com",
+                "logo"    : "projects/angstrom/logo.png",
+                "pictures":
+                [
+                    "projects/angstrom/0.jpg",
+                    "projects/angstrom/1.jpg",
+                    "projects/angstrom/2.jpg",
+                    "projects/angstrom/3.jpg",
+                    "projects/angstrom/4.jpg"
+                ]
+            },
+            {
+                "title": "Orion",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "With",
-                        "value" : [
+                        "label": "As",
+                        "value": "Freelancer"
+                    },
+                    {
+                        "label": "Client",
+                        "value": "Groupe Cera"
+                    },
+                    {
+                        "label": "With",
+                        "value": [
                             {
-                                "title" : "Xavier Bourdil",
-                                "link"  : "http://xavierbourdil.com"
+                                "title": "Loïc Berger",
+                                "link" : "#"
                             }
                         ]
                     }
                 ],
-                "link"     : "http://xavierbourdil.com",
-                "logo"     : "projects/xavier-bourdil/logo.png",
-                "pictures" :
+                "link"    : "http://orion-groupecera.com",
+                "logo"    : "projects/orion/logo.png",
+                "pictures":
+                [
+                    "projects/orion/0.jpg",
+                    "projects/orion/1.jpg",
+                    "projects/orion/2.jpg",
+                    "projects/orion/3.jpg",
+                    "projects/orion/4.jpg"
+                ]
+            },
+            {
+                "title": "Xavier Bourdil",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
+                    },
+                    {
+                        "label": "As",
+                        "value": "Freelancer"
+                    },
+                    {
+                        "label": "Client",
+                        "value": "Xavier Bourdil"
+                    },
+                    {
+                        "label": "With",
+                        "value": [
+                            {
+                                "title": "Xavier Bourdil",
+                                "link" : "http://xavierbourdil.com"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "http://xavierbourdil.com",
+                "logo"    : "projects/xavier-bourdil/logo.png",
+                "pictures":
                 [
                     "projects/xavier-bourdil/0.jpg",
                     "projects/xavier-bourdil/1.jpg",
@@ -72,34 +137,34 @@
                 ]
             },
             {
-                "title" : "Eve & Daphnée",
-                "infos" :
+                "title": "Eve & Daphnée",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Eve & Daphnée"
+                        "label": "Client",
+                        "value": "Eve & Daphnée"
                     },
                     {
-                        "label" : "With",
-                        "value" : [
+                        "label": "With",
+                        "value": [
                             {
-                                "title" : "Nicolas Bussière",
-                                "link"  : "http://nicolas-bussiere.fr"
+                                "title": "Nicolas Bussière",
+                                "link" : "http://nicolas-bussiere.fr"
                             }
                         ]
                     }
                 ],
-                "link"     : "http://www.eveetdaphnee.paris/fr/",
-                "logo"     : "projects/eve-daphnee/logo.png",
-                "pictures" :
+                "link"    : "http://www.eveetdaphnee.paris/fr/",
+                "logo"    : "projects/eve-daphnee/logo.png",
+                "pictures":
                 [
                     "projects/eve-daphnee/0.jpg",
                     "projects/eve-daphnee/2.jpg",
@@ -110,38 +175,38 @@
                 ]
             },
             {
-                "title" : "Cera Engineering",
-                "infos" :
+                "title": "Cera Engineering",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Groupe Cera"
+                        "label": "Client",
+                        "value": "Groupe Cera"
                     },
                     {
-                        "label" : "With",
-                        "value" : [
+                        "label": "With",
+                        "value": [
                             {
-                                "title" : "Nicolas Bussière",
-                                "link"  : "http://nicolas-bussiere.fr"
+                                "title": "Nicolas Bussière",
+                                "link" : "http://nicolas-bussiere.fr"
                             },
                             {
-                                "title" : "Loïc Berger",
-                                "link"  : "#"
+                                "title": "Loïc Berger",
+                                "link" : "#"
                             }
                         ]
                     }
                 ],
-                "link"     : "http://cera-groupecera.com",
-                "logo"     : "projects/cera/logo.png",
-                "pictures" :
+                "link"    : "http://cera-groupecera.com",
+                "logo"    : "projects/cera/logo.png",
+                "pictures":
                 [
                     "projects/cera/0.jpg",
                     "projects/cera/2.jpg",
@@ -151,52 +216,52 @@
                 ]
             },
             {
-                "title" : "Galerie Leloutre Lefevre",
-                "infos" :
+                "title": "Galerie Leloutre Lefevre",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Galerie Leloutre Lefèvre"
+                        "label": "Client",
+                        "value": "Galerie Leloutre Lefèvre"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Benjamin Leloutre",
-                                "link"  : "#"
+                                "title": "Benjamin Leloutre",
+                                "link" : "#"
                             },
                             {
-                                "title" : "Pauline Collet",
-                                "link"  : "#"
+                                "title": "Pauline Collet",
+                                "link" : "#"
                             }
                         ]
                     },
                     {
-                        "label" : "Distinctions",
-                        "value" :
+                        "label": "Distinctions",
+                        "value":
                         [
                             {
-                                "title" : "FWA Short List",
-                                "link"  : "#"
+                                "title": "FWA Short List",
+                                "link" : "#"
                             },
                             {
-                                "title" : "One Page Love",
-                                "link"  : "#"
+                                "title": "One Page Love",
+                                "link" : "#"
                             }
                         ]
                     }
                 ],
-                "logo"     : "projects/galerie-leloutre-lefevre/logo.png",
-                "pictures" :
+                "logo"    : "projects/galerie-leloutre-lefevre/logo.png",
+                "pictures":
                 [
                     "projects/galerie-leloutre-lefevre/0.jpg",
                     "projects/galerie-leloutre-lefevre/2.jpg",
@@ -204,106 +269,96 @@
                     "projects/galerie-leloutre-lefevre/4.jpg",
                     "projects/galerie-leloutre-lefevre/5.jpg"
                 ],
-                "link" : "http://galerieleloutrelefevre.com"
+                "link": "http://galerieleloutrelefevre.com"
             },
             {
-                "title" : "Sonic Block",
-                "infos" :
+                "title": "Sonic Blocks",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Sonic Block"
+                        "label": "Client",
+                        "value": "Sonic Blocks"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Green Chameleon",
-                                "link"  : "http://craftedbygc.com/"
+                                "title": "Green Chameleon",
+                                "link" : "http://craftedbygc.com/"
                             }
                         ]
                     },
                     {
-                        "label" : "Distinctions",
-                        "value" :
-                        [
-                            {
-                                "title" : "FWA Short List",
-                                "link"  : "http://www.thefwa.com/shortlist/sonic-blocks"
-                            },
-                            {
-                                "title" : "One Page Love",
-                                "link"  : "https://onepagelove.com/sonic-blocks"
-                            }
-                        ]
+                        "label": "Status",
+                        "value": "Offline"
                     }
                 ],
-                "logo"     : "projects/sonic-block/logo.png",
-                "pictures" :
+                "logo"    : "projects/sonic-block/logo.png",
+                "pictures":
                 [
                     "projects/sonic-block/0.jpg",
                     "projects/sonic-block/2.jpg",
                     "projects/sonic-block/3.jpg",
                     "projects/sonic-block/4.jpg"
                 ],
-                "link" : "http://sonicblocks.com"
+                "link": "http://sonic-blocks.bruno-simon.com"
             },
             {
-                "title" : "Nicolas Bussière",
-                "infos" :
+                "title": "Nicolas Bussière",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Nicolas Bussière"
+                        "label": "Client",
+                        "value": "Nicolas Bussière"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Nicolas Bussière",
-                                "link"  : "http://nicolas-bussiere.fr"
+                                "title": "Nicolas Bussière",
+                                "link" : "http://nicolas-bussiere.fr"
                             }
                         ]
                     },
                     {
-                        "label" : "Distinctions",
-                        "value" :
+                        "label": "Distinctions",
+                        "value":
                         [
                             {
-                                "title" : "Awwwards SOTD",
-                                "link"  : "http://www.awwwards.com/web-design-awards/nicolas-bussiere-1"
+                                "title": "Awwwards SOTD",
+                                "link" : "http://www.awwwards.com/web-design-awards/nicolas-bussiere-1"
                             },
                             {
-                                "title" : "CSS design awards SOTD",
-                                "link"  : "http://www.cssdesignawards.com/sites/nicolas-bussiere/26646/"
+                                "title": "CSS design awards SOTD",
+                                "link" : "http://www.cssdesignawards.com/sites/nicolas-bussiere/26646/"
                             },
                             {
-                                "title" : "Site Inspire",
-                                "link"  : "http://www.siteinspire.com/websites/5381-nicolas-bussiere"
+                                "title": "Site Inspire",
+                                "link" : "http://www.siteinspire.com/websites/5381-nicolas-bussiere"
                             }
                         ]
                     }
                 ],
-                "logo"     : "projects/nicolas-bussiere/logo.png",
-                "pictures" :
+                "logo"    : "projects/nicolas-bussiere/logo.png",
+                "pictures":
                 [
                     "projects/nicolas-bussiere/0.jpg",
                     "projects/nicolas-bussiere/2.jpg",
@@ -311,51 +366,51 @@
                     "projects/nicolas-bussiere/4.jpg",
                     "projects/nicolas-bussiere/5.jpg"
                 ],
-                "link" : "http://nicolas-bussiere.fr"
+                "link": "http://nicolas-bussiere.fr"
             },
             {
-                "title" : "Valérie Martinez",
-                "infos" :
+                "title": "Valérie Martinez",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Valérie Martinez Agency"
+                        "label": "Client",
+                        "value": "Valérie Martinez Agency"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Sylvain Capeyron",
-                                "link"  : "http://www.awwwards.com/Beaubourg/"
+                                "title": "Sylvain Capeyron",
+                                "link" : "http://www.awwwards.com/Beaubourg/"
                             }
                         ]
                     },
                     {
-                        "label" : "Distinctions",
-                        "value" :
+                        "label": "Distinctions",
+                        "value":
                         [
                             {
-                                "title" : "Awwwards SOTD",
-                                "link"  : "http://www.awwwards.com/web-design-awards/valerie-martinez-agency"
+                                "title": "Awwwards SOTD",
+                                "link" : "http://www.awwwards.com/web-design-awards/valerie-martinez-agency"
                             },
                             {
-                                "title" : "Site Inspire",
-                                "link"  : "http://www.siteinspire.com/websites/5098-valerie-martinez-agency"
+                                "title": "Site Inspire",
+                                "link" : "http://www.siteinspire.com/websites/5098-valerie-martinez-agency"
                             }
                         ]
                     }
                 ],
-                "logo"     : "projects/valerie-martinez/logo.png",
-                "pictures" :
+                "logo"    : "projects/valerie-martinez/logo.png",
+                "pictures":
                 [
                     "projects/valerie-martinez/0.jpg",
                     "projects/valerie-martinez/2.jpg",
@@ -364,47 +419,47 @@
                     "projects/valerie-martinez/5.jpg",
                     "projects/valerie-martinez/6.jpg"
                 ],
-                "link" : "http://www.valeriemartinez.com"
+                "link": "http://www.valeriemartinez.com"
             },
             {
-                "title" : "JR & Associée",
-                "infos" :
+                "title": "JR & Associée",
+                "infos":
                 [
                     {
-                        "label" : "Role",
-                        "value" : "Front developer"
+                        "label": "Role",
+                        "value": "Front developer"
                     },
                     {
-                        "label" : "As",
-                        "value" : "Freelancer"
+                        "label": "As",
+                        "value": "Freelancer"
                     },
                     {
-                        "label" : "Client",
-                        "value" : "Julia Roger"
+                        "label": "Client",
+                        "value": "Julia Roger"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Sylvain Capeyron",
-                                "link"  : "http://www.awwwards.com/Beaubourg/"
+                                "title": "Sylvain Capeyron",
+                                "link" : "http://www.awwwards.com/Beaubourg/"
                             }
                         ]
                     },
                     {
-                        "label" : "Distinctions",
-                        "value" :
+                        "label": "Distinctions",
+                        "value":
                         [
                             {
-                                "title" : "Awwwards SOTD",
-                                "link"  : "http://www.awwwards.com/web-design-awards/jr-associee"
+                                "title": "Awwwards SOTD",
+                                "link" : "http://www.awwwards.com/web-design-awards/jr-associee"
                             }
                         ]
                     }
                 ],
-                "logo"     : "projects/jr-associee/logo.png",
-                "pictures" :
+                "logo"    : "projects/jr-associee/logo.png",
+                "pictures":
                 [
                     "projects/jr-associee/0.jpg",
                     "projects/jr-associee/2.jpg",
@@ -412,109 +467,25 @@
                     "projects/jr-associee/4.jpg",
                     "projects/jr-associee/5.jpg"
                 ],
-                "link" : "http://jr-associee.com"
-            },
-            {
-                "title" : "Snapshots of Provence (2013)",
-                "infos" :
-                [
-                    {
-                        "label" : "Role",
-                        "value" : "Front developer"
-                    },
-                    {
-                        "label" : "At",
-                        "value" : "Uzik"
-                    },
-                    {
-                        "label" : "Client",
-                        "value" : "Bouches-du-Rhône Tourisme"
-                    },
-                    {
-                        "label" : "Distinctions",
-                        "value" :
-                        [
-                            {
-                                "title" : "Awwwards SOTD",
-                                "link"  : "http://www.awwwards.com/web-design-awards/snapshots-of-provence"
-                            },
-                            {
-                                "title" : "FWA SOTD",
-                                "link"  : "http://www.thefwa.com/site/snapshots-of-provence-2013"
-                            }
-                        ]
-                    }
-                ],
-                "logo"     : "projects/snapshots-of-provence/logo.png",
-                "pictures" :
-                [
-                    "projects/snapshots-of-provence/0.jpg",
-                    "projects/snapshots-of-provence/2.jpg",
-                    "projects/snapshots-of-provence/3.jpg",
-                    "projects/snapshots-of-provence/4.jpg",
-                    "projects/snapshots-of-provence/5.jpg"
-                ],
-                "link" : "https://www.myprovence.fr/snapshots2013/"
-            },
-            {
-                "title" : "Cheval Blanc Randheli",
-                "infos" :
-                [
-                    {
-                        "label" : "Role",
-                        "value" : "Front developer"
-                    },
-                    {
-                        "label" : "At",
-                        "value" : "Uzik"
-                    },
-                    {
-                        "label" : "Client",
-                        "value" : "LVMH - Cheval Blanc"
-                    },
-                    {
-                        "label" : "Distinctions",
-                        "value" :
-                        [
-                            {
-                                "title" : "Awwwards SOTD",
-                                "link"  : "http://www.awwwards.com/web-design-awards/cheval-blanc-randheli-1"
-                            },
-                            {
-                                "title" : "FWA SOTD",
-                                "link"  : "http://www.thefwa.com/site/snapshots-of-provence-2013"
-                            }
-                        ]
-                    }
-                ],
-                "logo"     : "projects/cheval-blanc-randheli/logo.png",
-                "pictures" :
-                [
-                    "projects/cheval-blanc-randheli/0.jpg",
-                    "projects/cheval-blanc-randheli/2.jpg",
-                    "projects/cheval-blanc-randheli/3.jpg",
-                    "projects/cheval-blanc-randheli/4.jpg",
-                    "projects/cheval-blanc-randheli/5.jpg"
-                ],
-                "link" : "http://randheli.chevalblanc.com"
+                "link": "http://jr-associee.com"
             }
         ]
     },
-    "lab" :
+    "lab":
     {
-        "items" :
+        "items":
         [
             {
-                "title" : "Keppler",
-                "infos" :
+                "title": "Keppler",
+                "infos":
                 [
                     {
-                        "label" : "description",
-                        "value" : "An efficient way to share your code while presenting"
+                        "label": "description",
+                        "value": "An efficient way to share your code while presenting"
                     }
                 ],
-                "link"     : "https://github.com/brunosimon/keppler",
-                "pictures" :
+                "link"    : "https://github.com/brunosimon/keppler",
+                "pictures":
                 [
                     "lab/keppler/1.jpg",
                     "lab/keppler/2.jpg",
@@ -522,20 +493,20 @@
                 ]
             },
             {
-                "title" : "Voice Waves",
-                "infos" :
+                "title": "Voice Waves",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL / Audio"
+                        "label": "features",
+                        "value": "WebGL / GLSL / Audio"
                     },
                     {
-                        "label" : "description",
-                        "value" : "Waves responding to the sound of your voice"
+                        "label": "description",
+                        "value": "Waves responding to the sound of your voice"
                     }
                 ],
-                "link"     : "/lab/voice-waves/",
-                "pictures" :
+                "link"    : "/lab/voice-waves/",
+                "pictures":
                 [
                     "lab/voice-waves/1.jpg",
                     "lab/voice-waves/2.jpg",
@@ -545,20 +516,20 @@
                 ]
             },
             {
-                "title" : "UZIK commits - circular calendar",
-                "infos" :
+                "title": "UZIK commits - circular calendar",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "CANVAS"
+                        "label": "features",
+                        "value": "CANVAS"
                     },
                     {
-                        "label" : "description",
-                        "value" : "Circular calendar of the 2015 year showing commits from UZIK developers"
+                        "label": "description",
+                        "value": "Circular calendar of the 2015 year showing commits from UZIK developers"
                     }
                 ],
-                "link"     : "",
-                "pictures" :
+                "link"    : "",
+                "pictures":
                 [
                     "lab/uzik-commits-circular-calendar/1.jpg",
                     "lab/uzik-commits-circular-calendar/2.jpg",
@@ -566,32 +537,32 @@
                 ]
             },
             {
-                "title" : "Claude",
-                "infos" :
+                "title": "Claude",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "ARDUINO - NODE WEBKIT"
+                        "label": "features",
+                        "value": "ARDUINO - NODE WEBKIT"
                     },
                     {
-                        "label" : "description",
-                        "value" : "A colorful desk cloud, USB powered, controlled by an OSX app"
+                        "label": "description",
+                        "value": "A colorful desk cloud, USB powered, controlled by an OSX app"
                     },
                     {
-                        "label" : "With",
-                        "value" :
+                        "label": "With",
+                        "value":
                         [
                             {
-                                "title" : "Stéphanie Chhim"
+                                "title": "Stéphanie Chhim"
                             },
                             {
-                                "title" : "Céline Tonnelier"
+                                "title": "Céline Tonnelier"
                             }
                         ]
                     }
                 ],
-                "link"     : "https://github.com/brunosimon/claude",
-                "pictures" :
+                "link"    : "https://github.com/brunosimon/claude",
+                "pictures":
                 [
                     "lab/claude/1.jpg",
                     "lab/claude/2.jpg",
@@ -605,16 +576,16 @@
                 ]
             },
             {
-                "title" : "Music Spinners",
-                "infos" :
+                "title": "Music Spinners",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "CANVAS / AUDIO API"
+                        "label": "features",
+                        "value": "CANVAS / AUDIO API"
                     }
                 ],
-                "link"     : "/lab/music-spinners/",
-                "pictures" :
+                "link"    : "/lab/music-spinners/",
+                "pictures":
                 [
                     "lab/music-spinners/1.jpg",
                     "lab/music-spinners/2.jpg",
@@ -623,35 +594,35 @@
                 ]
             },
             {
-                "title" : "Burno.js",
-                "infos" :
+                "title": "Burno.js",
+                "infos":
                 [
                     {
-                        "label" : "For",
-                        "value" : "Fun"
+                        "label": "For",
+                        "value": "Fun"
                     },
                     {
-                        "label" : "Description",
-                        "value" : "A light and simple JS front framework made to help you develop well structured web applications quickly."
+                        "label": "Description",
+                        "value": "A light and simple JS front framework made to help you develop well structured web applications quickly."
                     }
                 ],
-                "pictures" :
+                "pictures":
                 [
                     "lab/burno-js/0.jpg"
                 ],
-                "link" : "https://github.com/brunosimon/burno.js"
+                "link": "https://github.com/brunosimon/burno.js"
             },
             {
-                "title" : "Procedural Star",
-                "infos" :
+                "title": "Procedural Star",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL"
+                        "label": "features",
+                        "value": "WebGL / GLSL"
                     }
                 ],
-                "link"     : "/lab/procedural-star/",
-                "pictures" :
+                "link"    : "/lab/procedural-star/",
+                "pictures":
                 [
                     "lab/procedural-star/1.jpg",
                     "lab/procedural-star/2.jpg",
@@ -659,16 +630,16 @@
                 ]
             },
             {
-                "title" : "Procedural Planet",
-                "infos" :
+                "title": "Procedural Planet",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL"
+                        "label": "features",
+                        "value": "WebGL / GLSL"
                     }
                 ],
-                "link"     : "/lab/procedural-planet/",
-                "pictures" :
+                "link"    : "/lab/procedural-planet/",
+                "pictures":
                 [
                     "lab/procedural-planet/1.jpg",
                     "lab/procedural-planet/2.jpg",
@@ -676,16 +647,16 @@
                 ]
             },
             {
-                "title" : "Particles Shader",
-                "infos" :
+                "title": "Particles Shader",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL"
+                        "label": "features",
+                        "value": "WebGL / GLSL"
                     }
                 ],
-                "link"     : "/lab/particles-shader/",
-                "pictures" :
+                "link"    : "/lab/particles-shader/",
+                "pictures":
                 [
                     "lab/particles-shader/1.jpg",
                     "lab/particles-shader/2.jpg",
@@ -693,16 +664,16 @@
                 ]
             },
             {
-                "title" : "Santa Workout",
-                "infos" :
+                "title": "Santa Workout",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL / Matter.js"
+                        "label": "features",
+                        "value": "WebGL / GLSL / Matter.js"
                     }
                 ],
-                "link"     : "http://christmasexperiments.com/experiments/5",
-                "pictures" :
+                "link"    : "http://christmasexperiments.com/experiments/5",
+                "pictures":
                 [
                     "lab/santa-workout/1.jpg",
                     "lab/santa-workout/2.jpg",
@@ -713,16 +684,16 @@
                 ]
             },
             {
-                "title" : "Particles Morphing",
-                "infos" :
+                "title": "Particles Morphing",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL"
+                        "label": "features",
+                        "value": "WebGL / GLSL"
                     }
                 ],
-                "link"     : "/lab/particles-morphing",
-                "pictures" :
+                "link"    : "/lab/particles-morphing",
+                "pictures":
                 [
                     "lab/particles-morphing/1.jpg",
                     "lab/particles-morphing/2.jpg",
@@ -731,16 +702,16 @@
                 ]
             },
             {
-                "title" : "Terrain Shader",
-                "infos" :
+                "title": "Terrain Shader",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "WebGL / GLSL"
+                        "label": "features",
+                        "value": "WebGL / GLSL"
                     }
                 ],
-                "link"     : "/lab/terrain-shader",
-                "pictures" :
+                "link"    : "/lab/terrain-shader",
+                "pictures":
                 [
                     "lab/terrain-shader/1.jpg",
                     "lab/terrain-shader/2.jpg",
@@ -748,16 +719,16 @@
                 ]
             },
             {
-                "title" : "Sticks",
-                "infos" :
+                "title": "Sticks",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "CSS"
+                        "label": "features",
+                        "value": "CSS"
                     }
                 ],
-                "link"     : "/lab/sticks",
-                "pictures" :
+                "link"    : "/lab/sticks",
+                "pictures":
                 [
                     "lab/sticks/1.jpg",
                     "lab/sticks/2.jpg",
@@ -765,16 +736,16 @@
                 ]
             },
             {
-                "title" : "Trail Particles",
-                "infos" :
+                "title": "Trail Particles",
+                "infos":
                 [
                     {
-                        "label" : "features",
-                        "value" : "canvas"
+                        "label": "features",
+                        "value": "canvas"
                     }
                 ],
-                "link"     : "/lab/trail-particles",
-                "pictures" :
+                "link"    : "/lab/trail-particles",
+                "pictures":
                 [
                     "lab/trail-particles/1.jpg",
                     "lab/trail-particles/2.jpg",
