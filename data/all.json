@@ -505,7 +505,7 @@
                         "value": "Waves responding to the sound of your voice"
                     }
                 ],
-                "link"    : "/lab/voice-waves/",
+                "link"    : "/lab/experiments/voice-waves/",
                 "pictures":
                 [
                     "lab/voice-waves/1.jpg",
@@ -584,7 +584,7 @@
                         "value": "CANVAS / AUDIO API"
                     }
                 ],
-                "link"    : "/lab/music-spinners/",
+                "link"    : "/lab/experiments/music-spinners/",
                 "pictures":
                 [
                     "lab/music-spinners/1.jpg",
@@ -621,7 +621,7 @@
                         "value": "WebGL / GLSL"
                     }
                 ],
-                "link"    : "/lab/procedural-star/",
+                "link"    : "/lab/experiments/procedural-star/",
                 "pictures":
                 [
                     "lab/procedural-star/1.jpg",
@@ -638,7 +638,7 @@
                         "value": "WebGL / GLSL"
                     }
                 ],
-                "link"    : "/lab/procedural-planet/",
+                "link"    : "/lab/experiments/procedural-planet/",
                 "pictures":
                 [
                     "lab/procedural-planet/1.jpg",
@@ -647,7 +647,7 @@
                 ]
             },
             {
-                "title": "Particles Shader",
+                "title": "Snow Shader",
                 "infos":
                 [
                     {
@@ -655,12 +655,12 @@
                         "value": "WebGL / GLSL"
                     }
                 ],
-                "link"    : "/lab/particles-shader/",
+                "link"    : "/lab/experiments/snow-shader/",
                 "pictures":
                 [
-                    "lab/particles-shader/1.jpg",
-                    "lab/particles-shader/2.jpg",
-                    "lab/particles-shader/3.jpg"
+                    "lab/snow-shader/1.jpg",
+                    "lab/snow-shader/2.jpg",
+                    "lab/snow-shader/3.jpg"
                 ]
             },
             {
@@ -692,7 +692,7 @@
                         "value": "WebGL / GLSL"
                     }
                 ],
-                "link"    : "/lab/particles-morphing",
+                "link"    : "/lab/experiments/particles-morphing",
                 "pictures":
                 [
                     "lab/particles-morphing/1.jpg",
@@ -710,7 +710,7 @@
                         "value": "WebGL / GLSL"
                     }
                 ],
-                "link"    : "/lab/terrain-shader",
+                "link"    : "/lab/experiments/terrain-shader",
                 "pictures":
                 [
                     "lab/terrain-shader/1.jpg",
@@ -727,7 +727,7 @@
                         "value": "CSS"
                     }
                 ],
-                "link"    : "/lab/sticks",
+                "link"    : "/lab/experiments/sticks",
                 "pictures":
                 [
                     "lab/sticks/1.jpg",
@@ -744,7 +744,7 @@
                         "value": "canvas"
                     }
                 ],
-                "link"    : "/lab/trail-particles",
+                "link"    : "/lab/experiments/trail-particles",
                 "pictures":
                 [
                     "lab/trail-particles/1.jpg",
