@@ -63,12 +63,44 @@
                 ]
             },
             {
+                "title": "Yquem",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front/Back developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Uzik"
+                    },
+                    {
+                        "label": "Client",
+                        "value": "Yquem"
+                    },
+                    {
+                        "label": "Description",
+                        "value": "4k screen experience with second screen control"
+                    }
+                ],
+                "logo"    : "projects/yquem/logo.png",
+                "pictures":
+                [
+                    "projects/yquem/0.jpg",
+                    "projects/yquem/1.jpg",
+                    "projects/yquem/2.jpg",
+                    "projects/yquem/3.jpg",
+                    "projects/yquem/4.jpg",
+                    "projects/yquem/5.jpg"
+                ]
+            },
+            {
                 "title": "Orion",
                 "infos":
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
@@ -105,7 +137,7 @@
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
@@ -142,7 +174,7 @@
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
@@ -180,7 +212,7 @@
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
@@ -221,7 +253,7 @@
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
@@ -318,7 +350,7 @@
                 [
                     {
                         "label": "Role",
-                        "value": "Front developer"
+                        "value": "Front/Back developer"
                     },
                     {
                         "label": "As",
