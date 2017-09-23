@@ -38,6 +38,52 @@
         "items":
         [
             {
+                "title": "Gleec Chat",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Immersive Garden"
+                    },
+                    {
+                        "label": "Distinctions",
+                        "value":
+                        [
+                            {
+                                "title": "Awwwards SOTD",
+                                "link" : "https://www.awwwards.com/sites/gleec-chat"
+                            },
+                            {
+                                "title": "Awwwards SOTM",
+                                "link" : "https://www.awwwards.com/gleec-chat-by-immersive-garden-wins-august-site-of-the-month-2017.html"
+                            },
+                            {
+                                "title": "CSS design awards SOTD",
+                                "link" : "https://www.cssdesignawards.com/sites/gleec-chat/31237/"
+                            },
+                            {
+                                "title": "FWA",
+                                "link" : "https://thefwa.com/cases/gleec-chat"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "https://gleec.com",
+                "logo"    : "projects/gleec/logo.png",
+                "pictures":
+                [
+                    "projects/gleec/0.jpg",
+                    "projects/gleec/1.jpg",
+                    "projects/gleec/2.jpg",
+                    "projects/gleec/3.jpg",
+                    "projects/gleec/4.jpg"
+                ]
+            },
+            {
                 "title": "Wishes 2017 - Immersive Garden",
                 "infos":
                 [
