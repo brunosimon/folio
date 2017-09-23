@@ -9,7 +9,7 @@ var gulp                = require( 'gulp' ),
     gulp_data           = require( 'gulp-data' ),
     gulp_jade           = require( 'gulp-jade' ),
     gulp_notify         = require( 'gulp-notify' ),
-    // gulp_sass           = require( 'gulp-sass' ),
+    gulp_sass           = require( 'gulp-sass' ),
     gulp_rename         = require( 'gulp-rename' ),
     gulp_autoprefixer   = require( 'gulp-autoprefixer' ),
     glslify             = require( 'glslify' ),
@@ -199,8 +199,8 @@ gulp.task( 'watch', () =>
     // DATA
     gulp.watch( options.paths.data + '**/*.json', [ 'html' ] );
 
-    // // SASS
-    // gulp.watch( options.paths.sass + '**/*.scss', [ 'css' ] );
+    // SASS
+    gulp.watch( options.paths.sass + '**/*.scss', [ 'css' ] );
 
     // COPY
     gulp.watch(

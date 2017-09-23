@@ -13,8 +13,11 @@
             { "slug": "css3",    "title": "CSS3" },
             { "slug": "es6",     "title": "JS ES6" },
             { "slug": "gulp",    "title": "Gulp" },
+            { "slug": "webpack", "title": "Webpack" },
             { "slug": "sass",    "title": "Sass" },
+            { "slug": "stylus",  "title": "Stylus.js" },
             { "slug": "angular", "title": "AngularJS" },
+            { "slug": "vue",     "title": "Vue.js" },
             { "slug": "nodejs",  "title": "Node.js" },
             { "slug": "webgl",   "title": "WebGL" },
             { "slug": "php",     "title": "PHP / MySQL" },
@@ -704,7 +707,7 @@
                         "value": "WebGL / GLSL / Matter.js"
                     }
                 ],
-                "link"    : "http://christmasexperiments.com/experiments/5",
+                "link"    : "http://christmasexperiments.com/2014/05/santa-workout/",
                 "pictures":
                 [
                     "lab/santa-workout/1.jpg",

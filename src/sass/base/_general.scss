@@ -67,7 +67,7 @@ body {
             }
         }
     }
-    @include no-touch {
+    html.features-no-touch & {
         &.b-unveil {
             .arrows {
                 span {
@@ -150,11 +150,9 @@ p {
             transform-origin:0 0;
             transition:transform 0.15s;
         }
-        @include no-touch {
-            &:hover {
-                &:after {
-                    transform:scaleX(1) translateZ(0);
-                }
+        html.features-no-touch &:hover {
+            &:after {
+                transform:scaleX(1) translateZ(0);
             }
         }
     }
@@ -171,15 +169,13 @@ a {
         text-transform:uppercase;
         transition:color 0.15s,border-color 0.3s;
 
-        @include no-touch {
-            &:hover {
-                // color:$orange;
-                border-color:$orange;
-            }
+        html.features-no-touch &:hover {
+            // color:$orange;
+            border-color:$orange;
         }
     }
 }
-@include no-touch {
+html.features-no-touch {
     .b-unveil {
         opacity:0;
         transition:opacity 1s;

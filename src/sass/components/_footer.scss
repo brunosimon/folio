@@ -82,11 +82,9 @@ footer {
                 top:-1px;
             }
         }
-        @include no-touch {
-            &:hover {
-                svg,path {
-                    fill:#fff;
-                }
+        html.features-no-touch &:hover {
+            svg,path {
+                fill:#fff;
             }
         }
     }

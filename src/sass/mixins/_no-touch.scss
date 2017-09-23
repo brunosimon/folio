@@ -1,5 +1,0 @@
-@mixin no-touch {
-    html.features-no-touch & {
-        @content;
-    }
-}
