@@ -38,6 +38,56 @@
         "items":
         [
             {
+                "title": "Wishes 2017 - Immersive Garden",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Immersive Garden"
+                    },
+                    {
+                        "label": "With",
+                        "value": [
+                            {
+                                "title": "Florian Cordillot",
+                                "link" : "https://floriancordillot.fr"
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Distinctions",
+                        "value":
+                        [
+                            {
+                                "title": "Awwwards SOTD",
+                                "link" : "https://www.awwwards.com/sites/immersive-garden-s-2017-wishes"
+                            },
+                            {
+                                "title": "CSS design awards SOTD",
+                                "link" : "https://www.cssdesignawards.com/sites/immersive-garden-s-2017-wishes/30078/"
+                            },
+                            {
+                                "title": "FWA",
+                                "link" : "https://thefwa.com/cases/immersive-gardens-2017-wishes"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "https://immersive-g.com/wishes-2017/",
+                "logo"    : "projects/wishes-2017-immersive-garden/logo.png",
+                "pictures":
+                [
+                    "projects/wishes-2017-immersive-garden/0.jpg",
+                    "projects/wishes-2017-immersive-garden/1.jpg",
+                    "projects/wishes-2017-immersive-garden/2.jpg",
+                    "projects/wishes-2017-immersive-garden/3.jpg"
+                ]
+            },
+            {
                 "title": "Angstrom",
                 "infos":
                 [
