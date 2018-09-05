@@ -38,6 +38,160 @@
         "items":
         [
             {
+                "title": "Decathlon United",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front/Back developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Immersive Garden"
+                    },
+                    {
+                        "label": "Distinctions",
+                        "value":
+                        [
+                            {
+                                "title": "Awwwards SOTD",
+                                "link" : "https://www.awwwards.com/sites/decathlon-united"
+                            },
+                            {
+                                "title": "CSS design awards SOTD",
+                                "link" : "https://www.cssdesignawards.com/sites/decathlon-united/33353/"
+                            },
+                            {
+                                "title": "FWA of the Day",
+                                "link" : "https://thefwa.com/cases/decathlon-united-p2"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "https://www.decathlon-united.com",
+                "logo"    : "projects/decathlon-united/logo.png",
+                "pictures":
+                [
+                    "projects/decathlon-united/0.jpg",
+                    "projects/decathlon-united/1.jpg",
+                    "projects/decathlon-united/2.jpg",
+                    "projects/decathlon-united/3.jpg",
+                    "projects/decathlon-united/4.jpg"
+                ]
+            },
+            {
+                "title": "Red Bull Racing + Citrix",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Immersive Garden"
+                    },
+                    {
+                        "label": "Distinctions",
+                        "value":
+                        [
+                            {
+                                "title": "Awwwards SOTM",
+                                "link" : "https://www.awwwards.com/case-study-immersive-garden-havas-win-sotm-nov-with-the-new-mobile-workforce.html"
+                            },
+                            {
+                                "title": "Awwwards developer site of the year",
+                                "link" : "https://www.awwwards.com/interview-immersive-garden-win-studio-and-developer-site-of-the-year.html"
+                            },
+                            {
+                                "title": "CSS design awards SOTD",
+                                "link" : "https://www.cssdesignawards.com/sites/the-new-mobile-workforce/31897/"
+                            },
+                            {
+                                "title": "FWA of the Month",
+                                "link" : "https://thefwa.com/cases/the-new-mobile-workforce-p2"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "https://www.thenewmobileworkforce.com/",
+                "logo"    : "projects/red-bull-racing-citrix/logo.png",
+                "pictures":
+                [
+                    "projects/red-bull-racing-citrix/0.jpg",
+                    "projects/red-bull-racing-citrix/1.jpg",
+                    "projects/red-bull-racing-citrix/2.jpg",
+                    "projects/red-bull-racing-citrix/3.jpg",
+                    "projects/red-bull-racing-citrix/4.jpg",
+                    "projects/red-bull-racing-citrix/5.jpg"
+                ]
+            },
+            {
+                "title": "Reflet Communication",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front/Back developer"
+                    },
+                    {
+                        "label": "At",
+                        "value": "Immersive Garden"
+                    },
+                    {
+                        "label": "Distinctions",
+                        "value":
+                        [
+                            {
+                                "title": "Awwwards SOTD",
+                                "link" : "https://www.awwwards.com/sites/reflet-communication"
+                            },
+                            {
+                                "title": "CSS design awards SOTD",
+                                "link" : "https://www.cssdesignawards.com/sites/reflet-communication/31707/"
+                            },
+                            {
+                                "title": "FWA of the Day",
+                                "link" : "https://thefwa.com/cases/reflet-communication-p2"
+                            }
+                        ]
+                    }
+                ],
+                "link"    : "https://www.refletcommunication.com",
+                "logo"    : "projects/reflet-communication/logo.png",
+                "pictures":
+                [
+                    "projects/reflet-communication/0.jpg",
+                    "projects/reflet-communication/1.jpg",
+                    "projects/reflet-communication/2.jpg",
+                    "projects/reflet-communication/3.jpg",
+                    "projects/reflet-communication/4.jpg"
+                ]
+            },
+            {
+                "title": "Loaded",
+                "infos":
+                [
+                    {
+                        "label": "Role",
+                        "value": "Front developer"
+                    },
+                    {
+                        "label": "As",
+                        "value": "Freelancer"
+                    }
+                ],
+                "link"    : "https://loaded.gg",
+                "logo"    : "projects/loaded/logo.png",
+                "pictures":
+                [
+                    "projects/loaded/0.jpg",
+                    "projects/loaded/2.jpg",
+                    "projects/loaded/1.jpg",
+                    "projects/loaded/3.jpg"
+                ]
+            },
+            {
                 "title": "Gleec Chat",
                 "infos":
                 [
@@ -54,10 +208,6 @@
                         "value":
                         [
                             {
-                                "title": "Awwwards SOTD",
-                                "link" : "https://www.awwwards.com/sites/gleec-chat"
-                            },
-                            {
                                 "title": "Awwwards SOTM",
                                 "link" : "https://www.awwwards.com/gleec-chat-by-immersive-garden-wins-august-site-of-the-month-2017.html"
                             },
@@ -66,7 +216,7 @@
                                 "link" : "https://www.cssdesignawards.com/sites/gleec-chat/31237/"
                             },
                             {
-                                "title": "FWA",
+                                "title": "FWA of the Day",
                                 "link" : "https://thefwa.com/cases/gleec-chat"
                             }
                         ]
@@ -81,6 +231,24 @@
                     "projects/gleec/2.jpg",
                     "projects/gleec/3.jpg",
                     "projects/gleec/4.jpg"
+                ]
+            },
+            {
+                "title": "Keppler",
+                "infos":
+                [
+                    {
+                        "label": "description",
+                        "value": "An efficient way to share your code while presenting"
+                    }
+                ],
+                "link"    : "https://brunosimon.github.io/keppler/",
+                "logo"    : "projects/keppler/logo.png",
+                "pictures":
+                [
+                    "projects/keppler/1.jpg",
+                    "projects/keppler/2.jpg",
+                    "projects/keppler/3.jpg"
                 ]
             },
             {
@@ -117,7 +285,7 @@
                                 "link" : "https://www.cssdesignawards.com/sites/immersive-garden-s-2017-wishes/30078/"
                             },
                             {
-                                "title": "FWA",
+                                "title": "FWA of the Day",
                                 "link" : "https://thefwa.com/cases/immersive-gardens-2017-wishes"
                             }
                         ]
@@ -231,178 +399,6 @@
                 ]
             },
             {
-                "title": "Xavier Bourdil",
-                "infos":
-                [
-                    {
-                        "label": "Role",
-                        "value": "Front/Back developer"
-                    },
-                    {
-                        "label": "As",
-                        "value": "Freelancer"
-                    },
-                    {
-                        "label": "Client",
-                        "value": "Xavier Bourdil"
-                    },
-                    {
-                        "label": "With",
-                        "value": [
-                            {
-                                "title": "Xavier Bourdil",
-                                "link" : "http://xavierbourdil.com"
-                            }
-                        ]
-                    }
-                ],
-                "link"    : "http://xavierbourdil.com",
-                "logo"    : "projects/xavier-bourdil/logo.png",
-                "pictures":
-                [
-                    "projects/xavier-bourdil/0.jpg",
-                    "projects/xavier-bourdil/1.jpg",
-                    "projects/xavier-bourdil/2.jpg",
-                    "projects/xavier-bourdil/3.jpg",
-                    "projects/xavier-bourdil/4.jpg"
-                ]
-            },
-            {
-                "title": "Eve & Daphnée",
-                "infos":
-                [
-                    {
-                        "label": "Role",
-                        "value": "Front/Back developer"
-                    },
-                    {
-                        "label": "As",
-                        "value": "Freelancer"
-                    },
-                    {
-                        "label": "Client",
-                        "value": "Eve & Daphnée"
-                    },
-                    {
-                        "label": "With",
-                        "value": [
-                            {
-                                "title": "Nicolas Bussière",
-                                "link" : "http://nicolas-bussiere.fr"
-                            }
-                        ]
-                    }
-                ],
-                "link"    : "http://www.eveetdaphnee.paris/fr/",
-                "logo"    : "projects/eve-daphnee/logo.png",
-                "pictures":
-                [
-                    "projects/eve-daphnee/0.jpg",
-                    "projects/eve-daphnee/2.jpg",
-                    "projects/eve-daphnee/3.jpg",
-                    "projects/eve-daphnee/4.jpg",
-                    "projects/eve-daphnee/5.jpg",
-                    "projects/eve-daphnee/6.jpg"
-                ]
-            },
-            {
-                "title": "Cera Engineering",
-                "infos":
-                [
-                    {
-                        "label": "Role",
-                        "value": "Front/Back developer"
-                    },
-                    {
-                        "label": "As",
-                        "value": "Freelancer"
-                    },
-                    {
-                        "label": "Client",
-                        "value": "Groupe Cera"
-                    },
-                    {
-                        "label": "With",
-                        "value": [
-                            {
-                                "title": "Nicolas Bussière",
-                                "link" : "http://nicolas-bussiere.fr"
-                            },
-                            {
-                                "title": "Loïc Berger",
-                                "link" : "#"
-                            }
-                        ]
-                    }
-                ],
-                "link"    : "http://cera-groupecera.com",
-                "logo"    : "projects/cera/logo.png",
-                "pictures":
-                [
-                    "projects/cera/0.jpg",
-                    "projects/cera/2.jpg",
-                    "projects/cera/3.jpg",
-                    "projects/cera/4.jpg",
-                    "projects/cera/5.jpg"
-                ]
-            },
-            {
-                "title": "Galerie Leloutre Lefevre",
-                "infos":
-                [
-                    {
-                        "label": "Role",
-                        "value": "Front/Back developer"
-                    },
-                    {
-                        "label": "As",
-                        "value": "Freelancer"
-                    },
-                    {
-                        "label": "Client",
-                        "value": "Galerie Leloutre Lefèvre"
-                    },
-                    {
-                        "label": "With",
-                        "value":
-                        [
-                            {
-                                "title": "Benjamin Leloutre",
-                                "link" : "#"
-                            },
-                            {
-                                "title": "Pauline Collet",
-                                "link" : "#"
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Distinctions",
-                        "value":
-                        [
-                            {
-                                "title": "FWA Short List",
-                                "link" : "#"
-                            },
-                            {
-                                "title": "One Page Love",
-                                "link" : "#"
-                            }
-                        ]
-                    }
-                ],
-                "logo"    : "projects/galerie-leloutre-lefevre/logo.png",
-                "pictures":
-                [
-                    "projects/galerie-leloutre-lefevre/0.jpg",
-                    "projects/galerie-leloutre-lefevre/2.jpg",
-                    "projects/galerie-leloutre-lefevre/3.jpg",
-                    "projects/galerie-leloutre-lefevre/4.jpg",
-                    "projects/galerie-leloutre-lefevre/5.jpg"
-                ],
-                "link": "http://galerieleloutrelefevre.com"
-            },
-            {
                 "title": "Sonic Blocks",
                 "infos":
                 [
@@ -500,59 +496,6 @@
                 "link": "http://nicolas-bussiere.fr"
             },
             {
-                "title": "Valérie Martinez",
-                "infos":
-                [
-                    {
-                        "label": "Role",
-                        "value": "Front developer"
-                    },
-                    {
-                        "label": "As",
-                        "value": "Freelancer"
-                    },
-                    {
-                        "label": "Client",
-                        "value": "Valérie Martinez Agency"
-                    },
-                    {
-                        "label": "With",
-                        "value":
-                        [
-                            {
-                                "title": "Sylvain Capeyron",
-                                "link" : "http://www.awwwards.com/Beaubourg/"
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Distinctions",
-                        "value":
-                        [
-                            {
-                                "title": "Awwwards SOTD",
-                                "link" : "http://www.awwwards.com/web-design-awards/valerie-martinez-agency"
-                            },
-                            {
-                                "title": "Site Inspire",
-                                "link" : "http://www.siteinspire.com/websites/5098-valerie-martinez-agency"
-                            }
-                        ]
-                    }
-                ],
-                "logo"    : "projects/valerie-martinez/logo.png",
-                "pictures":
-                [
-                    "projects/valerie-martinez/0.jpg",
-                    "projects/valerie-martinez/2.jpg",
-                    "projects/valerie-martinez/3.jpg",
-                    "projects/valerie-martinez/4.jpg",
-                    "projects/valerie-martinez/5.jpg",
-                    "projects/valerie-martinez/6.jpg"
-                ],
-                "link": "http://www.valeriemartinez.com"
-            },
-            {
                 "title": "JR & Associée",
                 "infos":
                 [
@@ -607,20 +550,25 @@
         "items":
         [
             {
-                "title": "Keppler",
+                "title": "Beams",
                 "infos":
                 [
                     {
+                        "label": "features",
+                        "value": "WebGL / GLSL / Postprocessing"
+                    },
+                    {
                         "label": "description",
-                        "value": "An efficient way to share your code while presenting"
+                        "value": "Walk through energy beams with cool effects"
                     }
                 ],
-                "link"    : "https://github.com/brunosimon/keppler",
+                "link"    : "/lab/experiments/beams/",
                 "pictures":
                 [
-                    "lab/keppler/1.jpg",
-                    "lab/keppler/2.jpg",
-                    "lab/keppler/3.jpg"
+                    "lab/beams/1.jpg",
+                    "lab/beams/2.jpg",
+                    "lab/beams/3.jpg",
+                    "lab/beams/4.jpg"
                 ]
             },
             {
